@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2021-02-25T04:38:55.822Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="OUVpbCvdChicqQp3VN5V" version="14.4.2" type="github">
-  <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
-    <mxGraphModel dx="868" dy="1588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+<mxfile host="app.diagrams.net" modified="2021-02-25T04:47:11.635Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="Qopp7SzI1b2S5nMHPKU2" version="14.4.2" type="github" pages="2">
+  <diagram id="R2lEEEUBdFMjLlhIrx00" name="ER Diagram">
+    <mxGraphModel dx="868" dy="488" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="FEg0V8dU9HdjAfqLpy4W-1" value="User" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
-          <mxGeometry x="230" width="160" height="230" as="geometry" />
+          <mxGeometry x="250" y="80" width="160" height="230" as="geometry" />
         </mxCell>
         <mxCell id="FEg0V8dU9HdjAfqLpy4W-2" value="displayName&#xa;email&#xa;emailVerified&#xa;isAnonymous&#xa;metadata&#xa;multiFactor&#xa;phoneNumber&#xa;photoURL&#xa;providerData&#xa;providerId&#xa;refreshToken&#xa;tenantId&#xa;uid" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="FEg0V8dU9HdjAfqLpy4W-1">
           <mxGeometry y="30" width="160" height="200" as="geometry" />
@@ -14,8 +14,22 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="FEg0V8dU9HdjAfqLpy4W-4" value="This is a base structure provided by Firebase" style="shape=note;size=20;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="70" width="100" height="100" as="geometry" />
+          <mxGeometry x="90" y="150" width="100" height="100" as="geometry" />
         </mxCell>
+        <mxCell id="FEg0V8dU9HdjAfqLpy4W-6" value="Wallet" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
+          <mxGeometry x="540" y="115" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="FEg0V8dU9HdjAfqLpy4W-7" value="_id&#xa;name&#xa;type&#xa;amount&#xa;color&#xa;bank?&#xa;serial?&#xa;currency" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="FEg0V8dU9HdjAfqLpy4W-6">
+          <mxGeometry y="30" width="160" height="130" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="W-mz7RX8GHqiV0XYWgv4" name="CDM">
+    <mxGraphModel dx="868" dy="488" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="NOlgtETGSss0G0qQo0d1-0" />
+        <mxCell id="NOlgtETGSss0G0qQo0d1-1" parent="NOlgtETGSss0G0qQo0d1-0" />
       </root>
     </mxGraphModel>
   </diagram>
