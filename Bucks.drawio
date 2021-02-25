@@ -1,1 +1,22 @@
-<mxfile host="app.diagrams.net" modified="2021-02-24T05:59:33.568Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="11wceaC_DOC00h9gyq6m" version="14.2.7" type="github"><diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">7Vttb5s6FP41SHcfVvES0vRjw5JNWnJXtd328coFB6wRjIzztl+/YzAQ4qSF3aXxmkhRig8Hv5zn8WP7lBiON19/ZCiNpjTAsWGbwdpwPhi2PegP4FsYNoWhN5CGkJGgMFm14YH8xNJoSuuCBDhrOHJKY07SptGnSYJ93rAhxuiq6TajcbPVFIVYMTz4KFat30nAIzks16ztnzAJo7Jly5R35qh0loYsQgFdNUx4zcc04bKLd5jNUYITDnemiP3AzHBHEedipLeGPYbPTHhfhZSGMUYpya58Ogezn4HLeIbmJBZh3qpoKCuC5pyR4XiMUl5czdcejgVUJQxFn8YH7lZxYKLeFg9475ebyQ+TJ59Wzjc+nYZ310/vZS1LFC9kfGVs+KYMOA4g/rIITRG+uccx4oQmo/rOECfBrUAXnEb3PzGjj3SKEhj8MOOI8foeTaT7mED3nA9W6SLLJpTVocl+ZnTBfPzMeOyepCRiIebPOPYl4EGDbTJyHzGdY8424LCqOVYxKdrmV2lkeVCWTZYiyaSwqrBq446SnFhyXjolBeW07PfNZhXF0OVT2zDvVNTbqcjdragIjVIRXGwNvDblLOrCKPuNUcppySjrWjdKDZpMsOzfpVRvp6Ke+6qUUhn1hQWYZQqvQNFTccnRU86gnARyCXMEC2BR4ogkoL8FS3waxyjNSO5eWCISBxO0oQteVlSWhjOyxsF9sYIJX+DfBCrLJMXEWlCyWtxGMQkTuPaBcqLFIcMZ9GWCMi49DpJyiRnH62dZVGLj7OiGLG6RzHb3kcwxD/OpAWBXtJyX53+JE4ycExTfwz4BJWEOWRMREdaA0fSxnHzCkAqeYTZa4mKlzmMPM92jMRXAJoUe5G754NwhfGC4nnnlGi50wIOyVZfhI9wZ92iScYZIjgYGnFZYYDXkNJXtxHhWdoPJYIrrJ8o5LPyHUH2W1S9DLaF1WkJ7NGR7CrJ3n7tgS2GsszgX7YgEAU6KGSm2iajGew+Ue+NfxXwXjN152BIPpzUeWwA4rxl/V4k/FTr4Hzzk2catWYj2v18exffXycSodro6wVPKYuE7zFLkkyScFE/2d/Bzj4Hf2jg4n+zXxLN/zkq5f1P2Z5Sy7SJ4NGSvFWTHn60u4L7SXGwJQL81AKeSxoEScH+RwZgLdbT3SKN2WLyoi38cLF108Oaig8fRwZtT62CZNPxNaPVSwZvW4T+VClpqOq/YIQaIY7DLP2chg+3R0kUGLfXk/BCRdJ6L1iXVoaQ6KnROl+uw1CPxGS1dHQ7XVvvTmS7ZDks9br+ldEdFXY2XM/WAnElBvOQ8uoKozSqnno3PSDI7bDe7S+bJ0x6Wegz/q/MeFVc11kj18Fwlhc8q7dEBK12k0P5/p+OLFGqc+bDVo7iGk69l/Cui6quDZXj37RXPMPvRATFt1FBNf3gyh39JfxhbrwV1fdPDPBpil+xHy9n492U/7Led/bD1z37Yavbjpf9pnlPqowOC2qxwl9THsfTy5KkPW019aDgZ28Zf/7yHreY9KnVM0Fxs9P0IsX9c893Z7Pl1yoBAsf5pS/EieP1zJGf0Cw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-02-25T04:38:55.822Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="OUVpbCvdChicqQp3VN5V" version="14.4.2" type="github">
+  <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
+    <mxGraphModel dx="868" dy="1588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FEg0V8dU9HdjAfqLpy4W-1" value="User" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" vertex="1" parent="1">
+          <mxGeometry x="230" width="160" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="FEg0V8dU9HdjAfqLpy4W-2" value="displayName&#xa;email&#xa;emailVerified&#xa;isAnonymous&#xa;metadata&#xa;multiFactor&#xa;phoneNumber&#xa;photoURL&#xa;providerData&#xa;providerId&#xa;refreshToken&#xa;tenantId&#xa;uid" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="FEg0V8dU9HdjAfqLpy4W-1">
+          <mxGeometry y="30" width="160" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="FEg0V8dU9HdjAfqLpy4W-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=100;exitDy=60;exitPerimeter=0;dashed=1;endArrow=none;endFill=0;" edge="1" parent="1" source="FEg0V8dU9HdjAfqLpy4W-4" target="FEg0V8dU9HdjAfqLpy4W-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FEg0V8dU9HdjAfqLpy4W-4" value="This is a base structure provided by Firebase" style="shape=note;size=20;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="70" width="100" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
