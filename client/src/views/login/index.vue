@@ -6,7 +6,6 @@
       @submit.prevent="login"
       class="relative bg-white py-10 px-20 shadow-lg flex flex-col"
     >
-      <div class="bg-red w-full h-10 transform"></div>
       <label for="username" class="font-bold">Username</label>
       <input
         type="text"

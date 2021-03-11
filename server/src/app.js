@@ -15,11 +15,15 @@ const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
 
 const app = express();
+const path = __dirname + '/public/';
 
 if (config.env !== 'test') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
 }
+
+// use static Vue
+app.use(express.static(path));
 
 // set security HTTP headers
 app.use(helmet());
