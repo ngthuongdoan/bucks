@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -47,7 +48,16 @@ export default {
       this.isShow = !this.isShow;
       this.$refs.pass.type = this.isShow ? "text" : "password";
     },
-    login() {},
+    async login() {
+      try {
+        await firebase
+          .auth()
+          .signInWithEmailAndPassword(this.user.email, this.user.password);
+        await this.$router.replace("/dashboard");
+      } catch (err) {
+        console.error(err);
+      }
+    },
   },
 };
 </script>

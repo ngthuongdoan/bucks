@@ -1,49 +1,47 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from "@/store";
+import firebase from "firebase";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../views/login")
+    component: () => import("../views/login"),
   },
   {
     path: "/",
+    component: () => import("../views/index"),
+    meta: {
+      requiresAuth: true,
+    },
     children: [
       {
-        path: "",
+        path: "dashboard",
         name: "index",
-        component: () => import("../views/index")
-      }
-    ]
+        component: () => import("../views/index/dashboard"),
+      },
+    ],
   },
   {
     path: "*",
-    redirect: "/login"
-  }
+    redirect: "/login",
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
-router.beforeEach((to, from, next) => {
-  let user = store.getters["userModule/getUser"] || { loggedIn: false };
-  if (to.path !== "/login") {
-    if (user.loggedIn === true) {
-      next();
-    } else {
-      next("/login");
-    }
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const currentUser = await firebase.auth().currentUser;
+  console.log(requiresAuth, currentUser);
+  if (requiresAuth && !currentUser) {
+    next("/login");
   } else {
-    if (!user.loggedIn) {
-      next();
-    } else {
-      next(false);
-    }
+    next();
   }
 });
 

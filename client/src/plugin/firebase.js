@@ -1,4 +1,6 @@
 import { firebase } from "@firebase/app";
+require("firebase/auth");
+import store from "@/store";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -11,4 +13,8 @@ const firebaseConfig = {
   measurementId: "G-Z5QR8MVVB9",
 };
 
-export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+firebase.auth().onAuthStateChanged((user) => {
+  store.dispatch("userModule/fetchUser", user);
+});
