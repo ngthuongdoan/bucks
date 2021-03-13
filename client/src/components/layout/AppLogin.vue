@@ -3,8 +3,8 @@
     @submit.prevent="login"
     class="relative bg-white py-10 px-20 shadow-lg flex flex-col"
   >
-    <label for="username" class="font-bold">Username</label>
-    <input type="text" class="input" v-model.trim="user.username" />
+    <label for="username" class="font-bold">Email</label>
+    <input type="email" class="input" v-model.trim="user.email" />
     <br />
     <label for="pass" class="font-bold">Password</label>
     <div class="flex justify-center items-center">
@@ -26,7 +26,7 @@
     <input
       type="submit"
       value="Login"
-      class="bg-green-500 w-full py-3 font-semibold mt-4"
+      class="bg-green-500 w-full py-3 font-semibold mt-4 cursor-pointer"
     />
   </form>
 </template>
@@ -37,7 +37,7 @@ export default {
     return {
       isShow: false,
       user: {
-        username: "",
+        email: "",
         password: "",
       },
     };

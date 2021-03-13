@@ -18,9 +18,9 @@
 
 <script>
 import IconContainer from "@/components/common/IconContainer.vue";
-import AppLogin from "@/components/ui/AppLogin.vue";
-import AppSignup from "@/components/ui/AppSignup.vue";
-import LoginNav from "@/components/ui/LoginNav.vue";
+import AppLogin from "@/components/layout/AppLogin.vue";
+import AppSignup from "@/components/layout/AppSignup.vue";
+import LoginNav from "@/components/layout/LoginNav.vue";
 export default {
   data() {
     return {
