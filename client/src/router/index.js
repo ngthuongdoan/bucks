@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import firebase from "firebase";
+// import firebase from "firebase";
 Vue.use(VueRouter);
 
 const routes = [
@@ -16,6 +16,10 @@ const routes = [
       requiresAuth: true,
     },
     children: [
+      {
+        path: "",
+        redirect: "/dashboard",
+      },
       {
         path: "dashboard",
         name: "index",
@@ -34,15 +38,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  const currentUser = await firebase.auth().currentUser;
-  console.log(requiresAuth, currentUser);
-  if (requiresAuth && !currentUser) {
-    next("/login");
-  } else {
-    next();
-  }
-});
+// router.beforeEach(async (to, from, next) => {
+//   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+//   const currentUser = await firebase.auth().currentUser;
+//   console.log(requiresAuth, currentUser);
+//   if (requiresAuth && !currentUser) {
+//     next("/login");
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
