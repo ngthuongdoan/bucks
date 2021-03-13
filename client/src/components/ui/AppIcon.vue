@@ -13,7 +13,7 @@
       </defs>
     </svg>
     <!-- :style="'fill:' + icon.attrs[0].fill" -->
-    <svg class="w-10 h-10" :style="'fill:' + icon.fill">
+    <svg class="w-12 h-11" :style="'fill:' + icon.fill">
       <use :xlink:href="'#' + icon.tags[0]"></use>
     </svg>
   </div>
@@ -24,20 +24,20 @@ import icons from "@/config/icon.json";
 export default {
   data() {
     return {
-      icon: {}
+      icon: {},
     };
   },
   props: {
     iconName: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   created() {
-    this.icon = icons.icons.find(ico => {
+    this.icon = icons.icons.find((ico) => {
       return ico.tags[0] === this.iconName;
     });
-  }
+  },
 };
 </script>
 

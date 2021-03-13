@@ -4,7 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#EEEEEE",
+        "light-grey": "#EEEEEE",
+      },
+      translate: {
+        "2x": "200%",
       },
     },
   },
