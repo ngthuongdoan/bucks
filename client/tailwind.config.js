@@ -5,9 +5,13 @@ module.exports = {
     extend: {
       colors: {
         "light-grey": "#EEEEEE",
+        control: {
+          DEFAULT: "#FFD369",
+          light: "#FFEAB7",
+        },
       },
-      translate: {
-        "2x": "200%",
+      boxShadow: {
+        negative: "-1px -1px 20px -12px rgba(0,0,0,0.5)",
       },
     },
   },

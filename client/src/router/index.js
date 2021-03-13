@@ -39,7 +39,6 @@ const router = new VueRouter({
   routes,
 });
 
-console.log(typeof process.env.VUE_APP_GUARD);
 if (process.env.VUE_APP_GUARD === "true") {
   console.log("run");
   router.beforeEach(async (to, from, next) => {
