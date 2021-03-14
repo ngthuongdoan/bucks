@@ -2,15 +2,41 @@
   <div
     class="absolute flex items-center justify-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-control"
   >
-    <div class="w-9 h-9 rounded-full bg-control-light sonar"></div>
+    <circle-menu
+      type="middle-around"
+      :number="4"
+      circle
+      class="outline-none focus:outline-none"
+    >
+      <button
+        class="w-10 h-10 rounded-full bg-control-light sonar transform translate-y-1"
+        slot="item_btn"
+      ></button>
+      <a slot="item_1" class="fa fa-plus text-white"></a>
+      <a slot="item_2" class="fa fa-plus text-white"></a>
+      <a slot="item_3" class="fa fa-plus text-white"></a>
+      <a slot="item_4" class="fa fa-plus text-white"></a>
+    </circle-menu>
   </div>
 </template>
 
 <script>
-export default {};
-</script>
+import CircleMenu from "vue-circle-menu";
 
-<style>
+export default {
+  components: {
+    CircleMenu,
+  },
+};
+</script>
+<style lang="scss">
+.oy-menu-btn {
+  outline: none;
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
 .sonar {
   animation: sonar-effect 1s ease-in-out 0.1s infinite;
 }

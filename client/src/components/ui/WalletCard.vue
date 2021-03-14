@@ -3,7 +3,7 @@
     class="w-4/5 h-1/2 bg-green-600 shadow-2xl rounded-lg text-white px-8 py-4"
   >
     <img src="~@/assets/img/setting.svg" class="float-right" />
-    <div class="flex flex-col h-full gap-4">
+    <div class="flex flex-col h-full gap-3">
       <h1 class="font-bold text-sm">Sacombank</h1>
       <p class="text-xl mt-3">6,000,000 <span class="font-bold">VND</span></p>
       <div class="flex items-center">

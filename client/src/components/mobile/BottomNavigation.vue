@@ -3,6 +3,7 @@
     class="fixed bottom-0 left-0 right-0 py-4 shadow-negative rounded-t-xl bg-white"
   >
     <action-button></action-button>
+
     <ul class="flex items-center">
       <router-link
         class="w-full text-center"

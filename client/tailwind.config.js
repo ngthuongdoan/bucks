@@ -17,6 +17,9 @@ module.exports = {
         sans: ["Catamaran", "Helvetica", "Arial", "sans-serif"],
         kredit: ["Kredit Front"],
       },
+      borderWidth: {
+        action: "100px",
+      },
     },
   },
   variants: {
