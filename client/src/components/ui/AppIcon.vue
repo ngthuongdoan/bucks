@@ -7,36 +7,30 @@
       class="hidden"
     >
       <defs>
-        <symbol :id="icon.tags" viewBox="0 0 1000 1000">
+        <symbol :id="icon.tags[0]" viewBox="0 0 1000 1000">
           <path :d="icon.paths[0]"></path>
         </symbol>
       </defs>
     </svg>
     <!-- :style="'fill:' + icon.attrs[0].fill" -->
-    <svg class="w-12 h-11" :style="'fill:' + icon.fill">
+    <svg class="w-12 h-11" :style="filled">
       <use :xlink:href="'#' + icon.tags[0]"></use>
     </svg>
   </div>
 </template>
 
 <script>
-import icons from "@/config/icon.json";
 export default {
-  data() {
-    return {
-      icon: {},
-    };
-  },
   props: {
-    iconName: {
-      type: String,
+    icon: {
+      type: Object,
       required: true,
     },
   },
-  created() {
-    this.icon = icons.icons.find((ico) => {
-      return ico.tags[0] === this.iconName;
-    });
+  computed: {
+    filled() {
+      return this.icon.attrs ? { fill: this.icon.attrs[0].fill } : null;
+    },
   },
 };
 </script>

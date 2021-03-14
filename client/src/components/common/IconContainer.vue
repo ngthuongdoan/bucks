@@ -3,9 +3,9 @@
     <p class="text-gray-500 text-center font-bold my-5">OR</p>
     <div class="flex justify-center">
       <app-icon
-        v-for="icon in icons.selection"
+        v-for="icon in filterIcon"
         :key="icon.name"
-        :icon-name="icon.name"
+        :icon="icon"
         class="mx-4 cursor-pointer"
       ></app-icon>
     </div>
@@ -22,11 +22,18 @@ export default {
       icons,
     };
   },
+  computed: {
+    filterIcon() {
+      return this.icons.icons.filter((item) =>
+        ["facebook", "github", "google"].some((d) => d === item.tags[0])
+      );
+    },
+  },
+  mounted() {
+    console.log(this.filterIcon);
+  },
   components: {
     AppIcon,
   },
 };
 </script>
-
-<style>
-</style>
