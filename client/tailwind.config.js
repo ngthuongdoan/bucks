@@ -13,6 +13,9 @@ module.exports = {
       boxShadow: {
         negative: "-1px -1px 20px -12px rgba(0,0,0,0.5)",
       },
+      fontFamily: {
+        sans: ["Catamaran", "Helvetica", "Arial", "sans-serif"],
+      },
     },
   },
   variants: {

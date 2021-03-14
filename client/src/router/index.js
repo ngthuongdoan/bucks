@@ -25,6 +25,21 @@ const routes = [
         name: "index",
         component: () => import("../views/index/dashboard"),
       },
+      {
+        path: "report",
+        name: "report",
+        component: () => import("../views/index/report"),
+      },
+      {
+        path: "tool",
+        name: "tool",
+        component: () => import("../views/index/tool"),
+      },
+      {
+        path: "info",
+        name: "info",
+        component: () => import("../views/index/info"),
+      },
     ],
   },
   {
@@ -44,7 +59,6 @@ if (process.env.VUE_APP_GUARD === "true") {
   router.beforeEach(async (to, from, next) => {
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
     const currentUser = await firebase.auth().currentUser;
-    console.log(requiresAuth, currentUser);
     if (requiresAuth && !currentUser) {
       next("/login");
     } else {

@@ -1,5 +1,5 @@
 <template>
-  <div><router-view></router-view></div>
+  <div>REPORT</div>
 </template>
 
 <script>

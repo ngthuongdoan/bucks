@@ -4,7 +4,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
-import "./plugin/firebase.js";
+import "./plugin";
 
 Vue.config.productionTip = false;
 new Vue({

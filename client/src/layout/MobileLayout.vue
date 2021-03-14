@@ -1,6 +1,6 @@
 <template>
   <div class="bg-light-grey min-h-screen min-w-full">
-    Mobile
+    <router-view></router-view>
     <bottom-navigation></bottom-navigation>
   </div>
 </template>
