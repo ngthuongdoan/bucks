@@ -7,6 +7,13 @@
       :number="4"
       circle
       class="outline-none focus:outline-none"
+      :colors="[
+        '#FFEAB7',
+        'rgb(255, 255, 102)',
+        '#FFE26F',
+        '#F3825F',
+        '#F19584',
+      ]"
     >
       <button
         class="w-10 h-10 rounded-full bg-control-light sonar transform translate-y-1"
