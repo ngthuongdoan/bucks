@@ -5,9 +5,14 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Roboto";
-  src: local("Roboto"),
+  font-family: "Catamaran";
+  src: local("Catamaran"),
     url(./fonts/Catamaran-VariableFont_wght.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: "Kredit Front";
+  src: local("Kredit Front"), url(./fonts/kredit.ttf) format("ttf");
 }
 
 @layer components {
