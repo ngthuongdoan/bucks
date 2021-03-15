@@ -37,8 +37,17 @@ export default {
   },
   methods: {
     async oauth2(platform) {
-      if (platform !== "google") return;
-      let provider = new firebase.auth.GoogleAuthProvider();
+      let provider;
+      switch (platform) {
+        case "google":
+          provider = new firebase.auth.GoogleAuthProvider();
+          break;
+        case "facebook":
+          break;
+        case "github":
+          provider = new firebase.auth.GithubAuthProvider();
+          break;
+      }
       await firebase.auth().signInWithPopup(provider);
 
       await this.$router.replace("/dashboard");
