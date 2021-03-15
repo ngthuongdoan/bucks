@@ -19,10 +19,30 @@
         class="w-10 h-10 rounded-full bg-control-light sonar transform translate-y-1"
         slot="item_btn"
       ></button>
-      <a slot="item_1" class="fa fa-plus text-white"></a>
-      <a slot="item_2" class="fa fa-plus text-white"></a>
-      <a slot="item_3" class="fa fa-plus text-white"></a>
-      <a slot="item_4" class="fa fa-plus text-white"></a>
+      <router-link
+        tag="a"
+        to="/transaction"
+        slot="item_1"
+        class="fa fa-plus text-white"
+      ></router-link>
+      <router-link
+        tag="a"
+        to="/transaction"
+        slot="item_2"
+        class="fa fa-plus text-white"
+      ></router-link>
+      <router-link
+        tag="a"
+        to="/transaction"
+        slot="item_3"
+        class="fa fa-plus text-white"
+      ></router-link>
+      <router-link
+        tag="a"
+        to="/transaction"
+        slot="item_4"
+        class="fa fa-plus text-white"
+      ></router-link>
     </circle-menu>
   </div>
 </template>

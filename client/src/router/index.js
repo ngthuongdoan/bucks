@@ -40,6 +40,16 @@ const routes = [
         name: "account",
         component: () => import("../views/index/account"),
       },
+      {
+        path: "transaction",
+        name: "transaction",
+        component: () => import("../views/index/transaction"),
+      },
+      {
+        path: "wallet",
+        name: "wallet",
+        component: () => import("../views/index/wallet"),
+      },
     ],
   },
   {
