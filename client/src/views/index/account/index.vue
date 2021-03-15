@@ -6,14 +6,11 @@
 </template>
 
 <script>
-import { firebase } from "@firebase/app";
-require("firebase/auth");
+import { logout } from "@/plugin/modules/auth";
+
 export default {
   methods: {
-    async logout() {
-      await firebase.auth().signOut();
-      await this.$router.push("/login");
-    },
+    logout,
   },
 };
 </script>

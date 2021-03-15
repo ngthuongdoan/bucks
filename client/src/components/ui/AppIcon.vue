@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { firebase } from "@firebase/app";
-require("firebase/auth");
+import { createProvider, signInWithPopup } from "@/plugin/modules/auth";
 
 export default {
   props: {
@@ -37,20 +36,8 @@ export default {
   },
   methods: {
     async oauth2(platform) {
-      let provider;
-      switch (platform) {
-        case "google":
-          provider = new firebase.auth.GoogleAuthProvider();
-          break;
-        case "facebook":
-          provider = new firebase.auth.FacebookAuthProvider();
-          break;
-        case "github":
-          provider = new firebase.auth.GithubAuthProvider();
-          break;
-      }
-      await firebase.auth().signInWithPopup(provider);
-
+      let provider = createProvider(platform);
+      await signInWithPopup(provider);
       await this.$router.replace("/dashboard");
     },
   },
