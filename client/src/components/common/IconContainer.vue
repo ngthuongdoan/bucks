@@ -4,7 +4,7 @@
     <div class="flex justify-center">
       <app-icon
         v-for="icon in filterIcon"
-        :key="icon.name"
+        :key="icon.tags[0]"
         :icon="icon"
         class="mx-4 cursor-pointer"
       ></app-icon>
@@ -28,9 +28,6 @@ export default {
         ["facebook", "github", "google"].some((d) => d === item.tags[0])
       );
     },
-  },
-  mounted() {
-    console.log(this.filterIcon);
   },
   components: {
     AppIcon,

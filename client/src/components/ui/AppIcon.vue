@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="oauth2(icon.tags[0])">
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +20,9 @@
 </template>
 
 <script>
+import { firebase } from "@firebase/app";
+require("firebase/auth");
+
 export default {
   props: {
     icon: {
@@ -30,6 +33,15 @@ export default {
   computed: {
     filled() {
       return this.icon.attrs ? { fill: this.icon.attrs[0].fill } : null;
+    },
+  },
+  methods: {
+    async oauth2(platform) {
+      if (platform !== "google") return;
+      let provider = new firebase.auth.GoogleAuthProvider();
+      await firebase.auth().signInWithPopup(provider);
+
+      await this.$router.replace("/dashboard");
     },
   },
 };
