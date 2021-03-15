@@ -40,10 +40,10 @@
           src="https://img.icons8.com/ios-filled/50/000000/full-tool-storage-box---v1.png"
         />
       </router-link>
-      <router-link class="w-full" tag="li" to="/info" active-class="active">
+      <router-link class="w-full" tag="li" to="/account" active-class="active">
         <img
           class="w-7 m-auto"
-          src="https://img.icons8.com/metro/26/000000/info.png"
+          src="https://img.icons8.com/plumpy/48/000000/test-account.png"
         />
       </router-link>
     </ul>

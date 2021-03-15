@@ -43,6 +43,7 @@ export default {
           provider = new firebase.auth.GoogleAuthProvider();
           break;
         case "facebook":
+          provider = new firebase.auth.FacebookAuthProvider();
           break;
         case "github":
           provider = new firebase.auth.GithubAuthProvider();

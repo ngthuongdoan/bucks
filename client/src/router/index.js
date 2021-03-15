@@ -36,9 +36,9 @@ const routes = [
         component: () => import("../views/index/tool"),
       },
       {
-        path: "info",
-        name: "info",
-        component: () => import("../views/index/info"),
+        path: "account",
+        name: "account",
+        component: () => import("../views/index/account"),
       },
     ],
   },
