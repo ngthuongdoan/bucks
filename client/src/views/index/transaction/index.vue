@@ -17,11 +17,11 @@
           class="add-input text-4xl font-bold text-center"
         />
         <p class="text-center w-full ml-3">or</p>
-        <!-- <img
+        <img
           class="ml-3 grayscale"
           src="https://img.icons8.com/metro/26/000000/camera.png"
           @click="recognize"
-        /> -->
+        />
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
         <label for="username" class="font-bold self-start">Note</label>
@@ -48,52 +48,25 @@
 </template>
 
 <script>
-import Tesseract from "tesseract.js";
-// import path from "path";
-// const worker = createWorker({
-//   logger: (m) => console.log(m),
-//   langPath: path.resolve(__dirname, "tessdata"),
-// });
-
+import { createWorker, PSM, OEM } from 'tesseract.js';
+      const worker =  createWorker({
+        workerPath: 'https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js',
+        langPath: 'https://raw.githubusercontent.com/naptha/tessdata/gh-pages/4.0.0_best/',
+        corePath: 'https://unpkg.com/tesseract.js-core@v2.0.0/tesseract-core.wasm.js',
+        logger: (m) => console.log(m),
+      });
 export default {
   methods: {
-    // async recognize() {
-    //   const img = document.getElementById("text-img");
-    //   console.log(img);
-    //   await worker.load();
-    //   await worker.loadLanguage("eng");
-    //   await worker.initialize("eng", OEM.LSTM_ONLY);
-    //   await worker.setParameters({
-    //     tessedit_pageseg_mode: PSM.SINGLE_BLOCK,
-    //   });
-    //   const {
-    //     data: { text },
-    //   } = await worker.recognize(img);
-    //   console.log(text);
-    // },
-  },
-  async created() {
-    const exampleImage = "https://tesseract.projectnaptha.com/img/eng_bw.png";
+    async recognize() {
+      const img = document.getElementById("text-img");
 
-    const worker = Tesseract.createWorker({
-      logger: (m) => console.log(m),
-    });
-    Tesseract.setLogging(true);
-    // work();
-
-    // async function work() {
-    await worker.load();
-    await worker.loadLanguage("eng");
-    await worker.initialize("eng");
-
-    //   let result = await worker.detect(exampleImage);
-    //   console.log(result.data);
-
-    //   result = await worker.recognize(exampleImage);
-    //   console.log(result.data);
-
-    //   await worker.terminate();
-    // }
+      await worker.load();
+      await worker.loadLanguage("vie");
+      await worker.initialize("vie");
+      const result = await worker.recognize(img);
+      console.log(result.data.lines);
+      await worker.terminate()
+    },
   },
 };
 </script>
