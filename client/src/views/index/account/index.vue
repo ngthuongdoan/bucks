@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { logout } from "@/plugin/modules/auth";
+import { logout } from "@/plugin/auth";
 
 export default {
   methods: {

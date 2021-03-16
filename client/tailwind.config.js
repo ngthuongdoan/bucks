@@ -20,6 +20,9 @@ module.exports = {
       borderWidth: {
         action: "100px",
       },
+      gridTemplateColumns: {
+        add: "40% 60%",
+      },
     },
   },
   variants: {

@@ -5,8 +5,11 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 import "./plugin";
+import helpers from "./helper";
 
 Vue.config.productionTip = false;
+Vue.prototype.$helpers = helpers;
+
 new Vue({
   store,
   router,
