@@ -48,13 +48,14 @@
 </template>
 
 <script>
-import { createWorker, PSM, OEM } from 'tesseract.js';
-      const worker =  createWorker({
-        workerPath: 'https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js',
-        langPath: 'https://raw.githubusercontent.com/naptha/tessdata/gh-pages/4.0.0_best/',
-        corePath: 'https://unpkg.com/tesseract.js-core@v2.0.0/tesseract-core.wasm.js',
-        logger: (m) => console.log(m),
-      });
+import { createWorker, PSM, OEM } from "tesseract.js";
+const worker = createWorker({
+  // workerPath: 'https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js',
+  langPath:
+    "https://raw.githubusercontent.com/naptha/tessdata/gh-pages/4.0.0_best/",
+  // corePath: 'https://unpkg.com/tesseract.js-core@v2.0.0/tesseract-core.wasm.js',
+  logger: (m) => console.log(m),
+});
 export default {
   methods: {
     async recognize() {
@@ -65,7 +66,7 @@ export default {
       await worker.initialize("vie");
       const result = await worker.recognize(img);
       console.log(result.data.lines);
-      await worker.terminate()
+      await worker.terminate();
     },
   },
 };
