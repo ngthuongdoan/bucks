@@ -1,6 +1,6 @@
 <template>
   <div class="fixed">
-    <img src="~@/assets/img/top-panel.svg" class="w-full" />
+    <img src="~@/assets/img/top-panel.svg" class="w-screen" />
     <h1
       class="absolute z-10 top-5 left-5 font-bold font-sans text-xl text-white"
     >
