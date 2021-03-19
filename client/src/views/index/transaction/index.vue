@@ -130,7 +130,6 @@ export default {
           .slice(-1)[0]
           .text.trim()
           .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), "");
-        console.log(result.data);
         this.$helpers.close();
       } catch (err) {
         this.$helpers.showError(err);
