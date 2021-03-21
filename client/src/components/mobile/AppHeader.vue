@@ -7,9 +7,10 @@
       bucks
     </h1>
     <img
-        src="https://img.icons8.com/ios/64/000000/card-exchange.png"
         alt=""
         class="absolute z-10 top-7 right-5 w-6 cursor-pointer"
+        src="https://img.icons8.com/ios/64/000000/card-exchange.png"
+        @click="$helpers.to('/wallet')"
     />
     <wallet-card
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20"

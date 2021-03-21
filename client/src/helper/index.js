@@ -1,8 +1,12 @@
 import router from "@/router";
 import Swal from "sweetalert2";
+
 export default {
   async back() {
     await router.back();
+  },
+  async to(path) {
+    await router.push(path)
   },
   loading() {
     Swal.fire({
@@ -12,29 +16,28 @@ export default {
       didOpen: () => {
         Swal.showLoading();
       },
-    });
+    }).then();
   },
   /**
-   * Hiển thị lỗi
-   * @param {Error} error - Object lỗi gặp phải
+   * Show Error
+   * @param {Error} error
    */
   showError(error) {
     Swal.fire({
       title: "Please try again",
       icon: "error",
       text: error.message,
-    });
+    }).then();
     console.error(error);
   },
   showSuccess() {
     Swal.fire({
       title: "Success",
       icon: "success",
-    });
+    }).then();
   },
   /**
-   * Hiện bảng cảnh báo
-   * @param {String} confirmText
+   * Show warning
    * @returns {Promise<SweetAlertResult<Awaited<unknown>>>}
    */
   confirmSwal() {
@@ -49,4 +52,5 @@ export default {
   close() {
     Swal.close();
   },
+
 };

@@ -8,7 +8,7 @@ import "./plugin";
 import helpers from "./helper";
 
 Vue.config.productionTip = false;
-Vue.prototype.$helpers = helpers;
+Vue.prototype["$helpers"] = helpers;
 
 new Vue({
   store,
