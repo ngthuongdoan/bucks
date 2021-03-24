@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="fixed bottom-0 left-0 right-0 py-4 shadow-negative rounded-t-xl bg-white"
+      class="fixed bottom-0 left-0 right-0 py-4 shadow-negative rounded-t-xl bg-white z-50"
   >
     <action-button></action-button>
 
@@ -52,6 +52,7 @@
 
 <script>
 import ActionButton from "./ActionButton";
+
 export default {
   components: {
     ActionButton,

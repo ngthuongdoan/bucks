@@ -13,7 +13,7 @@
         @click="$helpers.to('/wallet')"
     />
     <wallet-card
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20 translate-z"
     ></wallet-card>
   </div>
 </template>

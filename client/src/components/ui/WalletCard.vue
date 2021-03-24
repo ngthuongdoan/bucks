@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-4/5 h-1/2 bg-green-600 shadow-2xl rounded-lg text-white px-8 py-4"
+      class="w-4/5 min-h-40 max-h-40 bg-green-600 shadow-2xl rounded-lg text-white px-8 py-4"
   >
     <img src="~@/assets/img/setting.svg" class="float-right" />
     <div class="flex flex-col h-full gap-3">

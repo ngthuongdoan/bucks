@@ -1,0 +1,35 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="375"
+        height="299.001"
+>
+    <defs>
+        <radialGradient
+                id="prefix__a"
+                cx=".5"
+                cy=".5"
+                r=".836"
+                gradientTransform="matrix(.575 .818 -.636 .447 .531 -.133)"
+                gradientUnits="objectBoundingBox"
+        >
+            <stop
+                    offset="0"
+                    stop-color="#222831"
+            />
+            <stop
+                    offset="1"
+                    stop-color="#6b6f75"
+            />
+        </radialGradient>
+    </defs>
+
+    <rect
+            x="0"
+            y="0"
+            width="300"
+            height="300"
+            fill="url(#prefix__a)"
+    >
+
+    </rect>>
+</svg>
