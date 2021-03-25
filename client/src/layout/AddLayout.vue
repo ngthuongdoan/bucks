@@ -6,7 +6,7 @@
       <img
           alt="" class="w-7" src="~@/assets/back.png" @click="to"/>
       <h1 class="text-lg capitalize">{{ title }}</h1>
-      <button class="font-bold text-lg" @click="save">Save</button>
+      <input class="font-bold text-lg bg-transparent" form="addForm" type="submit" value="Save"/>
     </div>
     <slot></slot>
   </div>
@@ -22,9 +22,6 @@ export default {
     },
   },
   methods: {
-    save() {
-      this.$emit("save");
-    },
     to() {
       this.$router.push("/dashboard")
     }
