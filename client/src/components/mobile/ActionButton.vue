@@ -20,28 +20,28 @@
         slot="item_btn"
       ></button>
       <router-link
-        tag="a"
-        to="/transaction"
-        slot="item_1"
-        class="fa fa-plus text-white"
+          slot="item_1"
+          class="fa fa-plus"
+          tag="a"
+          to="/transaction"
       ></router-link>
       <router-link
-        tag="a"
-        to="/transaction"
-        slot="item_2"
-        class="fa fa-plus text-white"
+          slot="item_4"
+          class="fab fa-cc-visa"
+          tag="a"
+          to="/wallet/add"
       ></router-link>
       <router-link
-        tag="a"
-        to="/transaction"
-        slot="item_3"
-        class="fa fa-plus text-white"
+          slot="item_3"
+          class="fa fa-plus"
+          tag="a"
+          to="/transaction"
       ></router-link>
       <router-link
-        tag="a"
-        to="/transaction"
-        slot="item_4"
-        class="fa fa-plus text-white"
+          slot="item_2"
+          class="fa fa-plus "
+          tag="a"
+          to="/transaction"
       ></router-link>
     </circle-menu>
   </div>

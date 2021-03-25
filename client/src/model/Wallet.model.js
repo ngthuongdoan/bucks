@@ -13,7 +13,7 @@ class Wallet {
    * @param  {string} serial="" - If bank exists
    * @param  {Currency} currency - Currency API
    */
-  constructor(name, amount, color, bank = "", type = "", serial = "", currency) {
+  constructor(name = "", amount = "", color = "", bank = "", type = "", serial = "", currency = "") {
     this.name = name;
     this.amount = amount;
     this.color = color;

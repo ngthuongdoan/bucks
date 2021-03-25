@@ -13,7 +13,8 @@
         @click="$helpers.to('/wallet')"
     />
     <wallet-card
-        :wallet="wallet"
+        v-if="wallet"
+        :wallet="wallet[0]"
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20 translate-z"
     ></wallet-card>
   </div>
@@ -21,17 +22,20 @@
 
 <script>
 import WalletCard from "@/components/ui/WalletCard";
-import Wallet from "@/model/Wallet.model";
+import {db} from "@/plugin/db"
 
 export default {
   data() {
     return {
-      wallet: new Wallet("Sacombank", "6000000", "green", "sacombank", "070080070479", "vnd")
+      wallet: []
     }
   },
   components: {
     WalletCard,
   },
+  firestore: {
+    wallet: db.collection('wallets').where("name", "==", "Overview")
+  }
 };
 </script>
 

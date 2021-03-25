@@ -50,6 +50,20 @@ const routes = [
         path: "wallet",
         name: "wallet",
         component: () => import("../views/index/wallet"),
+        children: [
+          {
+            path: "",
+            component: () => import("../views/index/wallet/all")
+          },
+          {
+            path: "add",
+            component: () => import("../views/index/wallet/add")
+          },
+          {
+            path: ":id",
+            component: () => import("../views/index/wallet/_id")
+          },
+        ]
       },
     ],
   },

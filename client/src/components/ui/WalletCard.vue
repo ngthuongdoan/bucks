@@ -2,8 +2,10 @@
   <div
       :style="{backgroundColor: wallet.color }"
       class="w-4/5 min-h-40 max-h-40 shadow-2xl rounded-lg text-white px-8 py-4"
+      v-if="wallet"
   >
-    <img src="~@/assets/img/setting.svg" class="float-right"/>
+    <img
+        alt="" class="float-right" src="~@/assets/img/setting.svg"/>
     <div class="flex flex-col h-full gap-3">
       <h1 class="font-bold text-sm">{{ wallet.name }}</h1>
       <p class="text-xl mt-3">{{ wallet.amount | separateValue }} <span
@@ -32,8 +34,14 @@ export default {
       required: true
     }
   },
+  watch: {
+    wallet() {
+      this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
+    }
+  },
   created() {
     this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
+
   },
   components: {
     AppIcon,
