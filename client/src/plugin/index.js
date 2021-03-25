@@ -1,2 +1,3 @@
 import "./modules/animate";
-import "./modules/firebase";
+import "./firebaseInit"
+import "./modules/auth";

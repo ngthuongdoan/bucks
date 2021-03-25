@@ -5,6 +5,7 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 import "./plugin";
+import "./filters"
 import helpers from "./helper";
 
 Vue.config.productionTip = false;

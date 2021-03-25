@@ -1,5 +1,6 @@
-import { firebase } from "@firebase/app";
+import firebase from "firebase/app";
 import router from "@/router";
+
 require("firebase/auth");
 
 export const createProvider = (platform) => {

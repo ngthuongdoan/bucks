@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { createProvider, signInWithPopup } from "@/plugin/auth";
+import {createProvider, signInWithPopup} from "@/plugin/oauth2";
 
 export default {
   props: {

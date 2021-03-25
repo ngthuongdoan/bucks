@@ -9,7 +9,7 @@
       class="outline-none focus:outline-none"
       :colors="[
         '#FFEAB7',
-        'rgb(255, 255, 102)',
+        '#ffff66',
         '#FFE26F',
         '#F3825F',
         '#F19584',
