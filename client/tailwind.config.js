@@ -15,7 +15,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Catamaran", "Helvetica", "Arial", "sans-serif"],
-        kredit: ["Kredit Front"],
+        kredit: ['"Kredit Front"'],
         monoton: ["Monoton", "cursive"]
       },
       borderWidth: {

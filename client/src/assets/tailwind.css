@@ -7,12 +7,12 @@
 @font-face {
   font-family: "Catamaran";
   src: local("Catamaran"),
-    url(./fonts/Catamaran-VariableFont_wght.ttf) format("ttf");
+  url(./fonts/Catamaran-VariableFont_wght.ttf) format("truetype");
 }
 
 @font-face {
   font-family: "Kredit Front";
-  src: local("Kredit Front"), url(./fonts/kredit.ttf) format("ttf");
+  src: local("Kredit Front"), url(./fonts/kredit.ttf) format("truetype");
 }
 
 @layer components {

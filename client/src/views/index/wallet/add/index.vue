@@ -1,5 +1,9 @@
 <template>
-  <add-layout title="Add Wallet" @save="save"></add-layout>
+  <add-layout title="Add Wallet" @save="save">
+    <form>
+
+    </form>
+  </add-layout>
 </template>
 
 <script>
