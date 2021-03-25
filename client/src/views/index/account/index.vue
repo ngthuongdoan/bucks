@@ -1,29 +1,25 @@
 <template>
   <div>
     Account
-    <ul>
-      <li v-for="p in persons" :key="p.id">{{ p }}</li>
-    </ul>
+    {{ currentUser }}
     <button class="bg-blue-600 text-white font-bold cursor-pointer w-full block py-3" @click="logout">Logout</button>
   </div>
 </template>
 
 <script>
 import {logout} from "@/plugin/oauth2";
-import {db} from "@/plugin/db"
+import {mapGetters} from "vuex";
 
 export default {
-  data() {
-    return {
-      persons: [],
-    }
+  computed: {
+    ...mapGetters({
+      currentUser: "userModule/user"
+    })
   },
   methods: {
     logout,
   },
-  firestore: {
-    persons: db.collection("person"),
-  },
+
 }
 </script>
 
