@@ -36,9 +36,13 @@ export default {
   },
   methods: {
     async oauth2(platform) {
-      let provider = createProvider(platform);
-      await signInWithPopup(provider);
-      await this.$router.replace("/dashboard");
+      try {
+        let provider = createProvider(platform);
+        await signInWithPopup(provider);
+        await this.$router.replace("/dashboard");
+      } catch (e) {
+        this.$helpers.showError(e)
+      }
     },
   },
 };

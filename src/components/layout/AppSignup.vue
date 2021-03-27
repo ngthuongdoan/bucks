@@ -1,39 +1,43 @@
 <template>
   <form
-    @submit.prevent="signup"
-    class="relative bg-white py-10 px-20 shadow-lg"
+      class="relative bg-white py-10 px-20 shadow-lg"
+      @submit.prevent="signup"
   >
     <div class="flex">
       <div class="flex flex-col mr-8">
         <label class="font-bold">Email</label>
-        <input type="email" class="input" v-model.trim="user.email" />
-        <br />
+        <input v-model.trim="user.email" class="input" type="email"/>
+        <br/>
         <label class="font-bold">Name</label>
-        <input type="text" class="input" v-model.trim="user.name" />
+        <input v-model.trim="user.name" class="input" type="text"/>
       </div>
       <div class="flex flex-col">
         <label class="font-bold">Password</label>
         <input
-          type="password"
-          class="input"
-          ref="pass"
-          v-model.trim="user.password"
+            ref="pass"
+            v-model.trim="user.password"
+            class="input"
+            type="password"
         />
-        <br />
+        <br/>
         <label class="font-bold">Confirm Password</label>
-        <input type="password" class="input" v-model.trim="confirmPassword" />
+        <input v-model.trim="confirmPassword" class="input" type="password"/>
       </div>
     </div>
     <input
-      type="submit"
-      value="Sign up"
-      class="bg-green-500 w-full py-3 font-semibold mt-4 cursor-pointer"
+        class="bg-green-500 w-full py-3 font-semibold mt-4 cursor-pointer"
+        type="submit"
+        value="Sign up"
     />
   </form>
 </template>
 
 <script>
-import firebase from "firebase";
+import WalletService from "@/service/Wallet.service"
+import UserService from "@/service/User.service"
+import {Auth} from "@/plugin/modules/auth";
+import {db} from "@/plugin/db";
+
 export default {
   data() {
     return {
@@ -48,13 +52,22 @@ export default {
   methods: {
     async signup() {
       try {
-        const data = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.user.email, this.user.password);
+        const data = await Auth
+            .createUserWithEmailAndPassword(this.user.email, this.user.password);
 
         await data.user.updateProfile({
           displayName: this.user.name,
         });
+
+
+        const response = await WalletService.addNew(WalletService.initOverviewWallet(data.user.uid))
+        await UserService.addNew({
+          uid: data.user.uid,
+          displayName: this.user.name,
+          email: this.user.email,
+          selectedWallet: db.collection("wallets").doc(response.id)
+        })
+        await this.$router.push("/login")
       } catch (err) {
         console.error(err);
       }

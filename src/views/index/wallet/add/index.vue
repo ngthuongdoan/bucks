@@ -45,10 +45,10 @@
 import AddLayout from "@/layout/AddLayout";
 import Wallet from "@/model/Wallet.model";
 import VSwatches from 'vue-swatches'
-import {db, Timestamp} from "@/plugin/db";
 
 // Import the styles too, typically in App.vue or main.js
 import 'vue-swatches/dist/vue-swatches.css'
+import WalletService from "@/service/Wallet.service"
 
 export default {
   data() {
@@ -60,7 +60,7 @@ export default {
     async addWallet() {
       this.$helpers.loading()
       try {
-        await db.collection('wallets').add(Object.assign({createdDate: Timestamp.fromDate(new Date('1789-07-14')),}, this.wallet))
+        await WalletService.addNew(this.wallet);
         this.$helpers.showSuccess();
         await this.$router.push("/dashboard");
       } catch (err) {

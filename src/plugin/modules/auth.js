@@ -5,7 +5,8 @@ import {firestorePlugin} from 'vuefire'
 
 require("firebase/auth");
 
-firebase.auth().onAuthStateChanged((user) => {
+export const Auth = firebase.auth();
+Auth.onAuthStateChanged((user) => {
   store.dispatch("userModule/fetchUser", user).then();
 });
 
