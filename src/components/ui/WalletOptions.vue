@@ -1,17 +1,20 @@
 <template>
   <ul v-on-click-away="away" class="bg-white text-black text-sm mt-2 block">
-    <li class="px-3 py-2">Edit Wallet</li>
-    <li class="px-3 py-2">Transfer Money</li>
-    <li class="px-3 py-2">Adjust Balance</li>
-    <li class="px-3 py-2">Delete Wallet</li>
+    <li v-for="opt in options" :key="opt.name" class="px-3 py-2">{{ opt.name }}</li>
   </ul>
 </template>
 
 <script>
 import {directive as onClickAway} from "vue-clickaway";
+import options from "@/config/wallet-options.json"
 
 export default {
   name: "WalletOptions",
+  data() {
+    return {
+      options
+    }
+  },
   directives: {
     onClickAway
   },
