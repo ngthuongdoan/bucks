@@ -26,6 +26,7 @@
 import AppIcon from "@/components/ui/AppIcon";
 import icons from "@/config/icon.json";
 import WalletOptions from "@/components/ui/WalletOptions";
+import {db} from "@/plugin/db";
 
 export default {
   data() {
@@ -57,8 +58,17 @@ export default {
     closeOption() {
       this.option = false
     },
-    async deleteWallet() {
-      console.log("delete")
+    deleteWallet: async function () {
+      const choose = await this.$helpers.confirmSwal();
+      if (choose.isConfirmed) {
+        try {
+          this.$helpers.loading();
+          await db.collection("wallets").doc(this.wallet.id).delete();
+          this.$helpers.showSuccess();
+        } catch (err) {
+          await this.$helpers.showError(err)
+        }
+      }
     },
     handleOption(option) {
       switch (Object.keys(option)[0]) {
