@@ -5,7 +5,7 @@
       v-if="wallet"
   >
     <img
-        alt="" class="float-right" src="~@/assets/img/setting.svg"/>
+        alt="" class="float-right cursor-pointer" src="~@/assets/img/setting.svg"/>
     <div class="flex flex-col h-full gap-3">
       <h1 class="font-bold text-sm">{{ wallet.name }}</h1>
       <p class="text-xl mt-3">{{ wallet.amount | separateValue }} <span

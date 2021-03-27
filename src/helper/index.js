@@ -52,5 +52,13 @@ export default {
   close() {
     Swal.close();
   },
-
+  /**
+   * Auto generate contrast color
+   * @param {array<number>} rgb
+   * @return {string} text contrast color
+   */
+  constrastColor(rgb) {
+    let o = Math.round((rgb[0] * 299) + (rgb[1] * 587) + (rgb[2] * 114) / 1000);
+    return (o > 125) ? "black" : "white";
+  }
 };
