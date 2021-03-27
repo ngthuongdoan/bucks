@@ -13,7 +13,7 @@
 publish = "dist"
 
 # Default build command.
-command = "yarn build"
+command = "yarn netlify"
 
 # Directory with the serverless functions, including background functions,
 # to deploy to AWS. This is relative to the base directory if one has been set,
