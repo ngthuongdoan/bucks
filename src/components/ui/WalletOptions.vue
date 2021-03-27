@@ -1,6 +1,13 @@
 <template>
   <ul v-on-click-away="away" class="bg-white text-black text-sm mt-2 block">
-    <li v-for="opt in options" :key="opt.name" class="px-3 py-2">{{ opt.name }}</li>
+    <li
+        v-for="opt in options"
+        :key="opt.name"
+        class="px-3 py-2 cursor-pointer"
+        @click="handleConfig(opt.config)"
+    >
+      {{ opt.name }}
+    </li>
   </ul>
 </template>
 
@@ -21,6 +28,9 @@ export default {
   methods: {
     away() {
       this.$emit('away');
+    },
+    handleConfig(config) {
+      this.$emit("config", config)
     }
   }
 }

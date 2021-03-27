@@ -4,10 +4,10 @@
       :style="{backgroundColor: wallet.color }"
       class="w-4/5 min-h-40 max-h-40 shadow-2xl rounded-lg text-white px-8 py-4"
   >
-    <div class="absolute right-4 w-1/2">
+    <div v-if="showSetting" class="absolute right-4 w-1/2">
       <img alt="" class="absolute cursor-pointer right-0 py-5 pt-0" src="~@/assets/img/setting.svg"
            @click="option=!option"/>
-      <wallet-options v-if="option" @away="closeOption"></wallet-options>
+      <wallet-options v-if="option" @away="closeOption" @config="handleOption($event)"></wallet-options>
     </div>
 
     <div class="flex flex-col h-full gap-3">
@@ -32,9 +32,14 @@ export default {
     return {
       option: false,
       icon: {},
+      optionModal: ""
     };
   },
   props: {
+    showSetting: {
+      type: Boolean,
+      default: true
+    },
     wallet: {
       type: Object,
       required: true
@@ -43,13 +48,34 @@ export default {
   watch: {
     wallet() {
       this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
+    },
+    optionModal() {
+      console.log(this.optionModal)
     }
   },
   methods: {
     closeOption() {
       this.option = false
     },
-
+    async deleteWallet() {
+      console.log("delete")
+    },
+    handleOption(option) {
+      switch (Object.keys(option)[0]) {
+        case "path":
+          this.$router.push(option.path + this.wallet.id);
+          break;
+        case "component":
+          this.optionModal = option.component;
+          break;
+        case "methods":
+          this.deleteWallet();
+          break;
+        default:
+          break;
+      }
+      this.closeOption()
+    }
   },
   created() {
     this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);

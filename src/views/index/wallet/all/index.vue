@@ -4,6 +4,7 @@
                  :style="{zIndex:i, transform: `rotateY(10deg) translateY(${(i)*150}px) !important`,
                   boxShadow:'1px 1px 70px black !important'}"
                  :wallet="wallet"
+                 :show-setting="false"
                  class="wallet w-2/3 absolute transform cursor-pointer min-h-0"
     ></wallet-card>
   </div>
