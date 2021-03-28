@@ -1,10 +1,10 @@
 <template>
   <div class="wallet-container w-screen min-h-screen h-full flex flex-col items-center pt-5">
     <wallet-card v-for="(wallet, i) in wallets" :key="wallet.id"
+                 :show-setting="false"
                  :style="{zIndex:i, transform: `rotateY(10deg) translateY(${(i)*150}px) !important`,
                   boxShadow:'1px 1px 70px black !important'}"
                  :wallet="wallet"
-                 :show-setting="false"
                  class="wallet w-2/3 absolute transform cursor-pointer"
     ></wallet-card>
   </div>
@@ -13,6 +13,7 @@
 <script>
 import WalletCard from "@/components/ui/WalletCard";
 import {db} from "@/plugin/db";
+import store from "@/store"
 
 export default {
   data() {
@@ -23,8 +24,11 @@ export default {
   components: {
     WalletCard
   },
-  firestore: {
-    wallets: db.collection("wallets").orderBy("createdDate", "desc")
+  firestore() {
+    const uid = store.getters["userModule/user"].data.uid;
+    return {
+      wallets: db.collection("wallets").where("uid", "==", uid).orderBy("createdDate", "desc")
+    }
   }
 };
 </script>

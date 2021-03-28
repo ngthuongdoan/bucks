@@ -24,7 +24,7 @@ export default {
    */
   showError(error) {
     Swal.fire({
-      title: "Please try again",
+      title: "Error Occurs",
       icon: "error",
       text: error.message,
     }).then();
