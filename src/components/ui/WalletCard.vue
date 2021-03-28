@@ -1,8 +1,8 @@
 <template>
   <div
       v-if="wallet"
-      :style="{backgroundColor: wallet.color }"
-      class="w-4/5 min-h-40 max-h-40 shadow-2xl rounded-lg text-white px-8 py-4"
+      :style="{backgroundColor: wallet.color , minHeight:'150px'}"
+      class="w-4/5 max-h-40 shadow-2xl rounded-lg text-white px-8 py-4"
   >
     <div v-if="showSetting" class="absolute right-4 w-1/2">
       <img alt="" class="absolute cursor-pointer right-0 py-5 pt-0" src="~@/assets/img/setting.svg"

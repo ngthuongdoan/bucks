@@ -5,7 +5,7 @@
                   boxShadow:'1px 1px 70px black !important'}"
                  :wallet="wallet"
                  :show-setting="false"
-                 class="wallet w-2/3 absolute transform cursor-pointer min-h-0"
+                 class="wallet w-2/3 absolute transform cursor-pointer"
     ></wallet-card>
   </div>
 </template>
