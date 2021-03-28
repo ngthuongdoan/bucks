@@ -26,6 +26,5 @@ export const logout = async () => {
 };
 
 export const signInWithPopup = async (provider) => {
-  const user = await firebase.auth().signInWithPopup(provider);
-  // db.collection("users").add()
+  return await firebase.auth().signInWithPopup(provider);
 };

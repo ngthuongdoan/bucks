@@ -1,6 +1,6 @@
 import {db} from "@/plugin/db";
 
-export default {
+export const UserService = {
 
   async getAll() {
   },

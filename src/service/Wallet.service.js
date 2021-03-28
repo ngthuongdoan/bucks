@@ -1,9 +1,10 @@
 import {db, Timestamp} from "@/plugin/db";
 import Wallet from "@/model/Wallet.model";
 
-export default {
-  initOverviewWallet(uid) {
-    return new Wallet("Overview", 0, "VND", "#1b1c6d", uid)
+export const WalletService = {
+  async initOverviewWallet(uid) {
+    const overview = new Wallet("Overview", 0, "VND", "#1b1c6d", uid)
+    return await this.addNew(overview);
   },
   async getAll() {
   },

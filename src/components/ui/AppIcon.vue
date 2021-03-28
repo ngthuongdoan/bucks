@@ -1,10 +1,8 @@
 <template>
   <div @click="oauth2(icon.tags[0])">
     <svg
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      class="hidden"
+        class="hidden"
+        xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
         <symbol :id="icon.tags[0]" viewBox="0 0 1000 1000">
@@ -13,7 +11,7 @@
       </defs>
     </svg>
     <!-- :style="'fill:' + icon.attrs[0].fill" -->
-    <svg class="w-12 h-11" :style="filled">
+    <svg :style="filled" class="w-12 h-11">
       <use :xlink:href="'#' + icon.tags[0]"></use>
     </svg>
   </div>
@@ -21,6 +19,10 @@
 
 <script>
 import {createProvider, signInWithPopup} from "@/plugin/oauth2";
+import {WalletService} from "@/service/Wallet.service";
+import {UserService} from "@/service/User.service";
+import User from "@/model/User.model";
+import {db} from "@/plugin/db";
 
 export default {
   props: {
@@ -31,14 +33,20 @@ export default {
   },
   computed: {
     filled() {
-      return this.icon.attrs ? { fill: this.icon.attrs[0].fill } : null;
+      return this.icon.attrs ? {fill: this.icon.attrs[0].fill} : null;
     },
   },
   methods: {
     async oauth2(platform) {
       try {
         let provider = createProvider(platform);
-        await signInWithPopup(provider);
+        const data = await signInWithPopup(provider);
+        if (data.additionalUserInfo.isNewUser) {
+          const response = await WalletService.initOverviewWallet(data.user.uid)
+          console.log(data.user);
+          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, db.collection("wallets").doc(response.id)))
+        }
+        this.$helpers.showSuccess()
         await this.$router.replace("/dashboard");
       } catch (e) {
         this.$helpers.showError(e)
