@@ -11,14 +11,12 @@
         />
         <label class="font-bold" for="currency">Currency</label>
         <select id="currency" v-model="wallet.currency" class="add-input" required>
-          <option selected value="vnd">VND</option>
-          <option value="usd">USD</option>
-          <option value="jpn">JPN</option>
+          <option v-for="cur in currency" :key="cur.key"></option>
         </select>
         <label class="font-bold" for="type">Type</label>
         <select id="type" v-model="wallet.type" class="add-input">
           <option selected value="">None</option>
-          <option value="visa">visa</option>
+          <option value="visa">Visa</option>
           <option value="mastercard">Mastercard</option>
         </select>
         <label class="font-bold" for="color">Color</label>
@@ -54,6 +52,11 @@ export default {
   data() {
     return {
       wallet: new Wallet(),
+    }
+  },
+  computed: {
+    currency() {
+      return this.$store.getters["currencyModule/currency"];
     }
   },
   methods: {

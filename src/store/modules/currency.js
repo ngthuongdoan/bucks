@@ -1,4 +1,4 @@
-import {init} from "@/plugin/modules/currency"
+import {init} from "@/service/Currency.service"
 
 export const state = () => ({
   currency: null,

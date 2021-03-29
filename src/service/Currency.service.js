@@ -1,5 +1,6 @@
 import axios from "axios";
 import helper from "@/helper"
+import Currency from "@/model/Currency.model"
 
 export const init = async () => {
   const initOption = {
@@ -13,7 +14,9 @@ export const init = async () => {
 
   try {
     const response = await axios.request(initOption);
-    return response.data.currencies;
+    const currencies = response.data.currencies;
+    const allKeys = Object.keys(response.data.currencies)
+    return allKeys.map(currency => new Currency(currency, currencies[currency]))
   } catch (error) {
     helper.showError(error)
   }
