@@ -27,7 +27,7 @@ export default {
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
     return {
-      wallets: db.collection("wallets").where("uid", "==", uid).orderBy("createdDate", "desc")
+      wallets: db.collection("wallets").where("uid", "==", uid)
     }
   }
 };

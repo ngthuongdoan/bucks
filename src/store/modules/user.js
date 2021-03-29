@@ -27,6 +27,7 @@ export const actions = {
         uid: user.uid,
         displayName: user.displayName,
         email: user.email,
+        selectedWallet: user.selectedWallet
       });
     } else {
       commit("SET_USER", null);

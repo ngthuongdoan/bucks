@@ -43,10 +43,15 @@ export default {
         const data = await signInWithPopup(provider);
         if (data.additionalUserInfo.isNewUser) {
           const response = await WalletService.initOverviewWallet(data.user.uid)
-          console.log(data.user);
-          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, db.collection("wallets").doc(response.id)))
+          const walletSnapshot = await db.collection("wallets").doc(response.id).get();
+          const selectedWallet = await walletSnapshot.data();
+          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, selectedWallet))
         }
         this.$helpers.showSuccess()
+        const userSnapshot = await db.collection("users").doc(data.user.uid).get();
+        const currentUser = await userSnapshot.data();
+        console.log(currentUser)
+        await this.$store.dispatch("userModule/fetchUser", {uid: data.user.uid, ...currentUser})
         await this.$router.replace("/dashboard");
       } catch (e) {
         this.$helpers.showError(e)

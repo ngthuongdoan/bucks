@@ -1,6 +1,6 @@
 <template>
   <div class="fixed">
-    <img src="~@/assets/img/top-panel.svg" alt="" class="w-screen"/>
+    <img alt="" class="w-screen" src="~@/assets/img/top-panel.svg"/>
     <h1
         class="absolute z-10 top-5 left-5  text-xl text-white font-monoton"
     >
@@ -14,7 +14,7 @@
     />
     <wallet-card
         v-if="wallet"
-        :wallet="wallet[0]"
+        :wallet="wallet"
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20 translate-z"
     ></wallet-card>
   </div>
@@ -22,20 +22,16 @@
 
 <script>
 import WalletCard from "@/components/ui/WalletCard";
-import {db} from "@/plugin/db"
 
 export default {
-  data() {
-    return {
-      wallet: []
+  computed: {
+    wallet() {
+      return this.$store.getters["userModule/user"].data.selectedWallet
     }
   },
   components: {
     WalletCard,
   },
-  firestore: {
-    wallet: db.collection('wallets').where("name", "==", "Overview")
-  }
 };
 </script>
 
