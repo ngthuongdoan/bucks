@@ -1,24 +1,24 @@
 import {init} from "@/service/Currency.service"
 
 export const state = () => ({
-  currency: null,
+  currencies: null,
 });
 
 export const getters = {
-  currency(state) {
-    return state.currency;
+  currencies(state) {
+    return state.currencies;
   },
 };
 export const mutations = {
-  SET_CURRENCY(state, currency) {
-    state.currency = currency
+  SET_CURRENCY(state, currencies) {
+    state.currencies = currencies
   },
 };
 
 export const actions = {
   async fetchCurrency({commit}) {
-    const currency = await init();
-    commit("SET_CURRENCY", currency)
+    const currencies = await init();
+    commit("SET_CURRENCY", currencies)
   }
 };
 

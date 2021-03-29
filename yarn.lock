@@ -4158,6 +4158,11 @@ cssstyle@^2.0.0:
   dependencies:
     cssom "~0.3.6"
 
+currency-flags@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/currency-flags/-/currency-flags-3.1.0.tgz#9e4e4446e5adcc3a93a56622c948b0eac527d9e6"
+  integrity sha512-M83mo0TEtAhKytxaoUEMNTOI9I2z1HFgltGxzSZTdL2ej6hh9tCZfTK3YMeYW7HZlluyiGqr0bwVOrgZEbFZig==
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"

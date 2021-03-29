@@ -11,7 +11,10 @@
         />
         <label class="font-bold" for="currency">Currency</label>
         <select id="currency" v-model="wallet.currency" class="add-input" required>
-          <option v-for="cur in currency" :key="cur.key"></option>
+          <!--          BUGS: div not inside option, need to use custom select-->
+          <option v-for="cur in currencies" :key="cur.key">
+            <div :class="['currency-flag', `currency-flag-${cur.key.toLowerCase()}`]"> {{ cur.key }}</div>
+          </option>
         </select>
         <label class="font-bold" for="type">Type</label>
         <select id="type" v-model="wallet.type" class="add-input">
@@ -46,7 +49,7 @@ import VSwatches from 'vue-swatches'
 
 // Import the styles too, typically in App.vue or main.js
 import 'vue-swatches/dist/vue-swatches.css'
-import WalletService from "@/service/Wallet.service"
+import {WalletService} from "@/service/Wallet.service"
 
 export default {
   data() {
@@ -55,8 +58,8 @@ export default {
     }
   },
   computed: {
-    currency() {
-      return this.$store.getters["currencyModule/currency"];
+    currencies() {
+      return this.$store.getters["currencyModule/currencies"];
     }
   },
   methods: {
