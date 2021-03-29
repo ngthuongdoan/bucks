@@ -8,6 +8,8 @@ import "./plugin";
 import "./filters"
 import helpers from "./helper";
 
+store.dispatch("currencyModule/fetchCurrency").then()
+
 Vue.config.productionTip = false;
 Vue.prototype["$helpers"] = helpers;
 
