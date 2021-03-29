@@ -33,8 +33,13 @@ const routes = [
       },
       {
         path: "tool",
-        name: "tool",
         component: () => import("../views/index/tool"),
+        children: [
+          {
+            path: ":feature",
+            component: () => import("../views/index/tool/_feature")
+          }
+        ]
       },
       {
         path: "account",
