@@ -14,12 +14,11 @@ export const init = async () => {
   const initOption = {
     url: '/list',
   };
-
   try {
     const response = await axios.request({...defaultOption, ...initOption});
     const currencies = response.data.currencies;
     const allKeys = Object.keys(response.data.currencies)
-    return allKeys.map(currency => new Currency(currency, currencies[currency]))
+    return allKeys.sort().map(currency => new Currency(currency, currencies[currency]))
   } catch (error) {
     helper.showError(error)
   }
