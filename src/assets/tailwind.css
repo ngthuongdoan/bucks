@@ -31,7 +31,11 @@
   }
 
   .add-input {
-    @apply border-b-2 border-gray-500 bg-transparent ml-3 px-3 py-2 w-full;
+    @apply border-b border-gray-500 bg-transparent ml-3 px-3 py-2 w-full;
+  }
+
+  .card {
+    @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer
   }
 }
 

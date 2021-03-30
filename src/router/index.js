@@ -35,9 +35,17 @@ const routes = [
         path: "tool",
         component: () => import("../views/index/tool"),
         children: [
+          // {
+          //   path: ":feature",
+          //   component: () => import("../views/all/tool/_feature")
+          // }
           {
-            path: ":feature",
-            component: () => import("../views/index/tool/_feature")
+            path: "",
+            component: () => import("../views/index/tool/all")
+          },
+          {
+            path: "exchange",
+            component: () => import("../views/index/tool/exchange")
           }
         ]
       },

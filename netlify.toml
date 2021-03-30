@@ -63,7 +63,7 @@ command = "yarn build"
 # A basic redirect rule
 #[[redirects]]
 #from = "/*"
-#to = "/index.html"
+#to = "/all.html"
 
 # A redirect rule with many of the supported properties
 #[[redirects]]
