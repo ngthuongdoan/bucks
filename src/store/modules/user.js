@@ -17,6 +17,9 @@ export const mutations = {
   SET_USER(state, data) {
     state.user.data = data;
   },
+  SET_SELECTED_WALLET(state, wallet) {
+    state.user.data.selectedWallet = Object.assign({}, wallet)
+  }
 };
 
 export const actions = {
@@ -33,6 +36,9 @@ export const actions = {
       commit("SET_USER", null);
     }
   },
+  changeSelected({commit}, wallet) {
+    commit("SET_SELECTED_WALLET", wallet)
+  }
 };
 
 export const namespaced = true;

@@ -6,7 +6,7 @@
                   boxShadow:'1px 1px 70px black !important'}"
                  :wallet="wallet"
                  class="wallet w-2/3 absolute transform cursor-pointer"
-                 @click="changeWallet(wallet)"
+                 @click.native="changeWallet(wallet)"
     ></wallet-card>
   </div>
 </template>
@@ -24,8 +24,17 @@ export default {
   },
   methods: {
     async changeWallet(wallet) {
-      await this.$firestoreRefs.user.update({selectedWallet: wallet})
-      console.log("Done")
+      try {
+
+        console.log(wallet)
+        const users = db.collection('users').doc(this.$store.getters["userModule/user"].data.uid)
+        this.$bind('users', users)
+        await this.$firestoreRefs.users.update({selectedWallet: wallet})
+        await this.$store.dispatch("userModule/changeSelected", wallet)
+        await this.$router.push("/dashboard")
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
   components: {
