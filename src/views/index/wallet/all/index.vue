@@ -6,6 +6,7 @@
                   boxShadow:'1px 1px 70px black !important'}"
                  :wallet="wallet"
                  class="wallet w-2/3 absolute transform cursor-pointer"
+                 @click="changeWallet(wallet)"
     ></wallet-card>
   </div>
 </template>
@@ -19,6 +20,12 @@ export default {
   data() {
     return {
       wallets: []
+    }
+  },
+  methods: {
+    async changeWallet(wallet) {
+      await this.$firestoreRefs.user.update({selectedWallet: wallet})
+      console.log("Done")
     }
   },
   components: {

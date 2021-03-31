@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import router from "@/router";
+// import {Auth} from "@/plugin/modules/auth";
 
 require("firebase/auth");
 
@@ -19,6 +20,14 @@ export const createProvider = (platform) => {
 
   return provider;
 };
+
+// const getCredential = async () =>{
+//   const result = await Auth.getRedirectResult();
+//   if (result.credential) {
+//     let token = result.credential.accessToken;
+//     console.log(token);
+//   }
+// }
 
 export const logout = async () => {
   await firebase.auth().signOut();

@@ -66,6 +66,7 @@ export default {
     async addWallet() {
       this.$helpers.loading()
       try {
+        this.wallet.uid = this.$store.getters["userModule/user"].data.uid;
         await WalletService.addNew(this.wallet);
         this.$helpers.showSuccess();
         await this.$router.push("/dashboard");

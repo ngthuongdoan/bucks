@@ -97,9 +97,9 @@ if (process.env.VUE_APP_GUARD === "true") {
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
     const currentUser = await firebase.auth().currentUser;
     if (requiresAuth && !currentUser) {
-      next("/login");
+      await next("/login");
     } else {
-      next();
+      await next();
     }
   });
 }
