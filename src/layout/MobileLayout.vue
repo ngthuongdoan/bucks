@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-light-grey min-h-screen min-w-full">
+  <div class="relative bg-light-grey min-h-screen min-w-full overflow-x-hidden">
     <router-view></router-view>
     <bottom-navigation></bottom-navigation>
   </div>
@@ -7,6 +7,7 @@
 
 <script>
 import BottomNavigation from "@/components/mobile/BottomNavigation";
+
 export default {
   components: {
     BottomNavigation,

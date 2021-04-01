@@ -1,3 +1,5 @@
+@import "currency-flags.css";
+
 @tailwind base;
 
 @tailwind components;
@@ -36,6 +38,10 @@
 
   .card {
     @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer
+  }
+
+  .currency-icon {
+    @apply flex-shrink-0 object-cover rounded-full
   }
 }
 
