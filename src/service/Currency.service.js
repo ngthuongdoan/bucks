@@ -1,6 +1,6 @@
+import helper from "@/helper";
+import Currency from "@/model/Currency.model";
 import axios from "axios";
-import helper from "@/helper"
-import Currency from "@/model/Currency.model"
 
 const defaultOption = {
   baseURL: 'https://currency-converter5.p.rapidapi.com/currency',
@@ -9,16 +9,16 @@ const defaultOption = {
     'x-rapidapi-key': process.env.VUE_APP_X_RAPID_API_KEY,
     'x-rapidapi-host': process.env.VUE_APP_X_RAPID_API_HOST
   }
-}
+};
 export const init = async () => {
   const initOption = {
-    url: '/list',
+    url: '/list'
   };
   try {
-    const response = await axios.request({...defaultOption, ...initOption});
+    const response = await axios.request({ ...defaultOption, ...initOption });
     const currencies = response.data.currencies;
-    const allKeys = Object.keys(response.data.currencies)
-    return allKeys.sort().map(currency => new Currency(currency, currencies[currency]))
+    const allKeys = Object.keys(response.data.currencies);
+    return allKeys.sort().map(currency => new Currency(currency, currencies[currency]));
   } catch (error) {
     helper.showError(error)
   }
@@ -37,9 +37,9 @@ export const exchange = async (from, to, amount = 1) => {
     params: {format: 'json', from, to, amount},
   };
   try {
-    const response = await axios.request({...defaultOption, ...exchangeOption});
-    const {rates} = response.data;
-    return rates[to];
+    const response = await axios.request({ ...defaultOption, ...exchangeOption });
+    const { rates, amount } = response.data;
+    return { amount, ...rates[to] };
   } catch (error) {
     helper.showError(error)
   }

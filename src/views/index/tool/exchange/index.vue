@@ -5,7 +5,9 @@
         <input
             v-model.number="amount"
             class="add-input text-4xl m-0 font-bold text-center"
-            type="text"
+            min="0"
+            step="0.01"
+            type="number"
         />
       </label>
       <div class="flex items-center justify-center mt-5 gap-10">
@@ -33,7 +35,7 @@
               <select-icon/>
             </button>
             <ul
-                v-if="fromSelect"
+                v-show="fromSelect"
                 aria-activedescendant="listbox-option-3"
                 aria-labelledby="listbox-label"
                 class="absolute mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
@@ -84,7 +86,7 @@
               <select-icon/>
             </button>
             <ul
-                v-if="toSelect"
+                v-show="toSelect"
                 aria-activedescendant="listbox-option-3"
                 aria-labelledby="listbox-label-1"
                 class="absolute mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
@@ -114,7 +116,7 @@
       <input class="w-full rounded bg-yellow-500 text-gray-50 font-bold mt-4 p-2" type="submit" value="Exchange">
     </form>
     <div v-if="isSubmit"
-         class="w-full max-w-screen-sm rounded shadow p-5 mt-4 ">
+         class="w-full max-w-screen-sm rounded shadow p-5 mt-4 mx-auto bg-white">
       <div class="grid grid-cols-3 items-start justify-center gap-3 text-center">
         <h1 class="font-bold text-lg text-gray-900">
           <div :class="['currency-flag currency-flag-xl ', `currency-flag-${from.key.toLowerCase()}`]"></div>
@@ -131,8 +133,8 @@
         </div>
       </div>
       <div class="flex w-full justify-evenly mt-4">
-
-        <h3 class="text-md"><span class="font-bold">From:</span> {{ amount }} {{ from.key.toUpperCase() }}</h3>
+        <h3 class="text-md"><span class="font-bold">From:</span> {{ Number.parseFloat(result.amount) }}
+          {{ from.key.toUpperCase() }}</h3>
         <h3 class="text-md"><span class="font-bold">To:</span> {{ Number.parseInt(result.value) | separateValue }}
           {{ to.key.toUpperCase() }}</h3>
       </div>
@@ -141,9 +143,9 @@
 </template>
 
 <script>
-import {exchange} from "@/service/Currency.service";
 import SelectIcon from "@/components/ui/SelectIcon";
 import Currency from "@/model/Currency.model";
+import { exchange } from "@/service/Currency.service";
 
 export default {
   components: {SelectIcon},
@@ -173,9 +175,15 @@ export default {
       this.toSelect = !this.toSelect
     },
     async exchange() {
-      const result = await exchange(this.from.key, this.to.key, this.amount);
-      this.result = {rate: result.rate, value: result.rate_for_amount}
-      this.isSubmit = true
+      this.$helpers.loading();
+      try {
+        const result = await exchange(this.from.key, this.to.key, this.amount);
+        this.result = { amount: result.amount, rate: result.rate, value: result.rate_for_amount };
+        this.isSubmit = true;
+        this.$helpers.close();
+      } catch (e) {
+        this.$helpers.showError(e);
+      }
     }
   }
 }

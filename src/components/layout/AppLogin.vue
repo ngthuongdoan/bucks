@@ -1,46 +1,47 @@
 <template>
   <form
-    @submit.prevent="login"
-    class="relative bg-white py-10 px-20 shadow-lg flex flex-col"
+      class="relative bg-white py-10 px-20 shadow-lg flex flex-col"
+      @submit.prevent="login"
   >
-    <label for="username" class="font-bold">Email</label>
-    <input type="email" class="input" v-model.trim="user.email" />
-    <br />
-    <label for="pass" class="font-bold">Password</label>
+    <label class="font-bold" for="username">Email</label>
+    <input v-model.trim="user.email" class="input" type="email"/>
+    <br/>
+    <label class="font-bold" for="pass">Password</label>
     <div class="flex justify-center items-center">
       <input
-        type="password"
-        class="input"
-        ref="pass"
-        v-model.trim="user.password"
+          ref="pass"
+          v-model.trim="user.password"
+          class="input"
+          type="password"
       />
       <i
-        :class="[
+          :class="[
           'fas',
           isShow ? 'fa-eye-slash' : 'fa-eye',
           'w-2 cursor-pointer  transform -translate-x-8 ',
         ]"
-        @click="showPassword"
+          @click="showPassword"
       ></i>
     </div>
     <input
-      type="submit"
-      value="Login"
-      class="bg-green-500 w-full py-3 font-semibold mt-4 cursor-pointer"
+        class="bg-green-500 w-full py-3 font-semibold mt-4 cursor-pointer"
+        type="submit"
+        value="Login"
     />
   </form>
 </template>
 
 <script>
-import firebase from "firebase";
+import { Auth } from "@/plugin/modules/auth";
+
 export default {
   data() {
     return {
       isShow: false,
       user: {
         email: "",
-        password: "",
-      },
+        password: ""
+      }
     };
   },
   methods: {
@@ -50,15 +51,16 @@ export default {
     },
     async login() {
       try {
-        await firebase
-          .auth()
-          .signInWithEmailAndPassword(this.user.email, this.user.password);
+        this.$helpers.loading();
+        await Auth
+            .signInWithEmailAndPassword(this.user.email, this.user.password);
+        this.$helpers.showSuccess();
         await this.$router.replace("/dashboard");
       } catch (err) {
-        console.error(err);
+        this.$helpers.showError(err);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
