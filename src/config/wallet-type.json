@@ -1,0 +1,14 @@
+[
+  {
+    "name": "None",
+    "icon": ""
+  },
+  {
+    "name": "Visa",
+    "icon": "visa"
+  },
+  {
+    "name": "Mastercard",
+    "icon": "mastercard"
+  }
+]
