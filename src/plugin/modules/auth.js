@@ -1,13 +1,13 @@
-import firebase from "firebase/app";
 import store from "@/store";
+import firebase from "firebase/app";
 import Vue from "vue";
-import {firestorePlugin} from 'vuefire'
+import { firestorePlugin } from 'vuefire';
 
 require("firebase/auth");
 
 export const Auth = firebase.auth();
 Auth.onAuthStateChanged((user) => {
-  store.dispatch("userModule/fetchUser", user).then();
+	store.dispatch("userModule/fetchUser", user).then();
 });
 
 Vue.use(firestorePlugin);

@@ -24,10 +24,10 @@
 
 <script>
 import AppIcon from "@/components/ui/AppIcon";
-import icons from "@/config/icon.json";
 import WalletOptions from "@/components/ui/WalletOptions";
+import icons from "@/config/icon.json";
 
-import {WalletService} from "@/service/Wallet.service";
+import { WalletService } from "@/service/Wallet.service";
 
 export default {
   data() {
@@ -52,24 +52,24 @@ export default {
       this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
     },
     optionModal() {
-      console.log(this.optionModal)
+      console.log(this.optionModal);
     }
   },
   methods: {
     closeOption() {
-      this.option = false
+      this.option = false;
     },
     deleteWallet: async function () {
       const choose = await this.$helpers.confirmSwal();
       if (choose.isConfirmed) {
         this.$helpers.loading();
         try {
-          await WalletService.delete(this.wallet)
+          await WalletService.delete(this.wallet);
           this.$helpers.showSuccess();
         } catch (err) {
-          await this.$helpers.close()
+          await this.$helpers.close();
 
-          await this.$helpers.showError(err)
+          await this.$helpers.showError(err);
         }
       }
     },
@@ -87,7 +87,7 @@ export default {
         default:
           break;
       }
-      this.closeOption()
+      this.closeOption();
     }
   },
   created() {
@@ -96,6 +96,6 @@ export default {
   components: {
     AppIcon,
     WalletOptions
-  },
+  }
 };
 </script>

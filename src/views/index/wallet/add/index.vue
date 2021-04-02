@@ -45,17 +45,17 @@
 <script>
 import AddLayout from "@/layout/AddLayout";
 import Wallet from "@/model/Wallet.model";
-import VSwatches from 'vue-swatches'
+import { WalletService } from "@/service/Wallet.service";
+import VSwatches from 'vue-swatches';
 
 // Import the styles too, typically in App.vue or main.js
-import 'vue-swatches/dist/vue-swatches.css'
-import {WalletService} from "@/service/Wallet.service"
+import 'vue-swatches/dist/vue-swatches.css';
 
 export default {
   data() {
     return {
-      wallet: new Wallet(),
-    }
+      wallet: new Wallet()
+    };
   },
   computed: {
     currencies() {
@@ -64,14 +64,14 @@ export default {
   },
   methods: {
     async addWallet() {
-      this.$helpers.loading()
+      this.$helpers.loading();
       try {
         this.wallet.uid = this.$store.getters["userModule/user"].data.uid;
         await WalletService.addNew(this.wallet);
         this.$helpers.showSuccess();
         await this.$router.push("/dashboard");
       } catch (err) {
-        this.$helpers.showError(err)
+        this.$helpers.showError(err);
       }
     }
   },
@@ -79,7 +79,7 @@ export default {
     AddLayout,
     VSwatches
   }
-}
+};
 </script>
 
 <style scoped>

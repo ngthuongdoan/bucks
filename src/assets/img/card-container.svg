@@ -1,12 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="989" viewBox="0 0 375 989">
-  <defs>
-    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="2.068" gradientTransform="matrix(0.717, 0.697, -0.667, 0.687, 0.475, -0.192)" gradientUnits="objectBoundingBox">
-      <stop offset="0" stop-color="#222831"/>
-      <stop offset="1" stop-color="#6b6f75"/>
-    </radialGradient>
-  </defs>
-  <g id="Rectangle_68" data-name="Rectangle 68" stroke="#707070" stroke-width="1" fill="url(#radial-gradient)">
-    <rect width="375" height="989" stroke="none"/>
-    <rect x="0.5" y="0.5" width="374" height="988" fill="none"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="989"
+     viewBox="0 0 375 989">
+    <defs>
+        <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="2.068"
+                        gradientTransform="matrix(0.717, 0.697, -0.667, 0.687, 0.475, -0.192)"
+                        gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#222831"/>
+            <stop offset="1" stop-color="#6b6f75"/>
+        </radialGradient>
+    </defs>
+    <g id="Rectangle_68" data-name="Rectangle 68" stroke="#707070" stroke-width="1" fill="url(#radial-gradient)">
+        <rect width="375" height="989" stroke="none"/>
+        <rect x="0.5" y="0.5" width="374" height="988" fill="none"/>
+    </g>
 </svg>

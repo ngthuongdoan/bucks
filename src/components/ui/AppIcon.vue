@@ -18,23 +18,23 @@
 </template>
 
 <script>
-import {createProvider, signInWithPopup} from "@/plugin/oauth2";
-import {WalletService} from "@/service/Wallet.service";
-import {UserService} from "@/service/User.service";
 import User from "@/model/User.model";
-import {db} from "@/plugin/db";
+import { db } from "@/plugin/db";
+import { createProvider, signInWithPopup } from "@/plugin/oauth2";
+import { UserService } from "@/service/User.service";
+import { WalletService } from "@/service/Wallet.service";
 
 export default {
   props: {
     icon: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     filled() {
-      return this.icon.attrs ? {fill: this.icon.attrs[0].fill} : null;
-    },
+      return this.icon.attrs ? { fill: this.icon.attrs[0].fill } : null;
+    }
   },
   methods: {
     async oauth2(platform) {
@@ -42,22 +42,22 @@ export default {
         let provider = createProvider(platform);
         const data = await signInWithPopup(provider);
         if (data.additionalUserInfo.isNewUser) {
-          const response = await WalletService.initOverviewWallet(data.user.uid)
+          const response = await WalletService.initOverviewWallet(data.user.uid);
           const walletSnapshot = await db.collection("wallets").doc(response.id).get();
           const selectedWallet = await walletSnapshot.data();
-          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, selectedWallet))
+          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, selectedWallet));
         }
-        this.$helpers.showSuccess()
+        this.$helpers.showSuccess();
         const userSnapshot = await db.collection("users").doc(data.user.uid).get();
         const currentUser = await userSnapshot.data();
-        console.log(currentUser)
-        await this.$store.dispatch("userModule/fetchUser", {uid: data.user.uid, ...currentUser})
+        console.log(currentUser);
+        await this.$store.dispatch("userModule/fetchUser", { uid: data.user.uid, ...currentUser });
         await this.$router.replace("/dashboard");
       } catch (e) {
-        this.$helpers.showError(e)
+        this.$helpers.showError(e);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

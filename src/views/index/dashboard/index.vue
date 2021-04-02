@@ -14,16 +14,16 @@
 
 <script>
 import AppHeader from "@/components/mobile/AppHeader";
-import {isMobile} from "mobile-device-detect";
+import { isMobile } from "mobile-device-detect";
 
 export default {
   data() {
     return {
-      isMobile,
+      isMobile
     };
   },
   components: {
-    AppHeader,
-  },
+    AppHeader
+  }
 };
 </script>

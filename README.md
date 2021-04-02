@@ -56,7 +56,8 @@
 
 ## About The Project
 
-This is a project for my student thesis. The BUCKS helps you to track your income/expense with the majority of tools. Especially, it using OCR to extract your invoices for not to waste time.
+This is a project for my student thesis. The BUCKS helps you to track your income/expense with the majority of tools.
+Especially, it using OCR to extract your invoices for not to waste time.
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
@@ -72,8 +73,8 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is an example of how you may give instructions on setting up your project locally. To get a local copy up and
+running follow these simple example steps.
 
 ### Prerequisites
 
@@ -138,15 +139,27 @@ Project Link: [https://github.com/ngthuongdoan/thesis](https://github.com/ngthuo
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+
 [contributors-url]: https://github.com/ngthuongdoan/thesis/graphs/contributors
+
 [forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+
 [forks-url]: https://github.com/ngthuongdoan/thesis/network/members
+
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+
 [stars-url]: https://github.com/ngthuongdoan/thesis/stargazers
+
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+
 [issues-url]: https://github.com/ngthuongdoan/thesis/issues
+
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+
 [license-url]: https://github.com/ngthuongdoan/thesis/blob/master/LICENSE.txt
+
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+
 [linkedin-url]: https://linkedin.com/in/othneildrew
+
 [product-screenshot]: images/screenshot.png

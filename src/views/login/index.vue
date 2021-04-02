@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-light-grey w-screen h-screen min-w-full min-h-full flex flex-col justify-center items-center"
+      class="bg-light-grey w-screen h-screen min-w-full min-h-full flex flex-col justify-center items-center"
   >
     <div class="flex flex-col">
       <login-nav
-        :tab="currentTabComponent"
-        @route="currentTabComponent = $event"
+          :tab="currentTabComponent"
+          @route="currentTabComponent = $event"
       ></login-nav>
       <keep-alive>
         <component :is="currentTabComponent"></component>
@@ -22,10 +22,11 @@ import AppLogin from "@/components/layout/AppLogin.vue";
 import AppSignup from "@/components/layout/AppSignup.vue";
 import LoginNav from "@/components/layout/LoginNav.vue";
 import firebase from "firebase";
+
 export default {
   data() {
     return {
-      currentTabComponent: "app-login",
+      currentTabComponent: "app-login"
     };
   },
   async beforeRouteEnter(to, from, next) {
@@ -36,8 +37,8 @@ export default {
     IconContainer,
     AppLogin,
     AppSignup,
-    LoginNav,
-  },
+    LoginNav
+  }
 };
 </script>
 

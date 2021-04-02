@@ -148,7 +148,7 @@ import Currency from "@/model/Currency.model";
 import { exchange } from "@/service/Currency.service";
 
 export default {
-  components: {SelectIcon},
+  components: { SelectIcon },
   data() {
     return {
       from: new Currency("USD", "United States Dollar"),
@@ -158,7 +158,7 @@ export default {
       amount: 1,
       result: null,
       isSubmit: false
-    }
+    };
   },
   computed: {
     currencies() {
@@ -168,11 +168,11 @@ export default {
   methods: {
     selectFrom(currency) {
       this.from = Object.assign({}, currency);
-      this.fromSelect = !this.fromSelect
+      this.fromSelect = !this.fromSelect;
     },
     selectTo(currency) {
       this.to = Object.assign({}, currency);
-      this.toSelect = !this.toSelect
+      this.toSelect = !this.toSelect;
     },
     async exchange() {
       this.$helpers.loading();
@@ -186,6 +186,6 @@ export default {
       }
     }
   }
-}
+};
 </script>
 

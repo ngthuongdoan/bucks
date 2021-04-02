@@ -12,15 +12,15 @@
 </template>
 
 <script>
-import {directive as onClickAway} from "vue-clickaway";
-import options from "@/config/wallet-options.json"
+import options from "@/config/wallet-options.json";
+import { directive as onClickAway } from "vue-clickaway";
 
 export default {
   name: "WalletOptions",
   data() {
     return {
       options
-    }
+    };
   },
   directives: {
     onClickAway
@@ -30,10 +30,10 @@ export default {
       this.$emit('away');
     },
     handleConfig(config) {
-      this.$emit("config", config)
+      this.$emit("config", config);
     }
   }
-}
+};
 </script>
 
 <style scoped>

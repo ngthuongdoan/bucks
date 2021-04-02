@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import {logout} from "@/plugin/oauth2";
-import {mapGetters} from "vuex";
+import { logout } from "@/plugin/oauth2";
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
@@ -17,10 +17,10 @@ export default {
     })
   },
   methods: {
-    logout,
-  },
+    logout
+  }
 
-}
+};
 </script>
 
 <style>

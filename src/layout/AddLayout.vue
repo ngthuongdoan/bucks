@@ -19,12 +19,12 @@ export default {
       type: String,
       required: true,
       default: "Add"
-    },
+    }
   },
   methods: {
     to() {
-      this.$router.push("/dashboard")
+      this.$router.push("/dashboard");
     }
   }
-}
+};
 </script>

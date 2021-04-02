@@ -7,49 +7,50 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Catamaran";
-  src: local("Catamaran"),
-  url(./fonts/Catamaran-VariableFont_wght.ttf) format("truetype");
+    font-family: "Catamaran";
+    src: local("Catamaran"),
+    url(./fonts/Catamaran-VariableFont_wght.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: "Kredit Front";
-  src: local("Kredit Front"), url(./fonts/kredit.ttf) format("truetype");
+    font-family: "Kredit Front";
+    src: local("Kredit Front"), url(./fonts/kredit.ttf) format("truetype");
 }
 
 @layer base {
-  input {
-    @apply outline-none focus:outline-none
-  }
+    input {
+        @apply outline-none focus:outline-none
+    }
 }
 
 @layer components {
-  .input {
-    @apply border-gray-500 border-2 rounded px-3 py-2 my-3 outline-none focus:shadow-xl ease-in-out transition-all duration-300;
-  }
+    .input {
+        @apply border-gray-500 border-2 rounded px-3 py-2 my-3 outline-none focus:shadow-xl ease-in-out transition-all duration-300;
+    }
 
-  .login-navigation {
-    @apply font-semibold  w-full text-center py-4 cursor-pointer transition-all ease-in-out duration-300;
-  }
+    .login-navigation {
+        @apply font-semibold  w-full text-center py-4 cursor-pointer transition-all ease-in-out duration-300;
+    }
 
-  .add-input {
-    @apply border-b border-gray-500 bg-transparent ml-3 px-3 py-2 w-full;
-  }
+    .add-input {
+        @apply border-b border-gray-500 bg-transparent ml-3 px-3 py-2 w-full;
+    }
 
-  .card {
-    @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer
-  }
+    .card {
+        @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer
+    }
 
-  .currency-icon {
-    @apply flex-shrink-0 object-cover rounded-full
-  }
+    .currency-icon {
+        @apply flex-shrink-0 object-cover rounded-full
+    }
 }
 
 @layer utilities {
-  .active {
-    @apply opacity-100;
-  }
-  .grayscale {
-    filter: grayscale(20%);
-  }
+    .active {
+        @apply opacity-100;
+    }
+
+    .grayscale {
+        filter: grayscale(20%);
+    }
 }

@@ -1,38 +1,38 @@
-<svg 
-    xmlns="http://www.w3.org/2000/svg"
-    width="375"
-    height="299.001"
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="375"
+        height="299.001"
 >
     <defs>
-        <radialGradient 
-            id="prefix__a" 
-            cx=".5" 
-            cy=".5" 
-            r=".836" 
-            gradientTransform="matrix(.575 .818 -.636 .447 .531 -.133)" 
-            gradientUnits="objectBoundingBox"
+        <radialGradient
+                id="prefix__a"
+                cx=".5"
+                cy=".5"
+                r=".836"
+                gradientTransform="matrix(.575 .818 -.636 .447 .531 -.133)"
+                gradientUnits="objectBoundingBox"
         >
-            <stop 
-                offset="0" 
-                stop-color="#222831"
+            <stop
+                    offset="0"
+                    stop-color="#222831"
             />
-            <stop 
-                offset="1"
-                stop-color="#6b6f75"
+            <stop
+                    offset="1"
+                    stop-color="#6b6f75"
             />
         </radialGradient>
     </defs>
-    
-    <path 
-        d=" M365.5 322a19.753 
+
+    <path
+            d=" M365.5 322a19.753
             19.753 0 01-5.6-.8 
             17.733 17.733 0 
             01-4.775-2.2h-.21c-37.642-28.8-99.854-46-166.419-46S59.723 
             290.2 22.082 319h-.21a17.709 17.709 0 01-4.775 2.2 20.057 
             20.057 0 01-11.192 0A17.706 17.706 0 011.13 
             319H0V23h375v296.54a17.99 17.99 0 01-3.9 1.665 19.8 19.8 
-            0 01-5.6.795z" 
-        transform="translate(0 -23)"
-        fill="url(#prefix__a)"
+            0 01-5.6.795z"
+            transform="translate(0 -23)"
+            fill="url(#prefix__a)"
     />
 </svg>

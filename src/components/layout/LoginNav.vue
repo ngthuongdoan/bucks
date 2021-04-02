@@ -2,24 +2,24 @@
   <nav class="w-full">
     <ul class="inline-flex bg-white w-full content-center justify-center">
       <li
-        :class="[
+          :class="[
           'login-navigation',
           tab === 'app-login'
             ? 'text-black bg-white'
             : 'text-gray-500 bg-gray-200',
         ]"
-        @click="$emit('route', 'app-login')"
+          @click="$emit('route', 'app-login')"
       >
         LOGIN
       </li>
       <li
-        :class="[
+          :class="[
           'login-navigation',
           tab === 'app-signup'
             ? 'text-black bg-white'
             : 'text-gray-500 bg-gray-200',
         ]"
-        @click="$emit('route', 'app-signup')"
+          @click="$emit('route', 'app-signup')"
       >
         SIGN UP
       </li>
@@ -34,11 +34,11 @@ export default {
       type: String,
       required: true,
       validate(value) {
-        const legal = ["app-login", "app-signup"];
+        const legal = [ "app-login", "app-signup" ];
         return legal.includes(value);
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

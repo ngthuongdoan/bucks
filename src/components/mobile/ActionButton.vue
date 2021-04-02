@@ -1,23 +1,23 @@
 <template>
   <div
-    class="absolute flex items-center justify-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-control"
+      class="absolute flex items-center justify-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-control"
   >
     <circle-menu
-      type="middle-around"
-      :number="4"
-      circle
-      class="outline-none focus:outline-none"
-      :colors="[
+        :colors="[
         '#FFEAB7',
         '#ffff66',
         '#FFE26F',
         '#F3825F',
         '#F19584',
       ]"
+        :number="4"
+        circle
+        class="outline-none focus:outline-none"
+        type="middle-around"
     >
       <button
-        class="w-10 h-10 rounded-full bg-control-light sonar transform translate-y-1"
-        slot="item_btn"
+          slot="item_btn"
+          class="w-10 h-10 rounded-full bg-control-light sonar transform translate-y-1"
       ></button>
       <router-link
           slot="item_1"
@@ -52,18 +52,20 @@ import CircleMenu from "vue-circle-menu";
 
 export default {
   components: {
-    CircleMenu,
-  },
+    CircleMenu
+  }
 };
 </script>
 <style lang="scss">
 .oy-menu-btn {
   outline: none;
+
   &:focus,
   &:active {
     outline: none;
   }
 }
+
 .sonar {
   animation: sonar-effect 1s ease-in-out 0.1s infinite;
 }

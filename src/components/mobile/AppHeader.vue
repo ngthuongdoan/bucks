@@ -26,12 +26,12 @@ import WalletCard from "@/components/ui/WalletCard";
 export default {
   computed: {
     wallet() {
-      return this.$store.getters["userModule/user"].data.selectedWallet
+      return this.$store.getters["userModule/user"].data.selectedWallet;
     }
   },
   components: {
-    WalletCard,
-  },
+    WalletCard
+  }
 };
 </script>
 

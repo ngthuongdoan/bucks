@@ -1,24 +1,24 @@
-import firebase from "firebase/app";
 import router from "@/router";
+import firebase from "firebase/app";
 // import {Auth} from "@/plugin/modules/auth";
 
 require("firebase/auth");
 
 export const createProvider = (platform) => {
-  let provider;
-  switch (platform) {
-    case "google":
-      provider = new firebase.auth.GoogleAuthProvider();
-      break;
-    case "facebook":
-      provider = new firebase.auth.FacebookAuthProvider();
-      break;
-    case "github":
-      provider = new firebase.auth.GithubAuthProvider();
-      break;
-  }
+	let provider;
+	switch (platform) {
+		case "google":
+			provider = new firebase.auth.GoogleAuthProvider();
+			break;
+		case "facebook":
+			provider = new firebase.auth.FacebookAuthProvider();
+			break;
+		case "github":
+			provider = new firebase.auth.GithubAuthProvider();
+			break;
+	}
 
-  return provider;
+	return provider;
 };
 
 // const getCredential = async () =>{
@@ -30,10 +30,10 @@ export const createProvider = (platform) => {
 // }
 
 export const logout = async () => {
-  await firebase.auth().signOut();
-  await router.push("/login");
+	await firebase.auth().signOut();
+	await router.push("/login");
 };
 
 export const signInWithPopup = async (provider) => {
-  return await firebase.auth().signInWithPopup(provider);
+	return await firebase.auth().signInWithPopup(provider);
 };

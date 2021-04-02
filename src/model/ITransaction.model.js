@@ -1,3 +1,4 @@
-class ITransaction {}
+class ITransaction {
+}
 
 export default ITransaction;

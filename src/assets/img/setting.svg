@@ -1,7 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="22.097" height="5.387" viewBox="0 0 22.097 5.387">
-  <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(1.5 1.5)">
-    <path id="Path_8" data-name="Path 8" d="M18.887,17.694A1.194,1.194,0,1,1,17.694,16.5,1.194,1.194,0,0,1,18.887,17.694Z" transform="translate(-8.145 -16.5)" fill="none" stroke="#393e46" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-    <path id="Path_9" data-name="Path 9" d="M29.387,17.694A1.194,1.194,0,1,1,28.194,16.5,1.194,1.194,0,0,1,29.387,17.694Z" transform="translate(-10.29 -16.5)" fill="none" stroke="#393e46" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-    <path id="Path_10" data-name="Path 10" d="M8.387,17.694A1.194,1.194,0,1,1,7.194,16.5,1.194,1.194,0,0,1,8.387,17.694Z" transform="translate(-6 -16.5)" fill="none" stroke="#393e46" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-  </g>
+    <g id="Icon_feather-more-horizontal" data-name="Icon feather-more-horizontal" transform="translate(1.5 1.5)">
+        <path id="Path_8" data-name="Path 8"
+              d="M18.887,17.694A1.194,1.194,0,1,1,17.694,16.5,1.194,1.194,0,0,1,18.887,17.694Z"
+              transform="translate(-8.145 -16.5)" fill="none" stroke="#393e46" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="3"/>
+        <path id="Path_9" data-name="Path 9"
+              d="M29.387,17.694A1.194,1.194,0,1,1,28.194,16.5,1.194,1.194,0,0,1,29.387,17.694Z"
+              transform="translate(-10.29 -16.5)" fill="none" stroke="#393e46" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="3"/>
+        <path id="Path_10" data-name="Path 10"
+              d="M8.387,17.694A1.194,1.194,0,1,1,7.194,16.5,1.194,1.194,0,0,1,8.387,17.694Z"
+              transform="translate(-6 -16.5)" fill="none" stroke="#393e46" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="3"/>
+    </g>
 </svg>

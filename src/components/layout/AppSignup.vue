@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import {WalletService} from "@/service/Wallet.service"
-import {UserService} from "@/service/User.service"
-import {Auth} from "@/plugin/modules/auth";
-import {db} from "@/plugin/db";
-import User from "@/model/User.model"
+import User from "@/model/User.model";
+import { db } from "@/plugin/db";
+import { Auth } from "@/plugin/modules/auth";
+import { UserService } from "@/service/User.service";
+import { WalletService } from "@/service/Wallet.service";
 
 export default {
   data() {
@@ -45,9 +45,9 @@ export default {
       user: {
         email: "",
         password: "",
-        name: "",
+        name: ""
       },
-      confirmPassword: "",
+      confirmPassword: ""
     };
   },
   methods: {
@@ -58,18 +58,18 @@ export default {
             .createUserWithEmailAndPassword(this.user.email, this.user.password);
 
         await data.user.updateProfile({
-          displayName: this.user.name,
+          displayName: this.user.name
         });
 
         const response = await WalletService.initOverviewWallet(data.user.uid);
-        await UserService.addNew(new User(data.user.uid, this.user.name, this.user.email, db.collection("wallets").doc(response.id)))
+        await UserService.addNew(new User(data.user.uid, this.user.name, this.user.email, db.collection("wallets").doc(response.id)));
         await this.$helpers.showSuccess();
         await this.$router.go(0);
       } catch (err) {
-        this.$helpers.showError(err)
+        this.$helpers.showError(err);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

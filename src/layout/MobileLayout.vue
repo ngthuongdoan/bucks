@@ -10,8 +10,8 @@ import BottomNavigation from "@/components/mobile/BottomNavigation";
 
 export default {
   components: {
-    BottomNavigation,
-  },
+    BottomNavigation
+  }
 };
 </script>
 
