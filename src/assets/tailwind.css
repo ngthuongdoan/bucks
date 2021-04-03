@@ -41,7 +41,7 @@
     }
 
     .card {
-        @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer
+        @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer bg-white
     }
 
     .currency-icon {
