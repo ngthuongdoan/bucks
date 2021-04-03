@@ -38,8 +38,7 @@ export const exchange = async (from, to, amount = 1) => {
 	};
 	try {
 		const response = await axios.request({ ...defaultOption, ...exchangeOption });
-		const { rates, amount } = response.data;
-		return { amount, ...rates[to] };
+		return response.data;
 	} catch (error) {
 		helper.showError(error);
 	}

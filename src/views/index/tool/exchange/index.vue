@@ -28,26 +28,31 @@
          class="w-full max-w-screen-sm rounded shadow p-5 mt-4 mx-auto bg-white">
       <div class="grid grid-cols-3 items-start justify-center gap-3 text-center">
         <h1 class="font-bold text-lg text-gray-900">
-          <div :class="['currency-flag currency-flag-xl ', `currency-flag-${from.key.toLowerCase()}`]"></div>
+          <div
+              :class="['currency-flag currency-flag-xl ', `currency-flag-${result.base_currency_code.toLowerCase()}`]"></div>
           <br>
-          {{ from.name }}
+          {{ result.base_currency_name }}
         </h1>
         <img class="object-cover w-10 justify-self-center"
              src="https://img.icons8.com/cotton/64/000000/data-in-both-directions.png"/>
         <h1 class="font-bold text-lg text-gray-900">
-          <div :class="['currency-flag currency-flag-xl ', `currency-flag-${to.key.toLowerCase()}`]"></div>
+          <div
+              :class="['currency-flag currency-flag-xl ', `currency-flag-${Object.keys(result.rates)[0].toLowerCase()}`]"></div>
           <br>
-          {{ to.name }}
+          {{ Object.values(result.rates)[0].currency_name }}
         </h1>
         <div class="col-span-3 justify-center">
-          <span class="font-bold">Rate:</span> {{ Number.parseInt(result.rate) | separateValue }}
+          <span class="font-bold">Rate:</span> {{
+            Number.parseInt(Object.values(result.rates)[0].rate) | separateValue
+          }}
         </div>
       </div>
       <div class="flex w-full justify-evenly mt-4">
         <h3 class="text-md"><span class="font-bold">From:</span> {{ Number.parseFloat(result.amount) }}
-          {{ from.key.toUpperCase() }}</h3>
-        <h3 class="text-md"><span class="font-bold">To:</span> {{ Number.parseInt(result.value) | separateValue }}
-          {{ to.key.toUpperCase() }}</h3>
+          {{ result.base_currency_code.toUpperCase() }}</h3>
+        <h3 class="text-md"><span class="font-bold">To:</span>
+          {{ Number.parseInt(Object.values(result.rates)[0].rate_for_amount) | separateValue }}
+          {{ Object.keys(result.rates)[0].toUpperCase() }}</h3>
       </div>
     </div>
   </div>
@@ -77,11 +82,9 @@ export default {
       this.to = Object.assign({}, currency);
     },
     async exchange() {
-      // TODO: cannot exchange on the second change
       this.$helpers.loading();
       try {
-        const result = await exchange(this.from.key, this.to.key, this.amount);
-        this.result = { amount: result.amount, rate: result.rate, value: result.rate_for_amount };
+        this.result = await exchange(this.from.key, this.to.key, this.amount);
         this.isSubmit = true;
         this.$helpers.close();
       } catch (e) {
