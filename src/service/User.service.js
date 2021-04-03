@@ -1,4 +1,4 @@
-import { db } from "@/plugin/db";
+import { userStore } from "@/plugin/db";
 
 export const UserService = {
 
@@ -6,7 +6,7 @@ export const UserService = {
 	},
 	async addNew(user) {
 		const { uid, ...data } = user;
-		return await db.collection("users").doc(uid).set({ ...data });
+		return await userStore.doc(uid).set({ ...data });
 	},
 	async delete(w) {
 	}

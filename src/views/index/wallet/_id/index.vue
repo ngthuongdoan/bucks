@@ -4,7 +4,7 @@
 
 <script>
 
-import { db } from "@/plugin/db";
+import { walletStore } from "@/plugin/db";
 
 export default {
   name: "index",
@@ -14,7 +14,7 @@ export default {
     };
   },
   firestore() {
-    const wallet = db.collection("wallets").doc(this.$route.params.id);
+    const wallet = walletStore.doc(this.$route.params.id);
     return {
       wallet
     };

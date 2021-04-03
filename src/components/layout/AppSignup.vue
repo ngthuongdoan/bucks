@@ -34,7 +34,7 @@
 
 <script>
 import User from "@/model/User.model";
-import { db } from "@/plugin/db";
+import { walletStore } from "@/plugin/db";
 import { Auth } from "@/plugin/modules/auth";
 import { UserService } from "@/service/User.service";
 import { WalletService } from "@/service/Wallet.service";
@@ -62,7 +62,7 @@ export default {
         });
 
         const response = await WalletService.initOverviewWallet(data.user.uid);
-        await UserService.addNew(new User(data.user.uid, this.user.name, this.user.email, db.collection("wallets").doc(response.id)));
+        await UserService.addNew(new User(data.user.uid, this.user.name, this.user.email, walletStore.doc(response.id)));
         await this.$helpers.showSuccess();
         await this.$router.go(0);
       } catch (err) {
