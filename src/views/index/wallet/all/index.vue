@@ -25,8 +25,6 @@ export default {
   methods: {
     async changeWallet(wallet) {
       try {
-
-        console.log(wallet);
         const users = db.collection('users').doc(this.$store.getters["userModule/user"].data.uid);
         this.$bind('users', users);
         await this.$firestoreRefs.users.update({ selectedWallet: wallet });

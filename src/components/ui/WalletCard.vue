@@ -13,7 +13,7 @@
     <div class="flex flex-col h-full gap-3">
       <h1 class="font-bold text-sm">{{ wallet.name }}</h1>
       <p class="text-xl mt-3">{{ wallet.amount | separateValue }} <span
-          class="font-bold uppercase">{{ wallet.currency }}</span></p>
+          class="font-bold uppercase">{{ wallet.currency.key }}</span></p>
       <div class="flex items-center">
         <app-icon :icon="icon"></app-icon>
         <p class="text-sm font-kredit ml-10">{{ wallet.serial }}</p>
@@ -68,7 +68,6 @@ export default {
           this.$helpers.showSuccess();
         } catch (err) {
           await this.$helpers.close();
-
           await this.$helpers.showError(err);
         }
       }

@@ -11,16 +11,34 @@
         />
         <currency-select
             :currency="wallet.currency"
-            class="col-span-2 z-50"
+            class="col-span-2 currency-select"
             label="Currency"
             @select-handle="changeCurrency($event)"
         ></currency-select>
-        <label class="text-input" for="type">Type</label>
-        <select id="type" v-model="wallet.type" class="add-input">
-          <option selected value="">None</option>
-          <option value="visa">Visa</option>
-          <option value="mastercard">Mastercard</option>
-        </select>
+        <label class="text-input" for="wallet-type">Type</label>
+        <div>
+          <div class="flex items-center mr-4 mb-4 mt-3">
+            <input id="radio1" v-model="wallet.type" class="hidden" name="radio" required type="radio" value=""/>
+            <label class="flex items-center cursor-pointer" for="radio1">
+              <span class="w-4 h-4 inline-block mr-1 rounded-full border border-grey"></span>
+              None</label>
+          </div>
+
+          <div class="flex items-center mr-4 mb-4">
+            <input id="radio2" v-model="wallet.type" class="hidden" name="radio" required type="radio" value="visa"/>
+            <label class="flex items-center cursor-pointer" for="radio2">
+              <span class="w-4 h-4 inline-block mr-1 rounded-full border border-grey"></span>
+              Visa</label>
+          </div>
+
+          <div class="flex items-center mr-4 mb-4">
+            <input id="radio3" v-model="wallet.type" class="hidden" name="radio" required type="radio"
+                   value="mastercard"/>
+            <label class="flex items-center cursor-pointer" for="radio3">
+              <span class="w-4 h-4 inline-block mr-1 rounded-full border border-grey"></span>
+              Mastercard</label>
+          </div>
+        </div>
         <label class="text-input" for="color">Color</label>
         <v-swatches id="color" v-model="wallet.color" class="ml-3" popover-x="right"></v-swatches>
         <label class="text-input" for="initial">Initial</label>
@@ -30,7 +48,9 @@
             class="add-input"
             required
         />
-        <label class="text-input" for="serial">Serial</label>
+        <label class="text-input" for="serial">Serial
+          <input-optional></input-optional>
+        </label>
         <input
             id="serial"
             v-model="wallet.serial"
@@ -43,6 +63,7 @@
 
 <script>
 import CurrencySelect from "@/components/ui/CurrencySelect";
+import InputOptional from "@/components/ui/InputOptional";
 import AddLayout from "@/layout/AddLayout";
 import Wallet from "@/model/Wallet.model";
 import { WalletService } from "@/service/Wallet.service";
@@ -81,11 +102,37 @@ export default {
   components: {
     CurrencySelect,
     AddLayout,
-    VSwatches
+    VSwatches,
+    InputOptional
   }
 };
 </script>
 
-<style scoped>
+<style>
+.currency-select {
+  z-index: 90;
+}
 
+input[type="radio"] + label span {
+  transition: background .2s,
+  transform .2s;
+}
+
+input[type="radio"] + label span:hover,
+input[type="radio"] + label:hover span {
+  transform: scale(1.2);
+}
+
+input[type="radio"]:checked + label span {
+  background-color: #3490DC;
+  box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type="radio"]:checked + label {
+  color: #3490DC;
+}
+
+#color {
+  z-index: 60;
+}
 </style>

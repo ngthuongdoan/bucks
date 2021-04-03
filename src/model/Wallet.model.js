@@ -22,10 +22,11 @@ class Wallet {
 		this.color = color;
 		this.currency = Object.assign({}, currency);
 		this.uid = uid;
+		this.type = type;
+
 		if (bank) {
 			this.serial = serial;
 			this.bank = bank;
-			this.type = type;
 		}
 	}
 }
