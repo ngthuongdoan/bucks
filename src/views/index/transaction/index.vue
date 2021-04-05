@@ -1,5 +1,10 @@
 <template>
   <add-layout title="Add Transaction" @save="save">
+    <app-modal
+        v-if="walletModal"
+        :data="wallets"
+        @away="toggleWalletModal"
+        @change-wallet="changeWallet($event)"></app-modal>
     <form class="flex flex-col m-auto gap-3 px-7 py-5">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
@@ -44,11 +49,7 @@
             rows="5"
         ></textarea>
         <label class="font-bold" for="wallet">Wallet</label>
-        <select id="wallet" v-model="transaction.wallet" class="add-input">
-          <option value="">Sacombank</option>
-          <option value="">Overview</option>
-          <option value="">Saving</option>
-        </select>
+        <div class="add-input" @click="toggleWalletModal">{{ transaction.wallet.name || "" }}</div>
         <label class="font-bold" for="category">Category</label>
         <select id="category" v-model="transaction.category" class="add-input">
           <option value="">A</option>
@@ -64,42 +65,33 @@
 </template>
 
 <script>
+import AppModal from "@/components/mobile/AppModal";
 import AddLayout from "@/layout/AddLayout";
-import { createWorker } from "tesseract.js";
+import Transaction from "@/model/Transaction.model";
+import { walletStore } from "@/plugin/db";
+import worker from "@/plugin/tesseract";
+import store from "@/store";
 import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
-
-const worker = createWorker({
-  // workerPath: 'https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js',
-  langPath:
-      "https://raw.githubusercontent.com/naptha/tessdata/gh-pages/4.0.0_best/",
-  // corePath: 'https://unpkg.com/tesseract.js-core@v2.0.0/tesseract-core.wasm.js',
-  logger: (m) => console.log(m)
-});
-
-(async () => {
-  await worker.load();
-  await worker.loadLanguage("vie");
-  await worker.initialize("vie");
-})();
 
 export default {
   data() {
     return {
-      transaction: {
-        value: 0,
-        time: new Date(),
-        category: "",
-        detail: "",
-        image: "",
-        wallet: ""
-      },
-      cropper: {}
+      transaction: new Transaction(),
+      cropper: {},
+      walletModal: false,
+      wallets: []
     };
   },
   methods: {
     change(result) {
       this.cropper = Object.assign({}, result);
+    },
+    toggleWalletModal() {
+      this.walletModal = !this.walletModal;
+    },
+    changeWallet(wallet) {
+      this.transaction.wallet = Object.assign({ id: wallet.id }, wallet);
     },
     crop() {
       this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
@@ -142,7 +134,14 @@ export default {
   },
   components: {
     Cropper,
-    AddLayout
+    AddLayout,
+    AppModal
+  },
+  firestore() {
+    const uid = store.getters["userModule/user"].data.uid;
+    return {
+      wallets: walletStore.where("uid", "==", uid)
+    };
   }
 };
 </script>
