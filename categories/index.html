@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Document</title>
+</head>
+<body>
+<button id="add">Add</button>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
+<script type="module">
+	import categories from "./data.js";
+	// Required for side-effects
+	firebase.initializeApp({
+			apiKey: "AIzaSyC5BKYT7KS2EEnuM4NuDrn0titAHZDeXiY",
+			authDomain: "bucks-10010.firebaseapp.com",
+			projectId: "bucks-10010",
+			storageBucket: "bucks-10010.appspot.com",
+			messagingSenderId: "887916796325",
+			appId: "1:887916796325:web:ee8e8c69e046004139b04c",
+			measurementId: "G-Z5QR8MVVB9"
+		}
+	);
+
+
+	let db = firebase.firestore();
+	const addCategories = async () => {
+		const categoryRef = db.collection("categories");
+		categories.forEach(category => {
+			categoryRef.add(category);
+			console.log(category);
+		});
+		console.log("Done");
+	};
+
+	document.getElementById("add").addEventListener("click", addCategories);
+</script>
+</body>
+</html>
