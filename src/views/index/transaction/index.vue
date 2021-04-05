@@ -5,20 +5,25 @@
         :data="wallets"
         @away="toggleWalletModal"
         @change-wallet="changeWallet($event)"></app-modal>
+    <category-modal
+        v-if="categoryModal"
+        @away="toggleCategoryModal"
+        @change-category="changeCategory($event)"
+    ></category-modal>
     <form class="flex flex-col m-auto gap-3 px-7 py-5">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
           <input
               v-model="transaction.value"
-              class="add-input text-4xl font-bold text-center"
+              class="add-input text-4xl font-bold text-center m-0"
               type="text"
           />
         </label>
-        <p class="text-center w-full ml-3">or</p>
+        <p class="text-center w-full mx-0">or</p>
         <label for="image">
           <img
               alt=""
-              class="ml-3 grayscale"
+              class="m-0 grayscale"
               src="https://img.icons8.com/metro/26/000000/camera.png"/>
         </label>
         <input
@@ -48,15 +53,11 @@
             class="add-input"
             rows="5"
         ></textarea>
-        <label class="font-bold" for="wallet">Wallet</label>
-        <div class="add-input" @click="toggleWalletModal">{{ transaction.wallet.name || "" }}</div>
-        <label class="font-bold" for="category">Category</label>
-        <select id="category" v-model="transaction.category" class="add-input">
-          <option value="">A</option>
-          <option value="">B</option>
-          <option value="">C</option>
-        </select>
-        <label class="font-bold" for="createdDate">Date</label>
+        <label class="font-bold  mt-2" for="wallet">Wallet</label>
+        <div class="add-input " @click="toggleWalletModal">{{ transaction.wallet.name || "" }}</div>
+        <label class="font-bold mt-2" for="category">Category</label>
+        <div class="add-input" @click="toggleCategoryModal">{{ transaction.category.name || "" }}</div>
+        <label class="font-bold  " for="createdDate">Date</label>
         <input id="createdDate" v-model="transaction.date" class="add-input" type="date"/>
       </div>
     </form>
@@ -65,7 +66,8 @@
 </template>
 
 <script>
-import AppModal from "@/components/mobile/AppModal";
+import AppModal from "@/components/common/AppModal";
+import CategoryModal from "@/components/common/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
 import Transaction from "@/model/Transaction.model";
 import { walletStore } from "@/plugin/db";
@@ -80,6 +82,7 @@ export default {
       transaction: new Transaction(),
       cropper: {},
       walletModal: false,
+      categoryModal: false,
       wallets: []
     };
   },
@@ -90,8 +93,14 @@ export default {
     toggleWalletModal() {
       this.walletModal = !this.walletModal;
     },
+    toggleCategoryModal() {
+      this.categoryModal = !this.categoryModal;
+    },
     changeWallet(wallet) {
       this.transaction.wallet = Object.assign({ id: wallet.id }, wallet);
+    },
+    changeCategory(category) {
+      this.transaction.category = Object.assign({ id: category.id }, category);
     },
     crop() {
       this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
@@ -135,7 +144,8 @@ export default {
   components: {
     Cropper,
     AddLayout,
-    AppModal
+    AppModal,
+    CategoryModal
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;

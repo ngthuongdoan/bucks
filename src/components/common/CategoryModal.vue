@@ -10,13 +10,11 @@
             class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
           <!--body-->
           <div class="relative p-2 flex-auto">
-            <ul v-if="isWallet">
-              <li v-for="(item, i) in data" :key="i" :style="{backgroundColor:item.color}"
-                  class="shadow-xl w-full px-5 py-2 rounded-2xl my-2 cursor-pointer"
-                  @click="changeWallet(item)">
-                <h1 class="font-bold text-white">{{ item.name }}</h1>
-                <p>{{ item.id }}</p>
-                <p class="italic text-gray-200 text-sm">{{ item.amount }} {{ item.currency.key }}</p>
+            <ul>
+              <li v-for="(item, i) in categories" :key="i"
+                  class="shadow-xl w-full px-5 py-2 rounded-2xl my-2 cursor-pointer capitalize"
+                  @click="changeCategory(item)">
+                <h1 class="font-bold">{{ item.name }}</h1>
               </li>
             </ul>
           </div>
@@ -28,19 +26,14 @@
 </template>
 
 <script>
+import { categoryStore } from "@/plugin/db";
 import { directive as onClickAway } from "vue-clickaway";
 
 export default {
-  name: "large-modal",
-  props: {
-    data: {
-      type: Array,
-      required: true
-    },
-    isWallet: {
-      type: Boolean,
-      default: true
-    }
+  data() {
+    return {
+      categories: []
+    };
   },
   directives: {
     onClickAway
@@ -49,11 +42,13 @@ export default {
     away() {
       this.$emit('away');
     },
-    changeWallet(wallet) {
-      this.$emit("change-wallet", wallet);
+    changeCategory(category) {
+      this.$emit("change-category", category);
       this.away();
     }
+  },
+  firestore: {
+    categories: categoryStore
   }
-
 };
 </script>
