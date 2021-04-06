@@ -1,12 +1,8 @@
 <template>
   <div v-if="isMobile">
     <app-header></app-header>
-    <div class="px-4 pt-80">
-      <div v-for="i in 50" :key="i" class=" px-3 py-2 my-3 flex w-full transaction items-center">
-        <img alt="" class="object-cover w-8 justify-self-start" src="~@/assets/icon/family.svg">
-        <h1 class="ml-3 font-bold text-sm">Khám bệnh</h1>
-        <span class="">120.000</span>
-      </div>
+    <div class="px-4 pt-80 ">
+      <app-transaction/>
     </div>
   </div>
   <div v-else>Desktop</div>
@@ -14,6 +10,7 @@
 
 <script>
 import AppHeader from "@/components/mobile/AppHeader";
+import AppTransaction from "@/components/ui/AppTransaction";
 import { isMobile } from "mobile-device-detect";
 
 export default {
@@ -23,6 +20,7 @@ export default {
     };
   },
   components: {
+    AppTransaction,
     AppHeader
   }
 };

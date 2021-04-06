@@ -3,8 +3,8 @@
       class="relative bg-white py-10 px-20 shadow-lg"
       @submit.prevent="signup"
   >
-    <div class="flex">
-      <div class="flex flex-col mr-8">
+    <div class="flex flex-col lg:flex-row">
+      <div class="flex flex-col lg:mr-8">
         <label class="font-bold">Email</label>
         <input v-model.trim="user.email" class="input" type="email"/>
         <br/>
