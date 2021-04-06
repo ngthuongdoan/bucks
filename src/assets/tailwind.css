@@ -25,7 +25,7 @@
 
 @layer components {
     .input {
-        @apply border-gray-500 border-2 rounded px-3 py-2 my-3 outline-none focus:shadow-xl ease-in-out transition-all duration-300;
+        @apply border-gray-500 border-2 rounded px-3 py-2 my-3 outline-none focus:shadow-xl ease-in-out transition-all duration-300 w-full  lg:justify-center;
     }
 
     .login-navigation {

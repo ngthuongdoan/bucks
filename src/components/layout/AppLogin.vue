@@ -1,17 +1,17 @@
 <template>
   <form
-      class="relative bg-white py-10 px-20 shadow-lg flex flex-col"
+      class="relative bg-white py-10 lg:px-20 px-10 shadow-lg flex flex-col items-center justify-center"
       @submit.prevent="login"
   >
-    <label class="font-bold" for="username">Email</label>
+    <label class="font-bold self-start justify-start lg:justify-center" for="username">Email</label>
     <input v-model.trim="user.email" class="input" type="email"/>
     <br/>
-    <label class="font-bold" for="pass">Password</label>
-    <div class="flex justify-center items-center">
+    <label class="font-bold self-start justify-start lg:justify-center " for="pass">Password</label>
+    <div class="flex items-center w-full lg:justify-center">
       <input
           ref="pass"
           v-model.trim="user.password"
-          class="input"
+          class="input w-full min-w-full"
           type="password"
       />
       <i
@@ -24,7 +24,7 @@
       ></i>
     </div>
     <input
-        class="bg-green-500 w-full py-3 font-semibold mt-4 cursor-pointer"
+        class="bg-green-500 py-3 font-semibold mt-4 cursor-pointer w-full"
         type="submit"
         value="Login"
     />
