@@ -111,8 +111,7 @@ export default {
       let reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = (evt) => {
-        let img = evt.target.result;
-        this.transaction.image = img;
+        this.transaction.image = evt.target.result;
       };
     },
     async recognize() {
@@ -126,7 +125,7 @@ export default {
               words.slice(-1)[0].text
           }\n`;
         });
-        this.transaction.value = result.data.words
+        this.transaction.detail = result.data.words
             .slice(-1)[0]
             .text.trim()
             .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), "");

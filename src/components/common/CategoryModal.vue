@@ -1,24 +1,23 @@
 <template>
   <div>
     <div
-        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex ">
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center flex ">
       <div
           v-on-click-away="away"
-          class="relative w-auto h-1/2 my-6 mx-auto min-w-full max-w-sm ">
-        <!--content-->
+          class="relative h-1/2 mx-auto min-w-full max-w-sm">
         <div
             class="border-0 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <!--body-->
           <div class="relative p-2 flex-auto">
             <category-navigation
                 :tab="currentCategory"
                 @change-category="currentCategory = $event"
             ></category-navigation>
-            <ul>
+            <input v-model="searchCriteria" class="px-5 py-2" placeholder="search..." type="search">
+            <ul class="max-h-96 overflow-y-scroll">
               <li v-for="(item, i) in filterCategory" :key="i"
                   class="w-full px-5 py-2 rounded-2xl my-2 cursor-pointer flex"
                   @click="changeCategory(item)">
-                <img :src="item.icon" alt="" class="object-contain max-h-4 h-4"/>
+                <img :src="item.icon" alt="" class="object-contain max-h-6 h-6 mr-4"/>
                 <h1 class="capitalize">{{ item.name }}</h1>
               </li>
             </ul>
@@ -40,7 +39,8 @@ export default {
     return {
       categories: [],
       isFetching: true,
-      currentCategory: 'income'
+      currentCategory: 'income',
+      searchCriteria: ""
     };
   },
   directives: {
@@ -53,7 +53,19 @@ export default {
   },
   computed: {
     filterCategory() {
-      return this.categories.filter(category => category.type === this.currentCategory);
+      if (this.searchCriteria === "") {
+        return this.categories
+            .filter(category => (category.type === this.currentCategory))
+            .sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+      } else {
+        return this.categories
+            .filter(category =>
+                (category.type === this.currentCategory)
+                && (this.searchCriteria.toLowerCase().split('').every(v => category.name.toLowerCase().includes(v)))
+            )
+            .sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+      }
+
     }
   },
   methods: {
