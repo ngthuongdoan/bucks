@@ -139,6 +139,7 @@ export default {
       }
     },
     async addTransaction() {
+      //TODO: update wallet value
       this.$helpers.loading();
       try {
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
