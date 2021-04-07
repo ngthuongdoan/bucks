@@ -29,7 +29,7 @@
     }
 
     .login-navigation {
-        @apply font-semibold  w-full text-center py-4 cursor-pointer transition-all ease-in-out duration-300;
+        @apply font-semibold w-full text-center py-4 cursor-pointer transition-all ease-in-out duration-300;
     }
 
     .text-input {

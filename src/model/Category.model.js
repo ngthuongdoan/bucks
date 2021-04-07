@@ -6,10 +6,10 @@ class Category {
 	/**
 	 *
 	 * @param {string} name
-	 * @param {Image} icon
+	 * @param {string} icon
 	 * @param {string} type - includes ["Income, Expense, Debt/Loan"]
 	 */
-	constructor(name, icon, type) {
+	constructor(name = "", icon = "", type = "") {
 		this.name = name;
 		this.icon = icon;
 		this.type = type;
