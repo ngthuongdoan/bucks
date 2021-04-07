@@ -1,6 +1,7 @@
 import Category from "@/model/Category.model";
 import Wallet from "@/model/Wallet.model";
 
+
 class Transaction {
 	/**
 	 *
@@ -8,7 +9,7 @@ class Transaction {
 	 * @param time
 	 * @param detail
 	 */
-	constructor(value = 0, time = new Date(), detail = "") {
+	constructor(value = 0, time = "", detail = "") {
 		this.value = value;
 		this.time = time;
 		this.detail = detail;

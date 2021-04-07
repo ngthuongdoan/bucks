@@ -1,5 +1,5 @@
 <template>
-  <add-layout title="Add Transaction" @save="save">
+  <add-layout title="Add Transaction">
     <app-modal
         v-if="walletModal"
         :data="wallets"
@@ -10,7 +10,7 @@
         @away="toggleCategoryModal"
         @change-category="changeCategory($event)"
     ></category-modal>
-    <form class="flex flex-col m-auto gap-3 px-7 py-5">
+    <form id="addForm" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="addTransaction">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
           <input
@@ -58,7 +58,7 @@
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input" @click="toggleCategoryModal">{{ transaction.category.name || "" }}</div>
         <label class="font-bold  " for="createdDate">Date</label>
-        <input id="createdDate" v-model="transaction.date" class="add-input" type="date"/>
+        <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
       </div>
     </form>
   </add-layout>
@@ -69,8 +69,9 @@
 import AppModal from "@/components/common/AppModal";
 import CategoryModal from "@/components/common/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
+
 import Transaction from "@/model/Transaction.model";
-import { walletStore } from "@/plugin/db";
+import { Timestamp, transactionStore, walletStore } from "@/plugin/db";
 import worker from "@/plugin/tesseract";
 import store from "@/store";
 import { Cropper } from "vue-advanced-cropper";
@@ -83,6 +84,7 @@ export default {
       cropper: {},
       walletModal: false,
       categoryModal: false,
+      tempDate: "",
       wallets: []
     };
   },
@@ -136,8 +138,17 @@ export default {
         await worker.terminate();
       }
     },
-    save() {
-      console.log(this.transaction);
+    async addTransaction() {
+      this.$helpers.loading();
+      try {
+        this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
+        await transactionStore.add({ ...this.transaction });
+        this.$helpers.showSuccess();
+        await this.$helpers.to("/dashboard");
+      } catch (e) {
+        this.$helpers.showError(e);
+      }
+
     }
   },
   components: {
