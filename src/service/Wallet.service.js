@@ -4,12 +4,25 @@ import {Timestamp, userStore, walletStore} from "@/plugin/db";
 import store from "@/store";
 
 export const WalletService = {
+	async updateWalletAmount(value, type, walletId) {
+		const walletRef = await walletStore.doc(walletId).get();
+		const wallet = await walletRef.data()
+		switch (type.toLowerCase()) {
+			case "income":
+				wallet.amount += Number.parseFloat(value);
+				break;
+			case "expense":
+				wallet.amount -= Number.parseFloat(value);
+				break;
+		}
+		await walletStore.doc(walletId).update({amount: wallet.amount})
+	},
 	async initOverviewWallet(uid) {
 		const overview = new Wallet("Overview", 0, new Currency("VND", "Vietnam Dong"), "#1b1c6d", uid);
 		return await this.addNew(overview);
 	},
 	async addNew(w) {
-		return await walletStore.add({ createdDate: Timestamp.fromDate(new Date()), ...w });
+		return await walletStore.add({createdDate: Timestamp.fromDate(new Date()), ...w});
 	},
 	async changeBackToOverView() {
 		//Find Overview

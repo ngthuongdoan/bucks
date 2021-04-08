@@ -34,10 +34,10 @@
 
 <script>
 import User from "@/model/User.model";
-import { walletStore } from "@/plugin/db";
-import { Auth } from "@/plugin/modules/auth";
-import { UserService } from "@/service/User.service";
-import { WalletService } from "@/service/Wallet.service";
+import {walletStore} from "@/plugin/db";
+import {Auth} from "@/plugin/modules/auth";
+import {UserService} from "@/service/User.service";
+import {WalletService} from "@/service/Wallet.service";
 
 export default {
   data() {
@@ -51,16 +51,14 @@ export default {
     };
   },
   methods: {
-    signup: async function () {
+    async signup() {
       this.$helpers.loading();
       try {
         const data = await Auth
             .createUserWithEmailAndPassword(this.user.email, this.user.password);
-
         await data.user.updateProfile({
           displayName: this.user.name
         });
-
         const response = await WalletService.initOverviewWallet(data.user.uid);
         await UserService.addNew(new User(data.user.uid, this.user.name, this.user.email, walletStore.doc(response.id)));
         await this.$helpers.showSuccess();

@@ -71,11 +71,12 @@ import CategoryModal from "@/components/common/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
 
 import Transaction from "@/model/Transaction.model";
-import { Timestamp, transactionStore, walletStore } from "@/plugin/db";
+import {Timestamp, transactionStore, userStore, walletStore} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
 import store from "@/store";
-import { Cropper } from "vue-advanced-cropper";
+import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
+import {WalletService} from "@/service/Wallet.service";
 
 export default {
   data() {
@@ -99,10 +100,10 @@ export default {
       this.categoryModal = !this.categoryModal;
     },
     changeWallet(wallet) {
-      this.transaction.wallet = Object.assign({ id: wallet.id }, wallet);
+      this.transaction.wallet = Object.assign({id: wallet.id}, wallet);
     },
     changeCategory(category) {
-      this.transaction.category = Object.assign({ id: category.id }, category);
+      this.transaction.category = Object.assign({id: category.id}, category);
     },
     crop() {
       this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
@@ -123,7 +124,7 @@ export default {
         const lines = result.data.lines;
         lines.forEach((line) => {
           const words = line.words;
-          this.transaction.detail += `${ words[0].text } ${ words[1].text } ${
+          this.transaction.detail += `${words[0].text} ${words[1].text} ${
               words.slice(-1)[0].text
           }\n`;
         });
@@ -139,17 +140,29 @@ export default {
       }
     },
     async addTransaction() {
-      //TODO: update wallet value
       this.$helpers.loading();
       try {
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
-        await transactionStore.add({ ...this.transaction });
+        this.transaction.value = Number.parseFloat(this.transaction.value);
+        await transactionStore.add({...this.transaction});
+        await WalletService.updateWalletAmount(
+            this.transaction.value,
+            this.transaction.category.type,
+            this.transaction.wallet.id
+        );
+        const selectedWallet = this.$store.getters["userModule/user"].data.selectedWallet
+        if (this.transaction.wallet.id === selectedWallet.id) {
+          const users = userStore.doc(this.$store.getters["userModule/user"].data.uid);
+          this.$bind('users', users);
+          await this.$firestoreRefs.users.update({selectedWallet});
+          await this.$store.dispatch("userModule/changeSelected", selectedWallet);
+        }
         this.$helpers.showSuccess();
+
         await this.$helpers.to("/dashboard");
       } catch (e) {
         this.$helpers.showError(e);
       }
-
     }
   },
   components: {
