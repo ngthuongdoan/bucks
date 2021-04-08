@@ -1,4 +1,4 @@
-import { createWorker } from "tesseract.js";
+import {createWorker} from "tesseract.js";
 
 const worker = createWorker({
 	// workerPath: 'https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js',
@@ -13,5 +13,6 @@ const worker = createWorker({
 	await worker.loadLanguage("vie");
 	await worker.initialize("vie");
 })();
+
 
 export default worker;

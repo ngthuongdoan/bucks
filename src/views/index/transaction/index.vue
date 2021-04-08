@@ -71,7 +71,7 @@ import CategoryModal from "@/components/common/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
 
 import Transaction from "@/model/Transaction.model";
-import {Timestamp, transactionStore, userStore, walletStore} from "@/plugin/db";
+import {Timestamp, transactionStore, walletStore} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
 import store from "@/store";
 import {Cropper} from "vue-advanced-cropper";
@@ -142,21 +142,16 @@ export default {
     async addTransaction() {
       this.$helpers.loading();
       try {
+        //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.value = Number.parseFloat(this.transaction.value);
         await transactionStore.add({...this.transaction});
+        //Update Wallet Value
         await WalletService.updateWalletAmount(
             this.transaction.value,
             this.transaction.category.type,
             this.transaction.wallet.id
         );
-        const selectedWallet = this.$store.getters["userModule/user"].data.selectedWallet
-        if (this.transaction.wallet.id === selectedWallet.id) {
-          const users = userStore.doc(this.$store.getters["userModule/user"].data.uid);
-          this.$bind('users', users);
-          await this.$firestoreRefs.users.update({selectedWallet});
-          await this.$store.dispatch("userModule/changeSelected", selectedWallet);
-        }
         this.$helpers.showSuccess();
 
         await this.$helpers.to("/dashboard");

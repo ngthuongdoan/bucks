@@ -22,15 +22,27 @@
 
 <script>
 import WalletCard from "@/components/ui/WalletCard";
+import {walletStore} from "@/plugin/db";
 
 export default {
-  computed: {
-    wallet() {
-      return this.$store.getters["userModule/user"].data.selectedWallet;
+  data() {
+    return {
+      wallet: {}
     }
   },
+  // computed: {
+  //   wallet() {
+  //     return this.$store.getters["userModule/user"].data.selectedWallet;
+  //   }
+  // },
   components: {
     WalletCard
+  },
+  firestore() {
+    const selectedWallet = this.$store.getters["userModule/user"].data.selectedWallet;
+    return {
+      wallet: walletStore.doc(selectedWallet.id)
+    }
   }
 };
 </script>
