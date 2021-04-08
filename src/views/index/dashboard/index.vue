@@ -11,9 +11,9 @@
 <script>
 import AppHeader from "@/components/mobile/AppHeader";
 import AppTransaction from "@/components/ui/AppTransaction";
-import { transactionStore } from "@/plugin/db";
+import {transactionStore} from "@/plugin/db";
 import store from "@/store";
-import { isMobile } from "mobile-device-detect";
+import {isMobile} from "mobile-device-detect";
 
 export default {
   data() {
@@ -28,9 +28,11 @@ export default {
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
+    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
     return {
-      //TODO: filter by current wallet
-      transactions: transactionStore.where("uid", "==", uid)
+      transactions: transactionStore
+          .where("uid", "==", uid)
+          .where("wallet.id", "==", wallet)
     };
   }
 };

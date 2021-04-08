@@ -18,7 +18,7 @@ export const mutations = {
 		state.user.data = data;
 	},
 	SET_SELECTED_WALLET(state, wallet) {
-		state.user.data.selectedWallet = Object.assign({}, wallet);
+		state.user.data.selectedWallet = Object.assign({id: wallet.id}, wallet);
 	}
 };
 

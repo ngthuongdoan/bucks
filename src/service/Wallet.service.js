@@ -1,6 +1,6 @@
 import Currency from "@/model/Currency.model";
 import Wallet from "@/model/Wallet.model";
-import { Timestamp, userStore, walletStore } from "@/plugin/db";
+import {Timestamp, userStore, walletStore} from "@/plugin/db";
 import store from "@/store";
 
 export const WalletService = {
@@ -19,7 +19,7 @@ export const WalletService = {
 			const walletSnapshot = await walletStore.where("uid", "==", uid).where("name", "==", "Overview").limit(1).get();
 			walletSnapshot.forEach(async (doc) => {
 				const overviewWallet = await doc.data();
-				await users.update({ selectedWallet: overviewWallet });
+				await users.update({selectedWallet: {id: overviewWallet.id, ...overviewWallet}});
 				await store.dispatch("userModule/changeSelected", overviewWallet);
 			});
 		} catch (e) {

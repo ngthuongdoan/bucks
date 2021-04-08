@@ -13,7 +13,7 @@
 
 <script>
 import WalletCard from "@/components/ui/WalletCard";
-import { userStore, walletStore } from "@/plugin/db";
+import {userStore, walletStore} from "@/plugin/db";
 import store from "@/store";
 
 export default {
@@ -27,7 +27,7 @@ export default {
       try {
         const users = userStore.doc(this.$store.getters["userModule/user"].data.uid);
         this.$bind('users', users);
-        await this.$firestoreRefs.users.update({ selectedWallet: wallet });
+        await this.$firestoreRefs.users.update({selectedWallet: {id: wallet.id, ...wallet}});
         await this.$store.dispatch("userModule/changeSelected", wallet);
         await this.$router.push("/dashboard");
       } catch (e) {
