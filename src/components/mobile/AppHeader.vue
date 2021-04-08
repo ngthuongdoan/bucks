@@ -27,14 +27,9 @@ import {walletStore} from "@/plugin/db";
 export default {
   data() {
     return {
-      wallet: {}
+      wallet: {},
     }
   },
-  // computed: {
-  //   wallet() {
-  //     return this.$store.getters["userModule/user"].data.selectedWallet;
-  //   }
-  // },
   components: {
     WalletCard
   },

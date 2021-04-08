@@ -1,7 +1,7 @@
 import router from "@/router";
 import Swal from "sweetalert2";
 
-export default {
+const helpers = {
 	async back() {
 		await router.back();
 	},
@@ -62,3 +62,6 @@ export default {
 		return (o > 125) ? "black" : "white";
 	}
 };
+
+
+export default helpers

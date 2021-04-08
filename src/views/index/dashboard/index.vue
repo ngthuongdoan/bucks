@@ -12,23 +12,23 @@
 import AppHeader from "@/components/mobile/AppHeader";
 import AppTransaction from "@/components/ui/AppTransaction";
 import {transactionStore} from "@/plugin/db";
-import store from "@/store";
 import {isMobile} from "mobile-device-detect";
 
 export default {
   data() {
     return {
       isMobile,
-      transactions: []
+      transactions: [],
     };
   },
   components: {
     AppTransaction,
     AppHeader
   },
+
   firestore() {
-    const uid = store.getters["userModule/user"].data.uid;
-    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
+    const uid = this.$store.getters["userModule/user"].data.uid;
+    const wallet = this.$store.getters["userModule/user"].data.selectedWallet.id;
     return {
       transactions: transactionStore
           .where("uid", "==", uid)
