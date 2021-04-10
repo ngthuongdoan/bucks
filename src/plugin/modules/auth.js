@@ -7,13 +7,14 @@ import {userStore} from "@/plugin/db";
 require("firebase/auth");
 
 export const Auth = firebase.auth();
-Auth.onAuthStateChanged((currentUser) => {
-	const walletSnapshot = userStore.doc(currentUser.uid).get();
-	walletSnapshot.then(snapshot => {
-		const user = snapshot.data();
-		store.dispatch("userModule/fetchUser", {selectedWallet: user.selectedWallet, ...currentUser}).then();
-	});
+Auth.onAuthStateChanged(async (currentUser) => {
+  if (currentUser) {
+    const walletSnapshot = await userStore.doc(currentUser.uid).get();
+    const snapshot = await walletSnapshot
+    const user = snapshot.data();
+    store.dispatch("userModule/fetchUser", {selectedWallet: user.selectedWallet, ...currentUser}).then();
 
+  }
 });
 
 Vue.use(firestorePlugin);

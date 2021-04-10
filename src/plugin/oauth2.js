@@ -1,6 +1,6 @@
 import router from "@/router";
 import firebase from "firebase/app";
-// import {Auth} from "@/plugin/modules/auth";
+import {Auth} from "@/plugin/modules/auth";
 
 require("firebase/auth");
 
@@ -30,10 +30,10 @@ export const createProvider = (platform) => {
 // }
 
 export const logout = async () => {
-	await firebase.auth().signOut();
+	await Auth.signOut();
 	await router.push("/login");
 };
 
 export const signInWithPopup = async (provider) => {
-	return await firebase.auth().signInWithPopup(provider);
+	return await Auth.signInWithPopup(provider);
 };

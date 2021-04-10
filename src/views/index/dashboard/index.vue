@@ -13,6 +13,7 @@ import AppHeader from "@/components/mobile/AppHeader";
 import AppTransaction from "@/components/ui/AppTransaction";
 import {transactionStore} from "@/plugin/db";
 import {isMobile} from "mobile-device-detect";
+import store from "@/store"
 
 export default {
   data() {
@@ -27,8 +28,8 @@ export default {
   },
 
   firestore() {
-    const uid = this.$store.getters["userModule/user"].data.uid;
-    const wallet = this.$store.getters["userModule/user"].data.selectedWallet.id;
+    const uid = store.getters["userModule/user"].data.uid;
+    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
     return {
       transactions: transactionStore
           .where("uid", "==", uid)
