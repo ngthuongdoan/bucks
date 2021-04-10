@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { Auth } from "@/plugin/modules/auth";
+import {Auth} from "@/plugin/modules/auth";
 
 export default {
   data() {
@@ -55,7 +55,6 @@ export default {
         await Auth
             .signInWithEmailAndPassword(this.user.email, this.user.password);
         this.$helpers.showSuccess();
-        await this.$router.replace("/dashboard");
       } catch (err) {
         this.$helpers.showError(err);
       }

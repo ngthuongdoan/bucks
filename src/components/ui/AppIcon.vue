@@ -48,7 +48,6 @@ export default {
           await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, {id: response.id, ...selectedWallet}));
         }
         this.$helpers.showSuccess();
-        await this.$router.replace("/dashboard");
       } catch (e) {
         this.$helpers.showError(e);
       }

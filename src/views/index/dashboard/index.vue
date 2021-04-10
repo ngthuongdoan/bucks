@@ -26,10 +26,10 @@ export default {
     AppTransaction,
     AppHeader
   },
-
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
     const wallet = store.getters["userModule/user"].data.selectedWallet.id;
+    console.log(uid, wallet)
     return {
       transactions: transactionStore
           .where("uid", "==", uid)

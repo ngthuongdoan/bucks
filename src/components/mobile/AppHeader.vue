@@ -23,6 +23,7 @@
 <script>
 import WalletCard from "@/components/ui/WalletCard";
 import {walletStore} from "@/plugin/db";
+import store from "@/store"
 
 export default {
   data() {
@@ -34,7 +35,7 @@ export default {
     WalletCard
   },
   firestore() {
-    const selectedWallet = this.$store.getters["userModule/user"].data.selectedWallet;
+    const selectedWallet = store.getters["userModule/user"].data.selectedWallet;
     return {
       wallet: walletStore.doc(selectedWallet.id)
     }
