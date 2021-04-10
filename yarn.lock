@@ -883,6 +883,18 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@dreipol/abstract-log@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@dreipol/abstract-log/-/abstract-log-0.0.4.tgz#bdc3671d9e4049e1e0deb624a6930f14625f29d3"
+  integrity sha512-tGxxZpxsTCPYnqG3G9DPNt8hajwcqfVYXJ8JEMckMkMsEMr5FVRWb+cf4PvmSlrfsmKUOfz/c66mjEwSa3Z5bQ==
+
+"@dreipol/vue-log@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@dreipol/vue-log/-/vue-log-0.0.8.tgz#0fc02455aad128a44e71e82a2dd038b1f48c18f3"
+  integrity sha512-XFS4y9PV74fcIEKueMgf61tXPAfr9zOCac+m54tEOql6zuOLY1iGVn1i+kKffIKoOIKEB8gVO01YeA30lrMHbw==
+  dependencies:
+    "@dreipol/abstract-log" "0.0.4"
+
 "@firebase/analytics-types@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-types/-/analytics-types-0.4.0.tgz#d6716f9fa36a6e340bc0ecfe68af325aa6f60508"

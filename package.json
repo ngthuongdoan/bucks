@@ -16,6 +16,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@dreipol/vue-log": "^0.0.8",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9",
     "axios": "^0.21.1",
