@@ -3,7 +3,9 @@
     <img :src="transaction.category.icon" alt="" class="object-contain w-1 justify-self-start flex-grow"
          style="max-width: 30px">
     <h1 class="ml-3 font-bold text-sm flex-grow">{{ transaction.category.name }}</h1>
-    <span class="flex-grow justify-self-end text-right">{{ transaction.value }}</span>
+    <span :class="['flex-grow justify-self-end text-right font-bold', isExpense?'text-red-400':'text-green-400']">{{
+        transaction.value | changeSign(isExpense) | separateValue
+      }}</span>
   </div>
 </template>
 <script>
@@ -13,6 +15,20 @@ export default {
     transaction: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    isExpense() {
+      return this.transaction.category.type === "expense"
+    }
+  },
+  filters: {
+    changeSign(value, isExpense) {
+      if (isExpense) {
+        return value * -1
+      } else {
+        return value
+      }
     }
   }
 };
