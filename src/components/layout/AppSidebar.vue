@@ -26,7 +26,7 @@
     </ul>
     <ul class="absolute bottom-5">
       <li class="mb-3">
-        <button class="rounded-full py-2 px-8 bg-gray-300 text-sm flex gap-2">
+        <button class="rounded-full w-full py-2 px-7 bg-gray-300 text-sm flex gap-2">
           <img
               class="object-contain"
               src="https://img.icons8.com/small/16/000000/gear.png"/>
@@ -34,9 +34,9 @@
         </button>
       </li>
       <li>
-        <button class="rounded-full py-2 px-8 bg-red-500 text-sm flex gap-2" @click="logout">
+        <button class="rounded-full w-full py-2 px-7 bg-red-500 text-sm flex gap-2" @click="logout">
           <img class="object-contain" src="https://img.icons8.com/android/16/000000/logout-rounded-left.png"/>
-          Logout
+          Sign out
         </button>
       </li>
     </ul>
