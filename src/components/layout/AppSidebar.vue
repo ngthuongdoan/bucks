@@ -1,27 +1,51 @@
 <template>
-  <nav class="fixed min-h-screen h-full bg-white px-5 flex flex-col justify-center items-center rounded-br-3xl rounded-tr-3xl shadow-2xl">
+  <nav
+      class="fixed min-h-screen h-full bg-white px-5 flex flex-col justify-center items-center rounded-br-3xl rounded-tr-3xl shadow-2xl">
+    <h1
+        class="absolute z-10 top-5 left-5  text-xl font-monoton"
+    >
+      bucks
+    </h1>
     <ul class=" flex flex-col gap-10">
       <router-link
           v-for="item in menu"
           :key="item.path"
-          active-class="active"
           :to="item.path"
+          active-class="active"
+          class="w-full text-center cursor-pointer flex items-center justify-start gap-3"
           exact
           exact-active-class="active"
           tag="li"
-          class="w-full text-center cursor-pointer"
       >
         <img
-            class="w-7"
             :src="item.icon"
+            class="w-7"
         />
+        <h1>{{ item.name }}</h1>
       </router-link>
+    </ul>
+    <ul class="absolute bottom-5">
+      <li class="mb-3">
+        <button class="rounded-full py-2 px-8 bg-gray-300 text-sm flex gap-2">
+          <img
+              class="object-contain"
+              src="https://img.icons8.com/small/16/000000/gear.png"/>
+          Setting
+        </button>
+      </li>
+      <li>
+        <button class="rounded-full py-2 px-8 bg-red-500 text-sm flex gap-2" @click="logout">
+          <img class="object-contain" src="https://img.icons8.com/android/16/000000/logout-rounded-left.png"/>
+          Logout
+        </button>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script>
 import menu from "@/config/menu.json"
+import {logout} from "@/plugin/oauth2";
 
 export default {
   name: "AppSidebar",
@@ -29,6 +53,9 @@ export default {
     return {
       menu
     }
+  },
+  methods: {
+    logout
   }
 }
 </script>
