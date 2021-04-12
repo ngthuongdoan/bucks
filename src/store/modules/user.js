@@ -30,6 +30,7 @@ export const actions = {
         uid: user.uid,
         displayName: user.displayName,
         email: user.email,
+        photoURL: user.photoURL,
         selectedWallet: user.selectedWallet
       });
 
