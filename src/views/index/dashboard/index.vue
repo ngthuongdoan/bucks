@@ -5,7 +5,9 @@
       <app-transaction v-for="trans in transactions" :key="trans.id" :transaction="trans"/>
     </div>
   </div>
-  <div v-else>Desktop</div>
+  <div v-else>
+    Desktop
+  </div>
 </template>
 
 <script>
@@ -24,7 +26,8 @@ export default {
   },
   components: {
     AppTransaction,
-    AppHeader
+    AppHeader,
+
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;

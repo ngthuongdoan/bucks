@@ -2,7 +2,6 @@
   <div>
     <mobile-layout v-if="isMobile"></mobile-layout>
     <default-layout v-else></default-layout>
-
   </div>
 </template>
 <script>
