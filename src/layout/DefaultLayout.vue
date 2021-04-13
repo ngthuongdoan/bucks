@@ -1,22 +1,25 @@
 <template>
   <div class="bg-gray-300 min-h-screen min-w-full">
     <app-sidebar></app-sidebar>
-<!--    <app-right-sidebar></app-right-sidebar>-->
-    <router-view></router-view>
+    <!--    <app-right-sidebar></app-right-sidebar>-->
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
 <script>
 import AppSidebar from "@/components/layout/AppSidebar";
-// import AppRightSidebar from "@/components/layout/AppRightSidebar";
 
 export default {
   components: {
-    AppSidebar,
-    // AppRightSidebar
+    AppSidebar
   }
 };
 </script>
 
 <style>
+main {
+  padding-left: 200px;
+}
 </style>

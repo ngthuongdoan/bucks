@@ -1,8 +1,8 @@
 <template>
   <nav
-      class="fixed min-h-screen h-full bg-white px-5 flex flex-col justify-center items-center rounded-br-3xl rounded-tr-3xl shadow-2xl">
+      class="fixed min-h-screen h-full bg-white p-5 flex flex-col justify-between items-center rounded-br-3xl rounded-tr-3xl shadow-2xl">
     <h1
-        class="absolute z-10 top-5 left-5  text-xl font-monoton"
+        class="text-xl font-monoton self-start justify-start"
     >
       bucks
     </h1>
@@ -24,7 +24,7 @@
         <h1>{{ item.name }}</h1>
       </router-link>
     </ul>
-    <ul class="absolute bottom-5">
+    <ul class="">
       <li class="mb-3">
         <button class="rounded-full w-full py-2 px-7 bg-gray-300 text-sm flex gap-2">
           <img

@@ -31,8 +31,8 @@
 
 <script>
 import CategoryNavigation from "@/components/common/CategoryNavigation";
-import { categoryStore } from "@/plugin/db";
-import { directive as onClickAway } from "vue-clickaway";
+import {categoryStore} from "@/plugin/db";
+import {directive as onClickAway} from "vue-clickaway";
 
 export default {
   data() {
