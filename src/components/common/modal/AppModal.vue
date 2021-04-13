@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { directive as onClickAway } from "vue-clickaway";
+import {directive as onClickAway} from "vue-clickaway";
 
 export default {
   name: "large-modal",
