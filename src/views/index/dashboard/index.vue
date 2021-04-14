@@ -29,9 +29,19 @@
       </div>
     </div>
     <!--    All Trans-->
-    <div class="w-full h-full">
+    <div class="w-full row-span-2">
       <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
-      <div class="bg-white w-full h-full rounded-xl"></div>
+      <div class="bg-white w-full h-full rounded-xl">
+        <datepicker v-model="selectedDate"
+                    format="dd/MM/yyyy"
+                    input-class=" top-2 left-3 text-gray-400 font-bold absolute cursor-pointer w-fit"
+                    placeholder="Select Date"
+                    @selected="fetchTransaction"
+        ></datepicker>
+        <div class="py-10">
+          <app-transaction v-for="trans in transactions" :key="trans.id" :transaction="trans" class="shadow-none"/>
+        </div>
+      </div>
     </div>
     <!--    Debt/Loan-->
     <!--    ...-->
@@ -45,6 +55,8 @@ import {transactionStore, walletStore} from "@/plugin/db";
 import {isMobile} from "mobile-device-detect";
 import store from "@/store"
 import WalletCard from "@/components/ui/WalletCard";
+import Datepicker from "vuejs-datepicker";
+import * as dayjs from "dayjs";
 
 export default {
   data() {
@@ -52,13 +64,20 @@ export default {
       isMobile,
       transactions: [],
       wallet: {},
-      activeOverview: "week"
+      activeOverview: "week",
+      selectedDate: new Date()
     };
+  },
+  methods: {
+    fetchTransaction(evt) {
+      console.log(dayjs(evt).format("DD/MM/YYYY"))
+    }
   },
   components: {
     AppTransaction,
     AppHeader,
-    WalletCard
+    WalletCard,
+    Datepicker
 
   },
   firestore() {
