@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="p-5 lg:inline-flex lg:flex-wrap lg:gap-5 lg:items-center">
+    <ul class="lg:inline-flex lg:flex-wrap lg:gap-5 lg:items-center">
       <router-link class="card" tag="li" to="/tool/exchange">
         <img
             alt=""

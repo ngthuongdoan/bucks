@@ -1,6 +1,6 @@
 <template>
   <nav
-      class="fixed min-h-screen h-full bg-white p-5 flex flex-col justify-between items-center rounded-br-3xl rounded-tr-3xl shadow-2xl">
+      class="fixed min-h-screen h-full bg-white p-5 flex flex-col justify-between items-center rounded-br-3xl rounded-tr-3xl shadow-2xl z-50">
     <h1
         class="text-xl font-monoton self-start justify-start"
     >

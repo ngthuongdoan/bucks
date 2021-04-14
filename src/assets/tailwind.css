@@ -21,6 +21,10 @@
     input {
         @apply outline-none focus:outline-none
     }
+
+    main {
+        padding: 50px 200px;
+    }
 }
 
 @layer components {
@@ -47,11 +51,27 @@
     .currency-icon {
         @apply flex-shrink-0 object-cover rounded-full
     }
+
+    .btn {
+        @apply text-black bg-white rounded-full w-20 uppercase font-semibold py-1 text-sm transition-all ease-in-out duration-100 outline-none focus:outline-none;
+    }
+
+    .desktop-dashboard {
+        @apply grid justify-start items-start;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        column-gap: 100px;
+        row-gap: 30px;
+    }
 }
 
 @layer utilities {
     .active {
         @apply opacity-100;
+    }
+
+    .btn-active {
+        @apply bg-control
     }
 
     .grayscale {
