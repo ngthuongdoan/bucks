@@ -96,8 +96,7 @@ const router = new VueRouter({
 if (process.env.VUE_APP_GUARD === "true") {
 	router.beforeEach(async (to, from, next) => {
 		const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-		const currentUser = await firebase.auth().currentUser;
-		if (requiresAuth && !currentUser) {
+		if (requiresAuth && !await firebase.getCurrentUser()) {
 			await next("/login");
 		} else {
 			await next();

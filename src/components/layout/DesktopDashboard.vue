@@ -78,6 +78,7 @@ export default {
       filterTransactions: [],
     };
   },
+
   watch: {
     selectedDate: {
       immediate: true,
@@ -104,7 +105,7 @@ export default {
   components: {
     AppTransaction,
     WalletCard,
-    Datepicker
+    Datepicker,
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;

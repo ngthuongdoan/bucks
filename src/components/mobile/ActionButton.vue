@@ -1,10 +1,8 @@
 <template>
-  <div
-      class="absolute flex items-center justify-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-control"
-  >
+  <div>
     <circle-menu
         :colors="[
-        '#FFEAB7',
+        '#539753',
         '#ffff66',
         '#FFE26F',
         '#F3825F',
@@ -12,12 +10,11 @@
       ]"
         :number="4"
         circle
-        class="outline-none focus:outline-none"
-        type="middle-around"
+        :type="isMobile?'middle-around':'right'"
     >
       <button
           slot="item_btn"
-          class="w-10 h-10 rounded-full bg-control-light sonar transform translate-y-1"
+          class="w-10 h-10 rounded-full bg-control sonar transform translate-y-1"
       ></button>
       <router-link
           slot="item_1"
@@ -49,8 +46,14 @@
 
 <script>
 import CircleMenu from "vue-circle-menu";
+import {isMobile} from 'mobile-device-detect';
 
 export default {
+  data() {
+    return {
+      isMobile
+    }
+  },
   components: {
     CircleMenu
   }

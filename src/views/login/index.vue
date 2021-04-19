@@ -21,7 +21,6 @@ import IconContainer from "@/components/common/IconContainer.vue";
 import AppLogin from "@/components/layout/AppLogin.vue";
 import AppSignup from "@/components/layout/AppSignup.vue";
 import LoginNav from "@/components/layout/LoginNav.vue";
-import firebase from "firebase";
 
 export default {
   data() {
@@ -29,10 +28,10 @@ export default {
       currentTabComponent: "app-login"
     };
   },
-  async beforeRouteEnter(to, from, next) {
-    await firebase.auth().signOut();
-    next();
-  },
+  // async beforeRouteEnter(to, from, next) {
+  //   await firebase.auth().signOut();
+  //   next();
+  // },
   components: {
     IconContainer,
     AppLogin,
