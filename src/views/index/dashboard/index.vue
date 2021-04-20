@@ -1,6 +1,9 @@
 <template>
+  <div v-if="user">
     <mobile-dashboard v-if="isMobile"></mobile-dashboard>
     <desktop-dashboard v-else></desktop-dashboard>
+  </div>
+
 </template>
 
 <script>
