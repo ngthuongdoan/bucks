@@ -2,9 +2,17 @@
   <add-layout title="Add Transaction">
     <app-modal
         v-if="walletModal"
-        :data="wallets"
         @away="toggleWalletModal"
-        @change-wallet="changeWallet($event)"></app-modal>
+        @change-wallet="changeWallet($event)">
+      <ul class="w-full p-2 flex-auto">
+        <li v-for="(item, i) in wallets" :key="i" :style="{backgroundColor:item.color}"
+            class="shadow-xl w-full px-5 py-2 rounded-2xl my-2 cursor-pointer"
+            @click="changeWallet(item)">
+          <h1 class="font-bold text-white">{{ item.name }}</h1>
+          <p class="italic text-gray-200 text-sm">{{ item.amount }} {{ item.currency.key }}</p>
+        </li>
+      </ul>
+    </app-modal>
     <category-modal
         v-if="categoryModal"
         @away="toggleCategoryModal"
@@ -101,6 +109,7 @@ export default {
     },
     changeWallet(wallet) {
       this.transaction.wallet = Object.assign({id: wallet.id}, wallet);
+      this.toggleWalletModal()
     },
     changeCategory(category) {
       this.transaction.category = Object.assign({id: category.id}, category);

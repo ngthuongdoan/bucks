@@ -23,7 +23,9 @@
     }
 
     body {
-        @apply outline-none!;
+        @apply outline-none;
+        backface-visibility: hidden !important;
+        -webkit-font-smoothing: subpixel-antialiased;
     }
 
     main {
@@ -61,7 +63,7 @@
     }
 
     .desktop-dashboard {
-        @apply grid justify-start items-start;
+        @apply grid justify-start items-start relative;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         column-gap: 100px;

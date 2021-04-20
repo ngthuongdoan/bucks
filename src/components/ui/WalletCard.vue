@@ -9,7 +9,6 @@
            @click.stop="option=!option"/>
       <wallet-options v-if="option" @away="closeOption" @config="handleOption($event)"></wallet-options>
     </div>
-
     <div class="flex flex-col h-full gap-3">
       <h1 class="font-bold text-sm">{{ wallet.name }}</h1>
       <p class="text-xl mt-3">{{ wallet.amount | separateValue }} <span
@@ -29,12 +28,12 @@ import icons from "@/config/icon.json";
 
 import {WalletService} from "@/service/Wallet.service";
 
+
 export default {
   data() {
     return {
       option: false,
       icon: {},
-      optionModal: ""
     };
   },
   props: {
@@ -51,9 +50,6 @@ export default {
     wallet() {
       this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
     },
-    optionModal() {
-      console.log(this.optionModal);
-    }
   },
   methods: {
     closeOption() {
@@ -78,7 +74,7 @@ export default {
           this.$router.push(option.path + this.wallet.id);
           break;
         case "component":
-          this.optionModal = option.component;
+          this.$emit("open-modal", option.component)
           break;
         case "methods":
           this.deleteWallet();
@@ -94,7 +90,7 @@ export default {
   },
   components: {
     AppIcon,
-    WalletOptions
+    WalletOptions,
   }
 };
 </script>

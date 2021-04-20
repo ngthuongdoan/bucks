@@ -1,8 +1,6 @@
 <template>
-  <keep-alive v-if="user">
     <mobile-dashboard v-if="isMobile"></mobile-dashboard>
     <desktop-dashboard v-else></desktop-dashboard>
-  </keep-alive>
 </template>
 
 <script>

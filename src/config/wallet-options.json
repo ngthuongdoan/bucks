@@ -8,13 +8,13 @@
   {
     "name": "Transfer Money",
     "config": {
-      "component": "transfer-money"
+      "component": "TransferMoney"
     }
   },
   {
     "name": "Adjust Balance",
     "config": {
-      "component": "adjust-balance"
+      "component": "AdjustBalance"
     }
   },
   {

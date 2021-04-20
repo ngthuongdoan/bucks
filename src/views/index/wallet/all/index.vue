@@ -2,7 +2,7 @@
   <div class="wallet-container w-screen min-h-screen h-full flex flex-col items-center pt-5">
     <wallet-card v-for="(wallet, i) in wallets" :key="wallet.id"
                  :show-setting="false"
-                 :style="{zIndex:i, transform: `rotateY(10deg) translateY(${(i)*150}px) !important`,
+                 :style="{zIndex:i, transform: `rotateY(10deg) translateY(${(i)*150}px) perspective(1px) !important`,
                   boxShadow:'1px 1px 70px black !important'}"
                  :wallet="wallet"
                  class="wallet w-2/3 absolute transform cursor-pointer"
