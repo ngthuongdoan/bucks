@@ -6,7 +6,7 @@
   >
     <div v-if="showSetting" class="absolute right-4 w-1/2">
       <img alt="" class="absolute cursor-pointer right-0 py-5 pt-0" src="~@/assets/img/setting.svg"
-           @click="option=!option"/>
+           @click.stop="option=!option"/>
       <wallet-options v-if="option" @away="closeOption" @config="handleOption($event)"></wallet-options>
     </div>
 
