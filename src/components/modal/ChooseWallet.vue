@@ -8,7 +8,7 @@
                      }"
                  :wallet="wallet"
                  class="wallet lg:w-full"
-                 @click.native="changeWallet"
+                 @click.native="changeWallet(wallet)"
     ></wallet-card>
   </div>
 </template>
@@ -27,16 +27,14 @@ export default {
     }
   },
   methods: {
-    toggleWalletModal() {
-      this.walletModal = false;
-    },
     async changeWallet(wallet) {
       try {
         const users = userStore.doc(this.$store.getters["userModule/user"].data.uid);
         this.$bind('users', users);
+        console.log({selectedWallet: {id: wallet.id, ...wallet}})
         await this.$firestoreRefs.users.update({selectedWallet: {id: wallet.id, ...wallet}});
         await this.$store.dispatch("userModule/changeSelected", wallet);
-        this.toggleWalletModal()
+        this.$emit("close")
       } catch (e) {
         console.log(e);
       }

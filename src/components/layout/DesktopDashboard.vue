@@ -5,8 +5,7 @@
         @away="closeOption"
         class="z-50 absolute "
     >
-      <component :is="optionModal.name"></component>
-      <!--      <choose-wallet :change-wallet="changeWallet(wallet)" :is-mobile="isMobile" :wallets="wallets"/>-->
+      <component :is="optionModal.name" :wallet="wallet" @close="closeOption"></component>
     </app-modal>
     <wallet-card
         :wallet="wallet"
