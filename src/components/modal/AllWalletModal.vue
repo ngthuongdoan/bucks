@@ -3,7 +3,7 @@
       class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none flex justify-center items-center ">
     <div
         v-on-click-away="away"
-        class="relative mx-auto bg-white p-5 min-w-max w-1/2 rounded-lg shadow-2xl">
+        class="relative mx-auto bg-white py-5 px-1 min-w-max w-2/6 rounded-lg shadow-2xl">
       <!--content-->
       <div
           class="border-0 flex flex-col justify-center items-center w-full">
@@ -15,7 +15,7 @@
                          transform: `rotateY(10deg) translateY(${(i)*((isMobile)?150:-50)}px) !important`
                      }"
                      :wallet="wallet"
-                     class="wallet lg:w-1/2"
+                     class="wallet lg:w-3/4"
                      @click.native="changeWallet(wallet)"
         ></wallet-card>
       </div>
