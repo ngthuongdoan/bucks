@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import AppModal from "@/components/common/modal/AppModal";
-import CategoryModal from "@/components/common/modal/CategoryModal";
+import AppModal from "@/components/modal/AppModal";
+import CategoryModal from "@/components/modal/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
 
 import Transaction from "@/model/Transaction.model";

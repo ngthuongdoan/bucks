@@ -1,8 +1,14 @@
 <template>
   <div v-if="wallet" class="desktop-dashboard">
+    <all-wallet-modal
+        v-if="walletModal"
+        @away="toggleWalletModal"
+
+    ></all-wallet-modal>
     <wallet-card
         :wallet="wallet"
         class="relative"
+        @click.native="chooseWallet"
     ></wallet-card>
     <!--    Overview Information-->
     <div>
@@ -66,24 +72,32 @@ import store from "@/store"
 import WalletCard from "@/components/ui/WalletCard";
 import Datepicker from "vuejs-datepicker";
 import * as dayjs from "dayjs"
+import AllWalletModal from "@/components/modal/AllWalletModal";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      walletModal: false,
       isDebt: true,
       transactions: [],
-      wallet: {},
       activeOverview: "week",
       selectedDate: new Date(),
       filterTransactions: [],
     };
   },
-
+  computed: {
+    ...mapGetters({
+      user: "userModule/user"
+    }),
+    wallet() {
+      return this.user.data.selectedWallet;
+    }
+  },
   watch: {
     selectedDate: {
       immediate: true,
       handler: function (value) {
-        console.log(value)
         this.filterTransactions = this.transactions.filter(trans => {
           return dayjs(trans.time.toDate()).isSame(dayjs(value), "day");
         })
@@ -91,21 +105,18 @@ export default {
     }
   },
   methods: {
-    // async fetchTransaction(time) {
-    //   const uid = store.getters["userModule/user"].data.uid;
-    //   const wallet = store.getters["userModule/user"].data.selectedWallet.id;
-    //   const transactionRefs = transactionStore
-    //       .where("uid", "==", uid)
-    //       .where("wallet.id", "==", wallet)
-    //       .where("time", "==", Timestamp(time));
-    //   const snapshot = await transactionRefs.get();
-    //   this.transactions = snapshot.data()
-    // }
+    chooseWallet() {
+      this.walletModal = true;
+    },
+    toggleWalletModal() {
+      this.walletModal = false;
+    }
   },
   components: {
     AppTransaction,
     WalletCard,
     Datepicker,
+    AllWalletModal
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;

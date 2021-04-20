@@ -2,7 +2,7 @@
   <div
       v-if="wallet"
       :style="{backgroundColor: wallet.color , minHeight:'150px'}"
-      class="w-4/5 max-h-40 shadow-2xl rounded-lg text-white px-8 py-4 max-w-6xl lg:w-3/4"
+      class="w-4/5 max-h-40 shadow-2xl rounded-lg text-white px-8 py-4 max-w-6xl min-w-max cursor-pointer"
   >
     <div v-if="showSetting" class="absolute right-4 w-1/2">
       <img alt="" class="absolute cursor-pointer right-0 py-5 pt-0" src="~@/assets/img/setting.svg"
