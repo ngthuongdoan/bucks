@@ -7,6 +7,7 @@
       <input accept="image/*" type="file" @change="previewImage">
       <p class="font-bold">Type</p>
       <select v-model="category.type">
+        <option value="">None</option>
         <option value="income">Income</option>
         <option value="expense">Expense</option>
         <option value="debt-loan">Debt-Loan</option>
@@ -19,7 +20,7 @@
 </template>
 <script>
 import Category from "@/model/Category.model";
-import { categoryStore } from "@/plugin/db";
+import {categoryStore} from "@/plugin/db";
 import firebase from 'firebase';
 
 export default {

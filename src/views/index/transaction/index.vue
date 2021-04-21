@@ -79,12 +79,12 @@ import CategoryModal from "@/components/modal/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
 
 import Transaction from "@/model/Transaction.model";
-import {Timestamp, transactionStore, walletStore} from "@/plugin/db";
+import {Timestamp, walletStore} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
 import store from "@/store";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
-import {WalletService} from "@/service/Wallet.service";
+import {TransactionService} from "@/service/Transaction.service";
 
 export default {
   data() {
@@ -154,15 +154,8 @@ export default {
         //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.value = Number.parseFloat(this.transaction.value);
-        await transactionStore.add({...this.transaction});
-        //Update Wallet Value
-        await WalletService.updateWalletAmount(
-            this.transaction.value,
-            this.transaction.category.type,
-            this.transaction.wallet.id
-        );
+        await TransactionService.addNew(this.transaction);
         this.$helpers.showSuccess();
-
         await this.$helpers.to("/dashboard");
       } catch (e) {
         this.$helpers.showError(e);

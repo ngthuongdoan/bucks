@@ -17,7 +17,10 @@
 </template>
 
 <script>
-import {walletStore} from "@/plugin/db";
+import Transaction from "@/model/Transaction.model";
+import {Timestamp} from "@/plugin/db";
+import {CategoryService} from "@/service/Category.service";
+import {TransactionService} from "@/service/Transaction.service";
 
 export default {
   name: "AdjustBalance",
@@ -38,14 +41,21 @@ export default {
   methods: {
     async adjustBalance() {
       try {
-        const ref = walletStore.doc(this.wallet.id);
-        await ref.update({amount: Number.parseFloat(this.balance)});
-        this.wallet.amount = this.balance;
-        await this.$store.dispatch("userModule/changeSelected", this.wallet)
+        const adjust = +this.balance - +this.wallet.amount;
+        const adjustTransaction = new Transaction(
+            adjust,
+            Timestamp.fromDate(new Date()),
+            "Adjust Balance"
+        );
+        adjustTransaction.wallet = this.wallet;
+        adjustTransaction.category = await CategoryService.fetchAdjustBalance();
+        adjustTransaction.category.type = (adjust > 0) ? "income" : "expense"
+        console.log(adjust)
+        await TransactionService.addNew(adjustTransaction)
         this.$helpers.showSuccess();
         this.$emit("close")
       } catch (e) {
-        console.error(e);
+        this.$helpers.showError(e);
       }
     }
   },

@@ -28,10 +28,6 @@ export default {
       currentTabComponent: "app-login"
     };
   },
-  // async beforeRouteEnter(to, from, next) {
-  //   await firebase.auth().signOut();
-  //   next();
-  // },
   components: {
     IconContainer,
     AppLogin,

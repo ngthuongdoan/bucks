@@ -95,6 +95,10 @@ const router = new VueRouter({
 
 if (process.env.VUE_APP_GUARD === "true") {
 	router.beforeEach(async (to, from, next) => {
+		if (to.path === "/upload") {
+			await next();
+			return;
+		}
 		const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 		if (requiresAuth && !await firebase.getCurrentUser()) {
 			await next("/login");

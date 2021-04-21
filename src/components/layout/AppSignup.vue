@@ -64,7 +64,6 @@ export default {
         const selectedWallet = await walletSnapshot.data();
         await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, {id: response.id, ...selectedWallet}));
         await this.$helpers.showSuccess();
-        await this.$router.go(0);
       } catch (err) {
         this.$helpers.showError(err);
       }
