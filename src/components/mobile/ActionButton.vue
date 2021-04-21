@@ -9,8 +9,9 @@
         '#F19584',
       ]"
         :number="4"
-        circle
         :type="isMobile?'middle-around':'right'"
+        ref="circle"
+        circle
     >
       <button
           slot="item_btn"
@@ -21,24 +22,28 @@
           class="fa fa-plus"
           tag="a"
           to="/transaction"
+          @click.native="toggleCircle"
       ></router-link>
       <router-link
           slot="item_4"
           class="fab fa-cc-visa"
           tag="a"
           to="/wallet/add"
+          @click.native="toggleCircle"
       ></router-link>
       <router-link
           slot="item_3"
           class="fa fa-plus"
           tag="a"
           to="/transaction"
+          @click.native="toggleCircle"
       ></router-link>
       <router-link
           slot="item_2"
           class="fa fa-plus "
           tag="a"
           to="/transaction"
+          @click.native="toggleCircle"
       ></router-link>
     </circle-menu>
   </div>
@@ -52,6 +57,11 @@ export default {
   data() {
     return {
       isMobile
+    }
+  },
+  methods: {
+    toggleCircle() {
+      this.$refs.circle.open = false;
     }
   },
   components: {
