@@ -1,14 +1,14 @@
 <template>
-  <div class="w-full h-full  row-span-2">
+  <div class="w-full h-80 max-h-80 row-span-2">
     <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
-    <div class="bg-white w-full h-full rounded-xl">
+    <div class="bg-white w-full h-full rounded-xl overflow-auto">
       <datepicker v-model="selectedDate"
                   format="dd/MM/yyyy"
                   input-class="top-2 left-3 text-gray-400 font-bold absolute cursor-pointer w-fit"
                   placeholder="Select Date"
                   :highlighted="highlightedFn"
       ></datepicker>
-      <div class="py-10">
+      <div class="py-10 ">
         <div v-if="filterTransactions.length===0" class="text-center  italic text-gray-500">No Transactions</div>
         <app-transaction v-for="trans in filterTransactions" v-else :key="trans.id" :transaction="trans"
                          class="shadow-none"/>
