@@ -6,6 +6,7 @@
                   format="dd/MM/yyyy"
                   input-class="top-2 left-3 text-gray-400 font-bold absolute cursor-pointer w-fit"
                   placeholder="Select Date"
+                  :highlighted="highlightedFn"
       ></datepicker>
       <div class="py-10">
         <div v-if="filterTransactions.length===0" class="text-center  italic text-gray-500">No Transactions</div>
@@ -30,6 +31,12 @@ export default {
       selectedDate: new Date(),
       transactions: [],
       filterTransactions: [],
+      highlightedFn: {
+        customPredictor(date) {
+          console.log(dayjs(date).isSame(dayjs(), "day"))
+          return dayjs(date).isSame(dayjs(), "day");
+        }
+      },
     }
   },
   watch: {
