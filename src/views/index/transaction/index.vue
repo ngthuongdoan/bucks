@@ -154,6 +154,7 @@ export default {
         //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.value = Number.parseFloat(this.transaction.value);
+        if (this.transaction.category.type === "expense") this.transaction.value = -this.transaction.value
         await TransactionService.addNew(this.transaction);
         this.$helpers.showSuccess();
         await this.$helpers.to("/dashboard");

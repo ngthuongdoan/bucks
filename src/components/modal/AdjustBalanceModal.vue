@@ -42,6 +42,7 @@ export default {
     async adjustBalance() {
       try {
         const adjust = +this.balance - +this.wallet.amount;
+        console.log(adjust)
         const adjustTransaction = new Transaction(
             adjust,
             Timestamp.fromDate(new Date()),

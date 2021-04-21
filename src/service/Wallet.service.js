@@ -15,14 +15,7 @@ export const WalletService = {
         const walletRef = await walletStore.doc(walletId).get();
         const wallet = await walletRef.data();
         if (wallet.amount === Number.parseFloat(value)) throw new Error("Nothing to update");
-        switch (type.toLowerCase()) {
-            case "income":
-                wallet.amount += Number.parseFloat(value);
-                break;
-            case "expense":
-                wallet.amount -= Number.parseFloat(value);
-                break;
-        }
+        wallet.amount += Number.parseFloat(value);
         await walletStore.doc(walletId).update({amount: wallet.amount})
         // Update selected wallet
         wallet.id = walletId;

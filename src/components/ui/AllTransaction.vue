@@ -33,7 +33,6 @@ export default {
       filterTransactions: [],
       highlightedFn: {
         customPredictor(date) {
-          console.log(dayjs(date).isSame(dayjs(), "day"))
           return dayjs(date).isSame(dayjs(), "day");
         }
       },
@@ -47,6 +46,9 @@ export default {
           return dayjs(trans.time.toDate()).isSame(dayjs(value), "day");
         })
       }
+    },
+    transactions() {
+      this.selectedDate = new Date();
     }
   },
   components: {
