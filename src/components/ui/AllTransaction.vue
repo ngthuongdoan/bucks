@@ -9,7 +9,7 @@
                   :highlighted="highlightedFn"
       ></datepicker>
       <div class="py-10 ">
-        <div v-if="filterTransactions.length===0" class="text-center  italic text-gray-500">No Transactions</div>
+        <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">No Transactions</div>
         <app-transaction v-for="trans in filterTransactions" v-else :key="trans.id" :transaction="trans"
                          class="shadow-none"/>
       </div>
