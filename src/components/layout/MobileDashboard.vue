@@ -1,7 +1,14 @@
 <template>
   <div>
-    <app-header></app-header>
-    <div class="absolute left-0 right-0 px-4 pt-80">
+    <app-modal
+        v-if="optionModal.open"
+        class=" absolute z-50"
+        @away="closeOption"
+    >
+      <component :is="optionModal.name" :wallet="user.data.selectedWallet" @close="closeOption"></component>
+    </app-modal>
+    <app-header @open-modal="openOption($event)"></app-header>
+    <div class="absolute left-0 right-0 px-4 top-80 z-0">
       <div class="left-3 fixed" style="top:330px">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
@@ -24,6 +31,8 @@ import {transactionStore} from "@/plugin/db";
 import store from "@/store"
 import * as dayjs from "dayjs";
 import Datepicker from "vuejs-datepicker";
+import AppModal from "@/components/modal/AppModal";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
@@ -31,12 +40,21 @@ export default {
       transactions: [],
       selectedDate: new Date(),
       filterTransactions: [],
+      optionModal: {
+        open: false,
+        name: "",
+      },
       highlightedFn: {
         customPredictor(date) {
           return dayjs(date).isSame(dayjs(), "day");
         }
       }
     };
+  },
+  computed: {
+    ...mapGetters({
+      user: "userModule/user",
+    })
   },
   watch: {
     selectedDate: {
@@ -51,10 +69,23 @@ export default {
       this.selectedDate = new Date();
     }
   },
+  methods: {
+    openOption(modal) {
+      this.optionModal.open = true;
+      this.optionModal.name = modal;
+    },
+    closeOption() {
+      this.optionModal.open = false;
+      this.optionModal.name = "";
+    },
+  },
   components: {
     AppTransaction,
     AppHeader,
-    Datepicker
+    Datepicker,
+    AppModal,
+    TransferMoney: () => import("@/components/modal/TransferMoneyModal"),
+    AdjustBalance: () => import("@/components/modal/AdjustBalanceModal"),
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;

@@ -66,7 +66,7 @@ import CurrencySelect from "@/components/ui/CurrencySelect";
 import InputOptional from "@/components/ui/InputOptional";
 import AddLayout from "@/layout/AddLayout";
 import Wallet from "@/model/Wallet.model";
-import { WalletService } from "@/service/Wallet.service";
+import {WalletService} from "@/service/Wallet.service";
 import VSwatches from "vue-swatches";
 
 // Import the styles too, typically in App.vue or main.js
@@ -109,30 +109,5 @@ export default {
 </script>
 
 <style>
-.currency-select {
-  z-index: 90;
-}
 
-input[type="radio"] + label span {
-  transition: background .2s,
-  transform .2s;
-}
-
-input[type="radio"] + label span:hover,
-input[type="radio"] + label:hover span {
-  transform: scale(1.2);
-}
-
-input[type="radio"]:checked + label span {
-  background-color: #3490DC;
-  box-shadow: 0px 0px 0px 2px white inset;
-}
-
-input[type="radio"]:checked + label {
-  color: #3490DC;
-}
-
-#color {
-  z-index: 60;
-}
 </style>
