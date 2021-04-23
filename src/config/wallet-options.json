@@ -8,7 +8,7 @@
   {
     "name": "Transfer Money",
     "config": {
-      "component": "TransferMoney"
+      "tool": "/tool/transfer/"
     }
   },
   {

@@ -28,7 +28,6 @@ import icons from "@/config/icon.json";
 
 import {WalletService} from "@/service/Wallet.service";
 
-
 export default {
   data() {
     return {
@@ -72,6 +71,9 @@ export default {
       switch (Object.keys(option)[0]) {
         case "path":
           this.$router.push(option.path + this.wallet.id);
+          break;
+        case "tool":
+          this.$router.push(option.tool)
           break;
         case "component":
           this.$emit("open-modal", option.component)

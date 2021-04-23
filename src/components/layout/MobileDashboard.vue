@@ -16,12 +16,15 @@
                     input-class="text-gray-400 bg-light-grey font-bold cursor-pointer w-fit justify-self-start"
                     placeholder="Select Date"
         ></datepicker>
-        <span :class="['font-bold flex-grow text-right', (total<0)?'text-red-400':'text-green-400']">{{
-            total | separateValue
-          }}</span>
+        <p class="font-bold flex-grow text-right">
+          Total:
+          <span :class=" (total<0)?'text-red-400':'text-green-400'">{{
+              total | separateValue
+            }}</span>
+        </p>
       </div>
-      <div class="w-full mt-5 h-80 overflow-y-scroll">
-        <div v-if="filterTransactions.length===0" class="mt-5 text-center italic text-gray-500">No Transactions</div>
+      <div class="w-full h-80 overflow-y-scroll">
+        <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">No Transactions</div>
         <app-transaction v-for="trans in filterTransactions" :key="trans.id" :transaction="trans"/>
       </div>
     </div>

@@ -29,10 +29,6 @@ export default {
     away() {
       this.$emit('away');
     },
-    changeWallet(wallet) {
-      this.$emit("change-wallet", wallet);
-      this.away();
-    }
   }
 
 };

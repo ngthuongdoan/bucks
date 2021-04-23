@@ -47,6 +47,10 @@ const routes = [
                     {
                         path: "exchange",
                         component: () => import("../views/index/tool/exchange")
+                    },
+                    {
+                        path: "transfer",
+                        component: () => import("../views/index/tool/transfer")
                     }
                 ]
             },
