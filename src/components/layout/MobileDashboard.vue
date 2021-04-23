@@ -18,6 +18,7 @@
         ></datepicker>
       </div>
       <div class="w-full mt-5 h-80 overflow-y-scroll">
+        <div v-if="filterTransactions.length===0" class="mt-5 text-center italic text-gray-500">No Transactions</div>
         <app-transaction v-for="trans in filterTransactions" :key="trans.id" :transaction="trans"/>
       </div>
     </div>
