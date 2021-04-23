@@ -1,13 +1,20 @@
 <template>
   <div class="w-full h-80 max-h-80 row-span-2">
     <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
-    <div class="bg-white w-full h-full rounded-xl overflow-auto">
-      <datepicker v-model="selectedDate"
-                  format="dd/MM/yyyy"
-                  input-class="top-2 left-3 text-gray-400 font-bold absolute cursor-pointer w-fit"
-                  placeholder="Select Date"
-                  :highlighted="highlightedFn"
-      ></datepicker>
+    <div class=" bg-white w-full h-full rounded-xl overflow-auto relative">
+      <div class="fixed p-3 pb-0  bg-white flex">
+        <datepicker v-model="selectedDate"
+                    :highlighted="highlightedFn"
+                    format="dd/MM/yyyy"
+                    input-class="text-gray-400 font-bold cursor-pointer flex-grow"
+                    placeholder="Select Date"
+        ></datepicker>
+        <p class="font-bold flex-grow text-right w-full">
+          Total:
+          <span :class="(total<0)?'text-red-400':'text-green-400'">{{
+              total | separateValue
+            }}</span></p>
+      </div>
       <div class="py-10 ">
         <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">No Transactions</div>
         <app-transaction v-for="trans in filterTransactions" v-else :key="trans.id" :transaction="trans"
@@ -36,6 +43,11 @@ export default {
           return dayjs(date).isSame(dayjs(), "day");
         }
       },
+    }
+  },
+  computed: {
+    total() {
+      return this.filterTransactions.reduce((accumulator, currentValue) => accumulator + Number.parseFloat(currentValue.value), 0)
     }
   },
   watch: {

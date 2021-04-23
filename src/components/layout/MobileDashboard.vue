@@ -8,14 +8,17 @@
       <component :is="optionModal.name" :wallet="user.data.selectedWallet" @close="closeOption"></component>
     </app-modal>
     <app-header @open-modal="openOption($event)"></app-header>
-    <div class="absolute left-0 right-0 px-4 top-80 z-0">
-      <div class="left-3 fixed" style="top:330px">
+    <div class="absolute left-0 right-0 px-4 top-80 z-0 ">
+      <div class="flex mx-7" style="top:330px; flex: 0 0 100% ">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
                     format="dd/MM/yyyy"
-                    input-class="text-gray-400 bg-light-grey font-bold cursor-pointer w-fit"
+                    input-class="text-gray-400 bg-light-grey font-bold cursor-pointer w-fit justify-self-start"
                     placeholder="Select Date"
         ></datepicker>
+        <span :class="['font-bold flex-grow text-right', (total<0)?'text-red-400':'text-green-400']">{{
+            total | separateValue
+          }}</span>
       </div>
       <div class="w-full mt-5 h-80 overflow-y-scroll">
         <div v-if="filterTransactions.length===0" class="mt-5 text-center italic text-gray-500">No Transactions</div>
@@ -55,7 +58,10 @@ export default {
   computed: {
     ...mapGetters({
       user: "userModule/user",
-    })
+    }),
+    total() {
+      return this.filterTransactions.reduce((accumulator, currentValue) => accumulator + Number.parseFloat(currentValue.value), 0)
+    }
   },
   watch: {
     selectedDate: {
