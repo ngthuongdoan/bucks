@@ -19,9 +19,9 @@
       ></button>
       <router-link
           slot="item_1"
-          class="fa fa-plus"
+          class="fa"
           tag="a"
-          to="/transaction"
+          to="/transaction/add"
           @click.native="toggleCircle"
       ></router-link>
       <router-link
@@ -33,16 +33,16 @@
       ></router-link>
       <router-link
           slot="item_3"
-          class="fa fa-plus"
+          class="fa "
           tag="a"
-          to="/transaction"
+          to="/transaction/add"
           @click.native="toggleCircle"
       ></router-link>
       <router-link
           slot="item_2"
           class="fa fa-plus "
           tag="a"
-          to="/transaction"
+          to="/transaction/add"
           @click.native="toggleCircle"
       ></router-link>
     </circle-menu>
