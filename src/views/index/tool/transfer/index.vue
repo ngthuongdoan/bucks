@@ -85,6 +85,20 @@ export default {
       }
       this.toggleWalletModal()
     },
+    createFromTransaction() {
+      this.fromTransaction.time = this.transaction.time;
+      this.fromTransaction.category = Object.assign({}, this.transaction.category);
+      this.fromTransaction.category.type = "expense";
+      this.fromTransaction.value = Number.parseFloat(this.transaction.value) * -1;
+      this.fromTransaction.wallet = this.fromWallet;
+    },
+    createToTransaction() {
+      this.toTransaction.time = this.transaction.time;
+      this.toTransaction.category = Object.assign({}, this.transaction.category);
+      this.toTransaction.category.type = "income";
+      this.toTransaction.value = Number.parseFloat(this.transaction.value);
+      this.toTransaction.wallet = this.toWallet;
+    },
     async addTransaction() {
       this.$helpers.loading();
       try {
@@ -92,17 +106,8 @@ export default {
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.category = await CategoryService.fetchAdjustBalance();
 
-        this.fromTransaction.time = this.transaction.time;
-        this.fromTransaction.category = this.transaction.category;
-        this.fromTransaction.category.type = "expense";
-        this.fromTransaction.value = -Number.parseFloat(this.transaction.value);
-        this.fromTransaction.wallet = this.fromWallet;
-
-        this.toTransaction.time = this.transaction.time;
-        this.toTransaction.category = this.transaction.category;
-        this.toTransaction.category.type = "income";
-        this.toTransaction.value = Number.parseFloat(this.transaction.value);
-        this.toTransaction.wallet = this.toWallet;
+        this.createFromTransaction();
+        this.createToTransaction();
 
         await TransactionService.addNew(Object.assign({}, this.fromTransaction));
         await TransactionService.addNew(Object.assign({}, this.toTransaction));

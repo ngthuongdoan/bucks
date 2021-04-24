@@ -7,7 +7,7 @@
          style="max-width: 30px">
     <h1 class="ml-3 font-bold text-sm flex-grow">{{ transaction.category.name }}</h1>
     <span :class="['flex-grow justify-self-end text-right font-bold', isExpense?'text-red-400':'text-green-400']">{{
-        transaction.value | changeSign(isExpense) | separateValue
+        transaction.value | separateValue
       }}</span>
   </div>
 </template>
@@ -25,14 +25,5 @@ export default {
       return this.transaction.category.type === "expense"
     }
   },
-  filters: {
-    changeSign(value, isExpense) {
-      if (isExpense) {
-        return value * -1
-      } else {
-        return value
-      }
-    }
-  }
 };
 </script>
