@@ -2,7 +2,9 @@
   <nav
       class="fixed bottom-0 left-0 right-0 py-4 shadow-negative rounded-t-xl bg-white z-50"
   >
-    <action-button></action-button>
+    <action-button
+        class="absolute flex items-center justify-center top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-control"
+    ></action-button>
 
     <ul class="flex items-center">
       <router-link

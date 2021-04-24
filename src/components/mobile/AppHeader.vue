@@ -9,13 +9,14 @@
     <img
         alt=""
         class="absolute z-10 top-7 right-5 w-6 cursor-pointer"
-        src="https://img.icons8.com/ios/64/000000/card-exchange.png"
-        @click="$helpers.to('/wallet')"
+        src="https://img.icons8.com/small/16/000000/gear.png"
     />
     <wallet-card
         v-if="wallet"
         :wallet="wallet"
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-20 translate-z"
+        @click.native="$helpers.to('/wallet')"
+        @open-modal="openOption($event)"
     ></wallet-card>
   </div>
 </template>
@@ -29,10 +30,16 @@ export default {
   data() {
     return {
       wallet: {},
+
     }
   },
+  methods: {
+    openOption(modal) {
+      this.$emit("open-modal", modal)
+    },
+  },
   components: {
-    WalletCard
+    WalletCard,
   },
   firestore() {
     const selectedWallet = store.getters["userModule/user"].data.selectedWallet;

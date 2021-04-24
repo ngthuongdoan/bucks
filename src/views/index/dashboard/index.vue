@@ -1,40 +1,31 @@
 <template>
-  <div v-if="isMobile">
-    <app-header></app-header>
-    <div class="px-4 pt-80 ">
-      <app-transaction v-for="trans in transactions" :key="trans.id" :transaction="trans"/>
-    </div>
+  <div v-if="user">
+    <mobile-dashboard v-if="isMobile"></mobile-dashboard>
+    <desktop-dashboard v-else></desktop-dashboard>
   </div>
-  <div v-else>Desktop</div>
+
 </template>
 
 <script>
-import AppHeader from "@/components/mobile/AppHeader";
-import AppTransaction from "@/components/ui/AppTransaction";
-import {transactionStore} from "@/plugin/db";
 import {isMobile} from "mobile-device-detect";
-import store from "@/store"
+import MobileDashboard from "@/components/layout/MobileDashboard";
+import DesktopDashboard from "@/components/layout/DesktopDashboard";
+import {mapGetters} from "vuex";
 
 export default {
   data() {
     return {
       isMobile,
-      transactions: [],
     };
+  },
+  computed: {
+    ...mapGetters({
+      user: "userModule/user"
+    })
   },
   components: {
-    AppTransaction,
-    AppHeader
-  },
-  firestore() {
-    const uid = store.getters["userModule/user"].data.uid;
-    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
-    console.log(uid, wallet)
-    return {
-      transactions: transactionStore
-          .where("uid", "==", uid)
-          .where("wallet.id", "==", wallet)
-    };
+    MobileDashboard,
+    DesktopDashboard,
   }
 };
 </script>

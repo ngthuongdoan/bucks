@@ -21,14 +21,6 @@ export const createProvider = (platform) => {
 	return provider;
 };
 
-// const getCredential = async () =>{
-//   const result = await Auth.getRedirectResult();
-//   if (result.credential) {
-//     let token = result.credential.accessToken;
-//     console.log(token);
-//   }
-// }
-
 export const logout = async () => {
 	await Auth.signOut();
 	await router.push("/login");

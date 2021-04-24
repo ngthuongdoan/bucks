@@ -6,8 +6,8 @@ module.exports = {
 			colors: {
 				"light-grey": "#EEEEEE",
 				control: {
-					DEFAULT: "#FFD369",
-					light: "#FFEAB7"
+					DEFAULT: "#008000",
+					light: "#539753"
 				}
 			},
 			boxShadow: {
@@ -27,9 +27,13 @@ module.exports = {
 		}
 	},
 	variants: {
-		extend: {}
+		extend: {
+			outline: ['important'],
+		}
 	},
-	plugins: [],
+	plugins: [
+		require('@neojp/tailwindcss-important-variant')
+	],
 	important: true
 };
 

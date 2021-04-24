@@ -1,5 +1,3 @@
-import Category from "@/model/Category.model";
-import Wallet from "@/model/Wallet.model";
 import store from "@/store";
 
 class Transaction {
@@ -8,7 +6,6 @@ class Transaction {
 	 * @param value
 	 * @param time
 	 * @param detail
-	 * @param uid
 	 */
 	constructor(value = 0, time = "", detail = "") {
 		this.value = value;
@@ -16,8 +13,8 @@ class Transaction {
 		this.time = time;
 		this.detail = detail;
 		this.images = [];
-		this.wallet = new Wallet();
-		this.category = new Category();
+		this.wallet = {};
+		this.category = {};
 	}
 
 	/**

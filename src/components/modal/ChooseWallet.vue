@@ -1,57 +1,51 @@
 <template>
-  <div class="wallet-container w-screen min-h-screen h-full flex flex-col items-center pt-5">
+  <div class="w-full px-10">
     <wallet-card v-for="(wallet, i) in wallets" :key="wallet.id"
                  :show-setting="false"
-                 :style="{zIndex:i, transform: `rotateY(10deg) translateY(${(i)*150}px) perspective(1px) !important`,
-                  boxShadow:'1px 1px 70px black !important'}"
+                 :style="{
+                         zIndex:i,
+                         transform: `rotateY(10deg) translateY(${(i)*((isMobile)?150:-50)}px) !important`
+                     }"
                  :wallet="wallet"
-                 class="wallet w-2/3 absolute transform cursor-pointer"
+                 class="wallet lg:w-full"
                  @click.native="changeWallet(wallet)"
     ></wallet-card>
   </div>
 </template>
-
 <script>
-import WalletCard from "@/components/ui/WalletCard";
-import {userStore, walletStore} from "@/plugin/db";
+import WalletCard from "@/components/ui/WalletCard"
 import store from "@/store";
+import {userStore, walletStore} from "@/plugin/db";
+import {isMobile} from "mobile-device-detect";
 
 export default {
+  name: 'ChooseWallet',
   data() {
     return {
-      wallets: []
-    };
+      wallets: [],
+      isMobile
+    }
   },
   methods: {
     async changeWallet(wallet) {
       try {
         const users = userStore.doc(this.$store.getters["userModule/user"].data.uid);
         this.$bind('users', users);
+        console.log({selectedWallet: {id: wallet.id, ...wallet}})
         await this.$firestoreRefs.users.update({selectedWallet: {id: wallet.id, ...wallet}});
         await this.$store.dispatch("userModule/changeSelected", wallet);
-        await this.$router.push("/dashboard");
+        this.$emit("close")
       } catch (e) {
         console.log(e);
       }
-    }
+    },
   },
-  components: {
-    WalletCard
-  },
+  components: {WalletCard},
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
     return {
       wallets: walletStore.where("uid", "==", uid)
     };
   }
-};
-</script>
-
-<style lang="scss">
-.wallet-container {
-  background-image: url(~@/assets/img/wallet-container.svg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
 }
-</style>
+</script>

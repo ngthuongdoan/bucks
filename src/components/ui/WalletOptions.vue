@@ -4,7 +4,7 @@
         v-for="opt in options"
         :key="opt.name"
         class="px-3 py-2 cursor-pointer"
-        @click="handleConfig(opt.config)"
+        @click.stop="handleConfig(opt.config)"
     >
       {{ opt.name }}
     </li>
@@ -13,7 +13,7 @@
 
 <script>
 import options from "@/config/wallet-options.json";
-import { directive as onClickAway } from "vue-clickaway";
+import {directive as onClickAway} from "vue-clickaway";
 
 export default {
   name: "WalletOptions",

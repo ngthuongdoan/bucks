@@ -21,6 +21,43 @@
     input {
         @apply outline-none focus:outline-none
     }
+
+    body {
+        @apply outline-none;
+        backface-visibility: hidden !important;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+
+    main {
+        padding: 50px 200px;
+    }
+
+    .currency-select {
+        z-index: 90;
+    }
+
+    input[type="radio"] + label span {
+        transition: background .2s,
+        transform .2s;
+    }
+
+    input[type="radio"] + label span:hover,
+    input[type="radio"] + label:hover span {
+        transform: scale(1.2);
+    }
+
+    input[type="radio"]:checked + label span {
+        background-color: #3490DC;
+        box-shadow: 0px 0px 0px 2px white inset;
+    }
+
+    input[type="radio"]:checked + label {
+        color: #3490DC;
+    }
+
+    #color {
+        z-index: 60;
+    }
 }
 
 @layer components {
@@ -41,11 +78,23 @@
     }
 
     .card {
-        @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer bg-white
+        @apply text-black font-bold shadow my-2 px-5 py-3 rounded flex items-center cursor-pointer bg-white lg:p-10 lg:block
     }
 
     .currency-icon {
         @apply flex-shrink-0 object-cover rounded-full
+    }
+
+    .btn {
+        @apply text-black bg-white rounded-full w-20 uppercase font-semibold py-1 text-sm transition-all ease-in-out duration-100 outline-none focus:outline-none;
+    }
+
+    .desktop-dashboard {
+        @apply grid justify-start items-start relative;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        column-gap: 100px;
+        row-gap: 30px;
     }
 }
 
@@ -54,7 +103,37 @@
         @apply opacity-100;
     }
 
+    .btn-active {
+        @apply bg-control
+    }
+
     .grayscale {
         filter: grayscale(20%);
+    }
+
+    .shake {
+        animation: shake-effect 0.82s cubic-bezier(.36, .07, .19, .97) both infinite;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+
+}
+
+@keyframes shake-effect {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
     }
 }

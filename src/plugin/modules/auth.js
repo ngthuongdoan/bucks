@@ -9,7 +9,7 @@ require("firebase/auth");
 
 export const Auth = firebase.auth();
 Auth.onAuthStateChanged(async (u) => {
-  const user = Auth.currentUser;
+  const user = await firebase.getCurrentUser();
   if (user) {
     console.log("%cLogged In", "color:red;font-family:system-ui;font-size:4rem;-webkit-text-stroke: 1px black;font-weight:bold")
     const snapshot = await userStore.doc(user.uid).get();
