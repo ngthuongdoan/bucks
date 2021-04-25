@@ -15,30 +15,7 @@ class Transaction {
 		this.images = [];
 		this.wallet = {};
 		this.category = {};
-	}
-
-	/**
-	 *
-	 * @param wallet
-	 */
-	addWallet(wallet) {
-		this.wallet = Object.assign({ id: wallet.id }, wallet);
-	}
-
-	/**
-	 *
-	 * @param images
-	 */
-	addImage(images) {
-		this.images = [ ...images ];
-	}
-
-	/**
-	 *
-	 * @param category
-	 */
-	addCategory(category) {
-		this.category = Object.assign({ id: category.id }, category);
+		this.people = {}
 	}
 }
 

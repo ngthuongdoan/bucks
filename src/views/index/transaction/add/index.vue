@@ -1,17 +1,9 @@
 <template>
   <add-layout title="Add Transaction">
     <app-modal
-        v-if="walletModal"
-        @away="toggleWalletModal"
-        @change-wallet="changeWallet($event)">
-      <ul class="w-full p-2 flex-auto">
-        <li v-for="(item, i) in wallets" :key="i" :style="{backgroundColor:item.color}"
-            class="shadow-xl w-full px-5 py-2 rounded-2xl my-2 cursor-pointer"
-            @click="changeWallet(item)">
-          <h1 class="font-bold text-white">{{ item.name }}</h1>
-          <p class="italic text-gray-200 text-sm">{{ item.amount }} {{ item.currency.key }}</p>
-        </li>
-      </ul>
+        v-if="isOpen"
+        @away="toggleModal">
+      <component :is="modal"></component>
     </app-modal>
     <category-modal
         v-if="categoryModal"
@@ -62,10 +54,10 @@
             rows="5"
         ></textarea>
         <label class="font-bold  mt-2" for="wallet">Wallet</label>
-        <div class="add-input " @click="toggleWalletModal">{{ transaction.wallet.name || "" }}</div>
+        <div class="add-input " @click="toggleModal('wallet-modal')">{{ transaction.wallet.name || "" }}</div>
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input" @click="toggleCategoryModal">{{ transaction.category.name || "" }}</div>
-        <label class="font-bold  " for="createdDate">Date</label>
+        <label class="font-bold" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
       </div>
     </form>
@@ -79,37 +71,39 @@ import CategoryModal from "@/components/modal/CategoryModal";
 import AddLayout from "@/layout/AddLayout";
 
 import Transaction from "@/model/Transaction.model";
-import {Timestamp, walletStore} from "@/plugin/db";
+import {Timestamp} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
-import store from "@/store";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
+import WalletModal from "@/components/modal/WalletModal";
 
 export default {
   data() {
     return {
       transaction: new Transaction(),
       cropper: {},
-      walletModal: false,
+      isOpen: false,
       categoryModal: false,
       tempDate: "",
-      wallets: []
+      wallets: [],
+      modal: ""
     };
   },
   methods: {
     change(result) {
       this.cropper = Object.assign({}, result);
     },
-    toggleWalletModal() {
-      this.walletModal = !this.walletModal;
+    toggleModal(modal) {
+      this.isOpen = !this.isOpen;
+      this.modal = modal;
     },
     toggleCategoryModal() {
       this.categoryModal = !this.categoryModal;
     },
     changeWallet(wallet) {
       this.transaction.wallet = Object.assign({id: wallet.id}, wallet);
-      this.toggleWalletModal()
+      this.toggleModal()
     },
     changeCategory(category) {
       this.transaction.category = Object.assign({id: category.id}, category);
@@ -167,14 +161,9 @@ export default {
     Cropper,
     AddLayout,
     AppModal,
-    CategoryModal
+    CategoryModal,
+    WalletModal
   },
-  firestore() {
-    const uid = store.getters["userModule/user"].data.uid;
-    return {
-      wallets: walletStore.where("uid", "==", uid)
-    };
-  }
 };
 </script>
 
