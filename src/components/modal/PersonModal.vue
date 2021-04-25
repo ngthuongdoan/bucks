@@ -51,8 +51,8 @@ export default {
         total: 0
       })
     },
-    changePerson() {
-
+    changePerson(person) {
+      this.$emit("change-person", person)
     }
   },
   firestore() {

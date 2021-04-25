@@ -3,7 +3,7 @@
     <app-modal
         v-if="isOpen"
         @away="toggleModal">
-      <component :is="modal" @change-wallet="changeWallet($event)"></component>
+      <component :is="modal" @change-wallet="changeWallet($event)" @change-person="changePerson($event)"></component>
     </app-modal>
     <category-modal
         v-if="categoryModal"
@@ -107,6 +107,11 @@ export default {
     },
     changeCategory(category) {
       this.transaction.category = Object.assign({id: category.id}, category);
+    },
+    changePerson(person) {
+      this.transaction.person = Object.assign({id: person.id}, person);
+      this.toggleModal()
+
     },
     uploadImage() {
       const image = this.$refs.fileInput.files[0];
