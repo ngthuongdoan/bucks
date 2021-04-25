@@ -12,10 +12,10 @@ class Transaction {
 		this.uid = store.getters["userModule/user"].data.uid;
 		this.time = time;
 		this.detail = detail;
-		this.images = [];
+		this.image = "";
 		this.wallet = {};
 		this.category = {};
-		this.people = {}
+		this.person = {}
 	}
 }
 

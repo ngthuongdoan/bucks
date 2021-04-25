@@ -3,7 +3,7 @@
     <app-modal
         v-if="isOpen"
         @away="toggleModal">
-      <component :is="modal"></component>
+      <component :is="modal" @change-wallet="changeWallet($event)"></component>
     </app-modal>
     <category-modal
         v-if="categoryModal"
@@ -57,8 +57,10 @@
         <div class="add-input " @click="toggleModal('wallet-modal')">{{ transaction.wallet.name || "" }}</div>
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input" @click="toggleCategoryModal">{{ transaction.category.name || "" }}</div>
-        <label class="font-bold" for="createdDate">Date</label>
+        <label class="font-bold mt-2" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
+        <label class="font-bold mt-2" for="">Person</label>
+        <div class="add-input" @click="toggleModal('person-modal')">{{ transaction.person.name || "" }}</div>
       </div>
     </form>
   </add-layout>
@@ -68,6 +70,7 @@
 <script>
 import AppModal from "@/components/modal/AppModal";
 import CategoryModal from "@/components/modal/CategoryModal";
+import PersonModal from "@/components/modal/PersonModal";
 import AddLayout from "@/layout/AddLayout";
 
 import Transaction from "@/model/Transaction.model";
@@ -91,9 +94,6 @@ export default {
     };
   },
   methods: {
-    change(result) {
-      this.cropper = Object.assign({}, result);
-    },
     toggleModal(modal) {
       this.isOpen = !this.isOpen;
       this.modal = modal;
@@ -108,10 +108,6 @@ export default {
     changeCategory(category) {
       this.transaction.category = Object.assign({id: category.id}, category);
     },
-    crop() {
-      this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
-      this.recognize();
-    },
     uploadImage() {
       const image = this.$refs.fileInput.files[0];
       let reader = new FileReader();
@@ -120,10 +116,17 @@ export default {
         this.transaction.image = evt.target.result;
       };
     },
+    change(result) {
+      this.cropper = Object.assign({}, result);
+    },
+    crop() {
+      this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
+      this.recognize();
+    },
     async recognize() {
       this.$helpers.loading();
       try {
-        const result = await worker.recognize(this.transaction.image);
+        const result = await worker.recognize(this.cropper.canvas.toDataURL("image/png", 1));
         const lines = result.data.lines;
         lines.forEach((line) => {
           const words = line.words;
@@ -148,6 +151,7 @@ export default {
         //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.value = Number.parseFloat(this.transaction.value);
+
         if (this.transaction.category.type === "expense") this.transaction.value = this.transaction.value * -1
         await TransactionService.addNew(this.transaction);
         this.$helpers.showSuccess();
@@ -162,7 +166,8 @@ export default {
     AddLayout,
     AppModal,
     CategoryModal,
-    WalletModal
+    WalletModal,
+    PersonModal
   },
 };
 </script>

@@ -6,6 +6,8 @@ import 'firebase/firestore';
 export const db = firebase.firestore();
 
 export const walletStore = db.collection("wallets");
+export const personStore = db.collection("persons");
+
 export const categoryStore = db.collection("categories");
 export const userStore = db.collection("users");
 export const transactionStore = db.collection("transactions");
