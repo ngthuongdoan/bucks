@@ -61,12 +61,8 @@ export default {
     }
   },
   methods: {
-    away() {
-      this.$emit('away');
-    },
     changeCategory(category) {
       this.$emit("change-category", category);
-      this.away();
     }
   },
   firestore: {

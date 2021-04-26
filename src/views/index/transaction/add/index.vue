@@ -5,7 +5,12 @@
         :is-category="this.modal==='category-modal'"
         @away="toggleModal"
     >
-      <component :is="modal" @change-wallet="changeWallet($event)" @change-person="changePerson($event)"></component>
+      <component
+          :is="modal"
+          @change-wallet="changeWallet($event)"
+          @change-person="changePerson($event)"
+          @change-category="changeCategory($event)"
+      ></component>
     </app-modal>
     <form id="addForm" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="addTransaction">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
@@ -56,9 +61,10 @@
         <div class="add-input" @click="toggleModal('category-modal')">{{ transaction.category.name || "" }}</div>
         <label class="font-bold mt-2" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
-        <div v-if="isDebtLoan">
-          <label class="font-bold mt-2" for="">Person</label>
-          <div class="add-input" @click="toggleModal('person-modal')">{{ transaction.person.name || "" }}</div>
+        <label v-if="isDebtLoan" class="font-bold mt-2">Person</label>
+        <div v-if="isDebtLoan" class="add-input" @click="toggleModal('person-modal')">{{
+            transaction.person.name || ""
+          }}
         </div>
       </div>
     </form>
@@ -106,11 +112,11 @@ export default {
       if (this.$getConst("DEBT_LOAN_DICT").includes(category.type)) {
         this.isDebtLoan = true;
       }
+      this.toggleModal()
     },
     changePerson(person) {
       this.transaction.person = Object.assign({id: person.id}, person);
       this.toggleModal()
-
     },
     uploadImage() {
       const image = this.$refs.fileInput.files[0];
