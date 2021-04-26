@@ -14,7 +14,6 @@ import {walletStore} from "@/plugin/db";
 import store from "@/store";
 
 export default {
-  name: "WalletModal",
   data() {
     return {
       wallets: [],

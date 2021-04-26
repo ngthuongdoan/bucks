@@ -55,7 +55,7 @@
             class="add-input"
             rows="5"
         ></textarea>
-        <label class="font-bold  mt-2" for="wallet">Wallet</label>
+        <label class="font-bold mt-2" for="wallet">Wallet</label>
         <div class="add-input " @click="toggleModal('wallet-modal')">{{ transaction.wallet.name || "" }}</div>
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input" @click="toggleModal('category-modal')">{{ transaction.category.name || "" }}</div>
@@ -69,7 +69,6 @@
       </div>
     </form>
   </add-layout>
-
 </template>
 
 <script>
@@ -85,33 +84,27 @@ import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
 import WalletModal from "@/components/modal/WalletModal";
+import {toggleMixin} from "@/mixin/toggleMixin";
 
 export default {
+  mixins: [toggleMixin],
   data() {
     return {
       transaction: new Transaction(),
       cropper: {},
-      isOpen: false,
       tempDate: "",
       wallets: [],
-      modal: "",
       isDebtLoan: false
     };
   },
   methods: {
-    toggleModal(modal) {
-      this.isOpen = !this.isOpen;
-      this.modal = modal;
-    },
     changeWallet(wallet) {
       this.transaction.wallet = Object.assign({id: wallet.id}, wallet);
       this.toggleModal()
     },
     changeCategory(category) {
       this.transaction.category = Object.assign({id: category.id}, category);
-      if (this.$getConst("DEBT_LOAN_DICT").includes(category.type)) {
-        this.isDebtLoan = true;
-      }
+      this.isDebtLoan = this.$getConst("DEBT_LOAN_DICT").includes(category.type);
       this.toggleModal()
     },
     changePerson(person) {

@@ -8,11 +8,13 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 
-
-store.dispatch("currencyModule/fetchCurrency").then();
+if (process.env.VUE_APP_CURRENCY) store.dispatch("currencyModule/fetchCurrency").then();
 
 Vue.config.productionTip = false;
 Vue.prototype["$helpers"] = helpers;
+
+Vue.config.devtools = true
+Vue.config.performance = true
 
 new Vue({
     store,

@@ -1,17 +1,10 @@
 <template>
   <add-layout title="Transfer Money">
     <app-modal
-        v-if="walletModal"
-        @away="toggleWalletModal"
+        v-if="isOpen"
+        @away="toggleModal"
     >
-      <ul class="w-full p-2 flex-auto">
-        <li v-for="(item, i) in wallets" :key="i" :style="{backgroundColor:item.color}"
-            class="shadow-xl w-full px-5 py-2 rounded-2xl my-2 cursor-pointer"
-            @click="changeWallet(item)">
-          <h1 class="font-bold text-white">{{ item.name }}</h1>
-          <p class="italic text-gray-200 text-sm">{{ item.amount }} {{ item.currency.key }}</p>
-        </li>
-      </ul>
+      <wallet-modal @change-wallet="changeWallet($event)"></wallet-modal>
     </app-modal>
     <form id="addForm" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="addTransaction">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
@@ -25,9 +18,9 @@
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
         <label class="font-bold  mt-2" for="wallet">From</label>
-        <div class="add-input " @click="toggleWalletModal('from')">{{ fromWallet.name || "" }}</div>
+        <div class="add-input " @click="toggleModal('from')">{{ fromWallet.name || "" }}</div>
         <label class="font-bold  mt-2" for="wallet">To</label>
-        <div class="add-input " @click="toggleWalletModal('to')">{{ toWallet.name || "" }}</div>
+        <div class="add-input " @click="toggleModal('to')">{{ toWallet.name || "" }}</div>
         <label class="font-bold self-start" for="note">Note</label>
         <textarea
             id="note"
@@ -44,60 +37,50 @@
 <script>
 import AppModal from "@/components/modal/AppModal";
 import AddLayout from "@/layout/AddLayout";
-import {Timestamp, walletStore} from "@/plugin/db";
-import store from "@/store";
+import {Timestamp} from "@/plugin/db";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
 import Transaction from "@/model/Transaction.model";
 import Wallet from "@/model/Wallet.model";
 import {CategoryService} from "@/service/Category.service";
+import {toggleMixin} from "@/mixin/toggleMixin";
+import WalletModal from "@/components/modal/WalletModal";
 
 export default {
+  mixins: [toggleMixin],
   data() {
     return {
-      mode: "from",
       fromWallet: new Wallet(),
       toWallet: new Wallet(),
       fromTransaction: new Transaction(),
       toTransaction: new Transaction(),
       transaction: new Transaction(),
       adjustBalance: {},
-      walletModal: false,
       tempDate: "",
       wallets: []
     };
   },
   methods: {
-    toggleWalletModal(mode) {
-      this.mode = mode;
-      this.walletModal = !this.walletModal;
-    },
     changeWallet(wallet) {
-      switch (this.mode) {
-        case "from":
-          this.fromWallet = Object.assign({id: wallet.id}, wallet)
-          break;
-        case "to":
-          this.toWallet = Object.assign({id: wallet.id}, wallet)
-          break;
-        default:
-          break;
+      const w = {id: wallet.id, ...wallet};
+      this.modal === "from" ? this.fromWallet = {...w} : this.toWallet = {...w};
+      this.toggleModal()
+    },
+    createTransaction(type) {
+      const uid = this.$store.getters["userModule/user"].data.uid;
+      let transaction = {};
+      transaction.uid = uid;
+      transaction.time = this.transaction.time;
+      transaction.category = {...this.transaction.category};
+      transaction.category.type = type;
+      if (type === "expense") {
+        transaction.value = Number.parseFloat(this.transaction.value) * -1;
+        transaction.wallet = {...this.fromWallet};
+      } else {
+        transaction.value = Number.parseFloat(this.transaction.value);
+        transaction.wallet = {...this.toWallet};
       }
-      this.toggleWalletModal()
-    },
-    createFromTransaction() {
-      this.fromTransaction.time = this.transaction.time;
-      this.fromTransaction.category = Object.assign({}, this.transaction.category);
-      this.fromTransaction.category.type = "expense";
-      this.fromTransaction.value = Number.parseFloat(this.transaction.value) * -1;
-      this.fromTransaction.wallet = this.fromWallet;
-    },
-    createToTransaction() {
-      this.toTransaction.time = this.transaction.time;
-      this.toTransaction.category = Object.assign({}, this.transaction.category);
-      this.toTransaction.category.type = "income";
-      this.toTransaction.value = Number.parseFloat(this.transaction.value);
-      this.toTransaction.wallet = this.toWallet;
+      return transaction;
     },
     async addTransaction() {
       this.$helpers.loading();
@@ -106,11 +89,11 @@ export default {
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.category = await CategoryService.fetchAdjustBalance();
 
-        this.createFromTransaction();
-        this.createToTransaction();
+        this.fromTransaction = this.createTransaction("expense");
+        this.toTransaction = this.createTransaction("income");
 
-        await TransactionService.addNew(Object.assign({}, this.fromTransaction));
-        await TransactionService.addNew(Object.assign({}, this.toTransaction));
+        await TransactionService.addNew({...this.fromTransaction});
+        await TransactionService.addNew({...this.toTransaction});
         this.$helpers.showSuccess();
         await this.$helpers.to("/dashboard");
       } catch (e) {
@@ -121,13 +104,8 @@ export default {
   components: {
     AddLayout,
     AppModal,
+    WalletModal
   },
-  firestore() {
-    const uid = store.getters["userModule/user"].data.uid;
-    return {
-      wallets: walletStore.where("uid", "==", uid),
-    };
-  }
 };
 </script>
 

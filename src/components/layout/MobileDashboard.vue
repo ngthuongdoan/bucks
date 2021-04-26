@@ -45,8 +45,8 @@ export default {
   data() {
     return {
       transactions: [],
-      selectedDate: new Date(),
       filterTransactions: [],
+      selectedDate: new Date(),
       optionModal: {
         open: false,
         name: "",
@@ -64,7 +64,7 @@ export default {
     }),
     total() {
       return this.filterTransactions.reduce((accumulator, currentValue) => accumulator + Number.parseFloat(currentValue.value), 0)
-    }
+    },
   },
   watch: {
     selectedDate: {
