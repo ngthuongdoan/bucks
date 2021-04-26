@@ -2,14 +2,11 @@
   <add-layout title="Add Transaction">
     <app-modal
         v-if="isOpen"
-        @away="toggleModal">
+        :is-category="this.modal==='category-modal'"
+        @away="toggleModal"
+    >
       <component :is="modal" @change-wallet="changeWallet($event)" @change-person="changePerson($event)"></component>
     </app-modal>
-    <category-modal
-        v-if="categoryModal"
-        @away="toggleCategoryModal"
-        @change-category="changeCategory($event)"
-    ></category-modal>
     <form id="addForm" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="addTransaction">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
@@ -56,11 +53,13 @@
         <label class="font-bold  mt-2" for="wallet">Wallet</label>
         <div class="add-input " @click="toggleModal('wallet-modal')">{{ transaction.wallet.name || "" }}</div>
         <label class="font-bold mt-2" for="category">Category</label>
-        <div class="add-input" @click="toggleCategoryModal">{{ transaction.category.name || "" }}</div>
+        <div class="add-input" @click="toggleModal('category-modal')">{{ transaction.category.name || "" }}</div>
         <label class="font-bold mt-2" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
-        <label class="font-bold mt-2" for="">Person</label>
-        <div class="add-input" @click="toggleModal('person-modal')">{{ transaction.person.name || "" }}</div>
+        <div v-if="isDebtLoan">
+          <label class="font-bold mt-2" for="">Person</label>
+          <div class="add-input" @click="toggleModal('person-modal')">{{ transaction.person.name || "" }}</div>
+        </div>
       </div>
     </form>
   </add-layout>
@@ -87,10 +86,10 @@ export default {
       transaction: new Transaction(),
       cropper: {},
       isOpen: false,
-      categoryModal: false,
       tempDate: "",
       wallets: [],
-      modal: ""
+      modal: "",
+      isDebtLoan: false
     };
   },
   methods: {
@@ -98,15 +97,15 @@ export default {
       this.isOpen = !this.isOpen;
       this.modal = modal;
     },
-    toggleCategoryModal() {
-      this.categoryModal = !this.categoryModal;
-    },
     changeWallet(wallet) {
       this.transaction.wallet = Object.assign({id: wallet.id}, wallet);
       this.toggleModal()
     },
     changeCategory(category) {
       this.transaction.category = Object.assign({id: category.id}, category);
+      if (this.$getConst("DEBT_LOAN_DICT").includes(category.type)) {
+        this.isDebtLoan = true;
+      }
     },
     changePerson(person) {
       this.transaction.person = Object.assign({id: person.id}, person);

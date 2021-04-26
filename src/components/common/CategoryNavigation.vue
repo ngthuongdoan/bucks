@@ -4,33 +4,33 @@
       <li
           :class="[
           'login-navigation',
-          tab === 'category-income'
+          tab.includes('income')
             ? 'text-black bg-white'
             : 'text-gray-500 bg-gray-200',
         ]"
-          @click="$emit('change-category', 'income')"
+          @click="$emit('change-category', ['income'])"
       >
         INCOME
       </li>
       <li
           :class="[
           'login-navigation',
-          tab === 'category-expense'
+          tab.includes('expense')
             ? 'text-black bg-white'
             : 'text-gray-500 bg-gray-200',
         ]"
-          @click="$emit('change-category', 'expense')"
+          @click="$emit('change-category', ['expense'])"
       >
         EXPENSE
       </li>
       <li
           :class="[
           'login-navigation',
-          tab === 'category-debt-loan'
+          tab.includes('debt')
             ? 'text-black bg-white'
             : 'text-gray-500 bg-gray-200',
         ]"
-          @click="$emit('change-category', 'debt-loan')"
+          @click="$emit('change-category', $getConst('DEBT_LOAN_DICT'))"
       >
         DEBT/LOAN
       </li>
@@ -42,12 +42,8 @@
 export default {
   props: {
     tab: {
-      type: String,
+      type: Array,
       required: true,
-      validate(value) {
-        const legal = [ "income", "expense", "debt-loan" ];
-        return legal.includes(value);
-      }
     }
   }
 };
