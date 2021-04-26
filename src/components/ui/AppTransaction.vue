@@ -5,7 +5,10 @@
   >
     <img :src="transaction.category.icon" alt="" class="object-contain w-1 justify-self-start flex-grow"
          style="max-width: 30px">
-    <h1 class="ml-3 font-bold text-sm flex-grow">{{ transaction.category.name }}</h1>
+    <div class="ml-3 flex-grow">
+      <h1 class="font-bold text-sm m-0">{{ transaction.category.name }}</h1>
+      <span class="text-xs text-gray-500">{{ transaction.detail }}</span>
+    </div>
     <span :class="['flex-grow justify-self-end text-right font-bold', isExpense?'text-red-400':'text-green-400']">{{
         transaction.value | separateValue
       }}</span>
