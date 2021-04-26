@@ -67,9 +67,7 @@ export default {
       this.toggleModal()
     },
     createTransaction(type) {
-      const uid = this.$store.getters["userModule/user"].data.uid;
-      let transaction = {};
-      transaction.uid = uid;
+      let transaction = new Transaction();
       transaction.time = this.transaction.time;
       transaction.category = {...this.transaction.category};
       transaction.category.type = type;

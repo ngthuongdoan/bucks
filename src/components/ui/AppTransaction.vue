@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     isExpense() {
-      return this.transaction.category.type === "expense"
+      return this.$getConst("DECREASE_DICT").includes(this.transaction.category.type)
     }
   },
 };

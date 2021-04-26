@@ -99,16 +99,16 @@ export default {
   },
   methods: {
     changeWallet(wallet) {
-      this.transaction.wallet = Object.assign({id: wallet.id}, wallet);
+      this.transaction.wallet = {id: wallet.id, ...wallet};
       this.toggleModal()
     },
     changeCategory(category) {
-      this.transaction.category = Object.assign({id: category.id}, category);
+      this.transaction.category = {id: category.id, ...category};
       this.isDebtLoan = this.$getConst("DEBT_LOAN_DICT").includes(category.type);
       this.toggleModal()
     },
     changePerson(person) {
-      this.transaction.person = Object.assign({id: person.id}, person);
+      this.transaction.person = {id: person.id, ...person}
       this.toggleModal()
     },
     uploadImage() {
@@ -153,9 +153,9 @@ export default {
       try {
         //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
-        this.transaction.value = Number.parseFloat(this.transaction.value);
+        this.transaction.value = Number.parseFloat(this.transaction.value) *
+            (this.$getConst("INCREASE_DICT").includes(this.transaction.category.type) ? 1 : -1)
 
-        if (this.transaction.category.type === "expense") this.transaction.value = this.transaction.value * -1
         await TransactionService.addNew(this.transaction);
         this.$helpers.showSuccess();
         await this.$helpers.to("/dashboard");
