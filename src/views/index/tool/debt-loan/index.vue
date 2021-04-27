@@ -1,11 +1,11 @@
 <template>
-  <div></div>
+  <div>debtloan</div>
 </template>
 
 <script>
 export default {
   name: "index"
-};
+}
 </script>
 
 <style scoped>

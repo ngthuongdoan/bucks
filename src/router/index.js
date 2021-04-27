@@ -2,9 +2,16 @@ import firebase from "firebase";
 import Vue from "vue";
 import VueRouter from "vue-router";
 import {isMobile} from "mobile-device-detect";
+import features from "@/config/features.json"
 
 Vue.use(VueRouter);
 const getFolder = () => isMobile ? 'mobile' : 'desktop';
+const featureRoutes = features.map(f => {
+    return {
+        path: f.path,
+        component: () => import(`../views/index/tool/${f.path}`)
+    }
+})
 
 const routes = [
     {
@@ -46,14 +53,7 @@ const routes = [
                         path: "",
                         component: () => import("../views/index/tool/all")
                     },
-                    {
-                        path: "exchange",
-                        component: () => import("../views/index/tool/exchange")
-                    },
-                    {
-                        path: "transfer",
-                        component: () => import("../views/index/tool/transfer")
-                    }
+                    ...featureRoutes
                 ]
             },
             {

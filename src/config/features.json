@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Exchange",
+    "path": "exchange",
+    "icon": "https://img.icons8.com/pastel-glyph/64/000000/exchange-euro.png"
+  },
+  {
+    "name": "Transfer Money",
+    "path": "transfer",
+    "icon": "https://img.icons8.com/android/96/000000/money-transfer.png"
+  },
+  {
+    "name": "Debt/Loan Management",
+    "path": "debt-loan",
+    "icon": "https://img.icons8.com/fluent-systems-filled/96/000000/debt.png"
+  }
+]
