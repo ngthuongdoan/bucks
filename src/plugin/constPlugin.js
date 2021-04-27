@@ -1,7 +1,9 @@
 import Vue from "vue";
 
-const CONSTANTS = {
+export const CONSTANTS = {
     DEBT_LOAN_DICT: ["debt", "loan", "debt-collection", "repayment"],
+    DEBT_DICT: ["debt", "repayment"],
+    LOAN_DICT: ["loan", "debt-collection"],
     INCREASE_DICT: ["income", "debt", "debt-collection"],
     DECREASE_DICT: ["expense", "loan", "repayment"]
 }

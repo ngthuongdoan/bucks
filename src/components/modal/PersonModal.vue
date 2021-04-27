@@ -48,7 +48,8 @@ export default {
       personStore.add({
         uid,
         name: this.searchCriteria,
-        total: 0
+        totalLoan: 0,
+        totalDebt: 0
       })
     },
     changePerson(person) {

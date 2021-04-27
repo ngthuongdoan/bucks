@@ -7,7 +7,7 @@ export const TransactionService = {
         //Refined Data
         await transactionStore.add({...transaction});
         if (Object.keys(transaction.person).length !== 0) {
-            await PersonService.updatePersonTotal(transaction.person.id, transaction.person.total)
+            await PersonService.updatePersonTotal(transaction.person.id, transaction.person)
         }
         //Update Wallet Value
         await WalletService.updateWalletAmount(

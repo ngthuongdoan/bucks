@@ -1,12 +1,13 @@
 <template>
   <div>
     <div
-        class="border-0 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        class="border-0 relative flex flex-col w-full bg-white outline-none focus:outline-none">
       <div class="relative p-2 flex-auto">
-        <category-navigation
+        <app-navigation
+            :routes="routes"
             :tab="currentCategory"
-            @change-category="currentCategory = $event"
-        ></category-navigation>
+            @route="currentCategory = $event"
+        ></app-navigation>
         <input v-model="searchCriteria" class="px-5 py-2" placeholder="search..." type="search">
         <ul class="max-h-96 overflow-y-scroll">
           <li v-for="(item, i) in filterCategory" :key="i"
@@ -22,15 +23,17 @@
 </template>
 
 <script>
-import CategoryNavigation from "@/components/common/CategoryNavigation";
 import {categoryStore} from "@/plugin/db";
 import {directive as onClickAway} from "vue-clickaway";
+import AppNavigation from "@/components/layout/AppNavigation";
+import {routes} from "@/config/routes";
 
 export default {
   data() {
     return {
       categories: [],
       isFetching: true,
+      routes: [...routes.CATEGORY],
       currentCategory: ['income'],
       searchCriteria: ""
     };
@@ -68,7 +71,7 @@ export default {
     categories: categoryStore
   },
   components: {
-    CategoryNavigation
+    AppNavigation
   }
 };
 </script>

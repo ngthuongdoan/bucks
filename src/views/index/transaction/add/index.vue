@@ -156,8 +156,10 @@ export default {
         this.transaction.value = Number.parseFloat(this.transaction.value) *
             (this.$getConst("INCREASE_DICT").includes(this.transaction.category.type) ? 1 : -1)
 
-        if (this.$getConst("DEBT_LOAN_DICT").includes(this.transaction.category.type)) {
-          this.transaction.person.total += this.transaction.value;
+        if (this.$getConst("DEBT_DICT").includes(this.transaction.category.type)) {
+          this.transaction.person.totalDebt += this.transaction.value;
+        } else if (this.$getConst("LOAN_DICT").includes(this.transaction.category.type)) {
+          this.transaction.person.totalLoan += this.transaction.value;
         }
 
         await TransactionService.addNew(this.transaction);
