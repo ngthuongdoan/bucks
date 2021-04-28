@@ -53,7 +53,15 @@ const routes = [
                         path: "",
                         component: () => import("../views/index/tool/all")
                     },
-                    ...featureRoutes
+                    ...featureRoutes,
+                    {
+                        path: "debt/:id",
+                        component: () => import("../views/index/tool/debt-loan/debt/_id")
+                    },
+                    {
+                        path: "loan/:id",
+                        component: () => import("../views/index/tool/debt-loan/loan/_id")
+                    }
                 ]
             },
             {
