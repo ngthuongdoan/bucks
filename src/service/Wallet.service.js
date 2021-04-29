@@ -27,6 +27,11 @@ export const WalletService = {
     async addNew(w) {
         return await walletStore.add({createdDate: Timestamp.fromDate(new Date()), ...w});
     },
+    async fetchWallet(wallet) {
+        const uid = store.getters["userModule/user"].data.uid;
+        const snapshot = await walletStore.where("uid", "==", uid).where("name", "==", wallet).get();
+        return {id: snapshot.docs[0].id, ...snapshot.docs[0].data()}
+    },
     async changeBackToOverView() {
         //Find Overview
         try {

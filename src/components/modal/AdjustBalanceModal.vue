@@ -49,9 +49,8 @@ export default {
             "Adjust Balance"
         );
         adjustTransaction.wallet = this.wallet;
-        adjustTransaction.category = await CategoryService.fetchAdjustBalance();
+        adjustTransaction.category = await CategoryService.fetchCategory("Adjust Balance");
         adjustTransaction.category.type = (adjust > 0) ? "income" : "expense"
-        console.log(adjust)
         await TransactionService.addNew(adjustTransaction)
         this.$helpers.showSuccess();
         this.$emit("close")

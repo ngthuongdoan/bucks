@@ -85,7 +85,7 @@ export default {
       try {
         //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
-        this.transaction.category = await CategoryService.fetchAdjustBalance();
+        this.transaction.category = await CategoryService.fetchCategory("Adjust Balance");
 
         this.fromTransaction = this.createTransaction("expense");
         this.toTransaction = this.createTransaction("income");

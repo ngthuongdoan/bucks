@@ -46,11 +46,14 @@ import {personStore, Timestamp, transactionStore} from "@/plugin/db";
 import AppTransaction from "@/components/ui/AppTransaction";
 import AppModal from "@/components/modal/AppModal";
 import Transaction from "@/model/Transaction.model";
+import {CategoryService} from "@/service/Category.service";
+import {TransactionService} from "@/service/Transaction.service";
+import {WalletService} from "@/service/Wallet.service";
 
 export default {
   data() {
     return {
-      person: [],
+      person: {},
       transactions: [],
       isPay: false,
     }
@@ -68,10 +71,13 @@ export default {
         //Refined Data
         transaction.time = Timestamp.fromDate(new Date());
         transaction.value = Number.parseFloat(this.amount) * -1;
-
-        // await TransactionService.addNew(this.transaction);
+        transaction.category = await CategoryService.fetchCategory("Repayment");
+        transaction.person = this.person;
+        transaction.person.totalDebt = this.person.totalDebt - this.amount;
+        transaction.wallet = await WalletService.fetchWallet("Overview");
+        await TransactionService.addNew(transaction);
         this.$helpers.showSuccess();
-        await this.$helpers.to("/dashboard");
+        await this.$helpers.back();
       } catch (e) {
         this.$helpers.showError(e);
       }
