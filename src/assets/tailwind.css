@@ -61,6 +61,24 @@
 }
 
 @layer components {
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #F5F5F5;
+        border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 5px;
+        @apply bg-control-light;
+
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        @apply bg-control;
+    }
+
     .input {
         @apply border-gray-500 border-2 rounded px-3 py-2 my-3 outline-none focus:shadow-xl ease-in-out transition-all duration-300 w-full  lg:justify-center;
     }
