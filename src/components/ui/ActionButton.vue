@@ -17,34 +17,26 @@
           slot="item_btn"
           class="w-10 h-10 rounded-full bg-control sonar transform translate-y-1"
       ></button>
-      <router-link
+      <button
           slot="item_1"
-          class="fa"
-          tag="a"
-          to="/transaction/add"
+          class="fa fa-plus"
           @click.native="toggleCircle"
-      ></router-link>
-      <router-link
+      ></button>
+      <button
           slot="item_4"
           class="fab fa-cc-visa"
-          tag="a"
-          to="/wallet/add"
-          @click.native="toggleCircle"
-      ></router-link>
-      <router-link
+          @click.native="handle(`/wallet/add`, 'wallet')"
+      ></button>
+      <button
           slot="item_3"
           class="fa "
-          tag="a"
-          to="/transaction/add"
           @click.native="toggleCircle"
-      ></router-link>
-      <router-link
+      ></button>
+      <button
           slot="item_2"
-          class="fa fa-plus "
-          tag="a"
-          to="/transaction/add"
+          class="fa"
           @click.native="toggleCircle"
-      ></router-link>
+      ></button>
     </circle-menu>
   </div>
 </template>
@@ -53,8 +45,10 @@
 import CircleMenu from "vue-circle-menu";
 import {isMobile} from 'mobile-device-detect';
 import {directive as onClickAway} from "vue-clickaway";
+import {toggleMixin} from "@/mixin/toggleMixin";
 
 export default {
+  mixins: [toggleMixin],
   data() {
     return {
       isMobile
@@ -66,6 +60,14 @@ export default {
   methods: {
     toggleCircle() {
       this.$refs.circle.open = false;
+    },
+    handle(path, modal) {
+      this.toggleCircle();
+      if (this.isMobile) {
+        this.$router.push(path);
+      } else {
+        this.toggleModal(modal)
+      }
     }
   },
   components: {

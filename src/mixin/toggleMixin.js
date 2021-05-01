@@ -1,14 +1,14 @@
+import store from "@/store";
+
 export const toggleMixin = {
-    data() {
-        return {
-            isOpen: false,
-            modal: "",
-        }
-    },
-    methods: {
-        toggleModal(modal) {
-            this.isOpen = !this.isOpen;
-            this.modal = modal;
-        }
-    },
+  data() {
+    return {}
+  },
+  methods: {
+    async toggleModal(modal = "") {
+      this.isOpen = !this.isOpen;
+      console.log(modal)
+      if (!(modal instanceof MouseEvent) && modal !== "") await store.dispatch("modalModule/changeModal", modal)
+    }
+  },
 }

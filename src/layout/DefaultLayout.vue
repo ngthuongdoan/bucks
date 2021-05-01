@@ -13,7 +13,7 @@
 
 <script>
 import AppSidebar from "@/components/layout/AppSidebar";
-import ActionButton from "@/components/mobile/ActionButton";
+import ActionButton from "@/components/ui/ActionButton";
 
 export default {
   components: {

@@ -2,11 +2,11 @@
   <div class="w-full h-80 max-h-80 ">
     <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
     <div class=" bg-white w-full h-full rounded-xl overflow-auto relative">
-      <div class="fixed p-3 pb-0  bg-white flex">
+      <div class="fixed p-3 pb-0 rounded-t-xl bg-white flex">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
                     format="dd/MM/yyyy"
-                    input-class="text-gray-400 font-bold cursor-pointer flex-grow"
+                    input-class="text-gray-400 font-bold cursor-pointer flex-grow "
                     placeholder="Select Date"
         ></datepicker>
         <p class="font-bold flex-grow text-right w-full">

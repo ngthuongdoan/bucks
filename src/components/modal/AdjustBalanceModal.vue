@@ -9,7 +9,7 @@
           value="Adjust">
       <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
               type="button"
-              @click="$emit('close')">
+              @click="$store.dispatch('modalModule/changeModal')">
         Cancel
       </button>
     </div>
@@ -32,14 +32,14 @@ export default {
   created() {
     this.balance = this.wallet.amount;
   },
-  props: {
-    wallet: {
-      type: Object,
-      required: true
+  computed: {
+    wallet() {
+      return this.$store.getters["userModule/user"].data.selectedWallet;
     }
   },
   methods: {
     async adjustBalance() {
+      this.$helpers.loading()
       try {
         const adjust = +this.balance - +this.wallet.amount;
         if (adjust === 0) throw new Error("Nothing to adjust")
@@ -53,7 +53,7 @@ export default {
         adjustTransaction.category.type = (adjust > 0) ? "income" : "expense"
         await TransactionService.addNew(adjustTransaction)
         this.$helpers.showSuccess();
-        this.$emit("close")
+        await this.$store.dispatch('modalModule/changeModal')
       } catch (e) {
         this.$helpers.showError(e);
       }

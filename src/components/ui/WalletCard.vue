@@ -6,8 +6,8 @@
   >
     <div v-if="showSetting" class="absolute right-4 w-1/2">
       <img alt="" class="absolute cursor-pointer right-0 py-5 pt-0" src="~@/assets/img/setting.svg"
-           @click.stop="option=!option"/>
-      <wallet-options v-if="option" @away="closeOption" @config="handleOption($event)"></wallet-options>
+           @click.stop="option = !option"/>
+      <wallet-options v-if="option" @away="option = !option"></wallet-options>
     </div>
     <div class="flex flex-col h-full gap-3">
       <h1 class="font-bold text-sm">{{ wallet.name }}</h1>
@@ -25,8 +25,6 @@
 import AppIcon from "@/components/ui/AppIcon";
 import WalletOptions from "@/components/ui/WalletOptions";
 import icons from "@/config/icon.json";
-
-import {WalletService} from "@/service/Wallet.service";
 
 export default {
   data() {
@@ -49,46 +47,6 @@ export default {
     wallet() {
       this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
     },
-  },
-  methods: {
-    closeOption() {
-      this.option = false;
-    },
-    deleteWallet: async function () {
-      const choose = await this.$helpers.confirmSwal();
-      if (choose.isConfirmed) {
-        this.$helpers.loading();
-        try {
-          await WalletService.delete(this.wallet);
-          this.$helpers.showSuccess();
-        } catch (err) {
-          await this.$helpers.close();
-          await this.$helpers.showError(err);
-        }
-      }
-    },
-    handleOption(option) {
-      switch (Object.keys(option)[0]) {
-        case "path":
-          this.$router.push(option.path + this.wallet.id);
-          break;
-        case "tool":
-          this.$router.push(option.tool)
-          break;
-        case "component":
-          this.$emit("open-modal", option.component)
-          break;
-        case "methods":
-          this.deleteWallet();
-          break;
-        default:
-          break;
-      }
-      this.closeOption();
-    }
-  },
-  created() {
-    this.icon = icons.icons.find((i) => i.tags[0] === this.wallet.type);
   },
   components: {
     AppIcon,

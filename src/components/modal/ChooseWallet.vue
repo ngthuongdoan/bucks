@@ -19,7 +19,6 @@ import {userStore, walletStore} from "@/plugin/db";
 import {isMobile} from "mobile-device-detect";
 
 export default {
-  name: 'ChooseWallet',
   data() {
     return {
       wallets: [],
@@ -34,10 +33,11 @@ export default {
         console.log({selectedWallet: {id: wallet.id, ...wallet}})
         await this.$firestoreRefs.users.update({selectedWallet: {id: wallet.id, ...wallet}});
         await this.$store.dispatch("userModule/changeSelected", wallet);
-        this.$emit("close")
+        await this.$store.dispatch("modalModule/changeModal");
       } catch (e) {
         console.log(e);
       }
+
     },
   },
   components: {WalletCard},
