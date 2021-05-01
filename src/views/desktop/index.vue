@@ -7,7 +7,7 @@
 <script>
 import DefaultLayout from "@/layout/DefaultLayout";
 import MobileLayout from "@/layout/MobileLayout";
-import { isMobile } from "mobile-device-detect";
+import {isMobile} from "mobile-device-detect";
 
 export default {
   data() {

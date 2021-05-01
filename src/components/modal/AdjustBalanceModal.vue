@@ -4,7 +4,7 @@
     <input v-model="balance" class="input" step="0.1" type="number">
     <div class="flex w-full items-center justify-center gap-3">
       <input
-          class="p-3 bg-control hover:bg-control-light font-bold text-md w-2/6 cursor-pointer ease-in-out duration-300 transition-all"
+          class="main-btn p-3 w-2/6"
           type="submit"
           value="Adjust">
       <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"

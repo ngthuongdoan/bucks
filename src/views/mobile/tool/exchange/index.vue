@@ -61,10 +61,10 @@
 <script>
 import CustomSelect from "@/components/ui/CurrencySelect";
 import Currency from "@/model/Currency.model";
-import { exchange } from "@/service/Currency.service";
+import {exchange} from "@/service/Currency.service";
 
 export default {
-  components: { CustomSelect },
+  components: {CustomSelect},
   data() {
     return {
       from: new Currency("USD", "United States Dollar"),

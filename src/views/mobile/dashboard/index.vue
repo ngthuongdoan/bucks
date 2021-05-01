@@ -1,54 +1,68 @@
 <template>
-  <div class="w-full h-80 max-h-80 ">
-    <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
-    <div class=" bg-white w-full h-full rounded-xl overflow-auto relative">
-      <div class="fixed p-3 pb-0  bg-white flex">
+  <div v-if="user">
+    <app-modal
+        v-if="isOpen"
+        class=" absolute z-50"
+        @away="toggleModal"
+    >
+      <component :is="modal" :wallet="user.data.selectedWallet" @close="toggleModal"></component>
+    </app-modal>
+    <app-header @open-modal="toggleModal($event)"></app-header>
+    <div class="absolute left-0 right-0 px-4 top-72 z-0 ">
+      <div class="flex mx-7" style="top:330px">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
                     format="dd/MM/yyyy"
-                    input-class="text-gray-400 font-bold cursor-pointer flex-grow"
+                    input-class="text-gray-400 bg-light-grey font-bold cursor-pointer w-fit justify-self-start"
                     placeholder="Select Date"
         ></datepicker>
-        <p class="font-bold flex-grow text-right w-full">
+        <p class="font-bold justify-self-end">
           Total:
           <span :class="(total<0)?'text-red-400':'text-green-400'">{{
               total | separateValue
-            }}</span></p>
+            }}</span>
+        </p>
       </div>
-      <div class="py-10 ">
+      <div class="w-full h-80 overflow-y-scroll">
         <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">No Transactions</div>
-        <app-transaction v-for="trans in filterTransactions" v-else :key="trans.id" :transaction="trans"
-                         class="shadow-none"/>
+        <app-transaction v-for="trans in filterTransactions" :key="trans.id" :transaction="trans"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import * as dayjs from "dayjs";
-import store from "@/store";
-import {transactionStore} from "@/plugin/db";
+import AppHeader from "@/components/mobile/AppHeader";
 import AppTransaction from "@/components/ui/AppTransaction";
+import {transactionStore} from "@/plugin/db";
+import store from "@/store"
+import * as dayjs from "dayjs";
 import Datepicker from "vuejs-datepicker";
+import AppModal from "@/components/modal/AppModal";
+import {mapGetters} from "vuex";
+import {toggleMixin} from "@/mixin/toggleMixin";
 
 export default {
-  name: "AllTransaction",
+  mixins: [toggleMixin],
   data() {
     return {
-      selectedDate: new Date(),
       transactions: [],
       filterTransactions: [],
+      selectedDate: new Date(),
       highlightedFn: {
         customPredictor(date) {
           return dayjs(date).isSame(dayjs(), "day");
         }
-      },
-    }
+      }
+    };
   },
   computed: {
+    ...mapGetters({
+      user: "userModule/user",
+    }),
     total() {
       return this.filterTransactions.reduce((accumulator, currentValue) => accumulator + Number.parseFloat(currentValue.value), 0)
-    }
+    },
   },
   watch: {
     selectedDate: {
@@ -65,7 +79,11 @@ export default {
   },
   components: {
     AppTransaction,
+    AppHeader,
     Datepicker,
+    AppModal,
+    TransferMoney: () => import("@/components/modal/TransferMoneyModal"),
+    AdjustBalance: () => import("@/components/modal/AdjustBalanceModal"),
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
@@ -73,12 +91,8 @@ export default {
     return {
       transactions: transactionStore
           .where("uid", "==", uid)
-          .where("wallet.id", "==", wallet),
+          .where("wallet.id", "==", wallet)
     };
   }
-}
+};
 </script>
-
-<style scoped>
-
-</style>
