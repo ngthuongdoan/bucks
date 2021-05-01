@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-for="person in haveDebt" :key="person.id" class="shadow-2xl">
+    <div v-for="person in persons" :key="person.id" class="shadow-2xl ">
       <debt-loan-card
           :person="person"
+          :class="[person.totalDebt===0?'bg-gray-300 line-through':'']"
       ></debt-loan-card>
     </div>
   </div>
@@ -20,11 +21,6 @@ export default {
       transactions: []
     }
   },
-  computed: {
-    haveDebt() {
-      return this.persons.filter(p => p.totalDebt !== 0)
-    }
-  },
   components: {
     DebtLoanCard
   },
@@ -32,7 +28,8 @@ export default {
     const uid = store.getters["userModule/user"].data.uid;
     return {
       persons: personStore
-          .where("uid", "==", uid),
+          .where("uid", "==", uid)
+          .orderBy("totalDebt", "desc"),
     };
   }
 }

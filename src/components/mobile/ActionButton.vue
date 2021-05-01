@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on-click-away="toggleCircle">
     <circle-menu
         :colors="[
         '#539753',
@@ -52,12 +52,16 @@
 <script>
 import CircleMenu from "vue-circle-menu";
 import {isMobile} from 'mobile-device-detect';
+import {directive as onClickAway} from "vue-clickaway";
 
 export default {
   data() {
     return {
       isMobile
     }
+  },
+  directives: {
+    onClickAway
   },
   methods: {
     toggleCircle() {
