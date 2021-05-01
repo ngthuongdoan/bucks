@@ -3,11 +3,12 @@
     <app-modal
         v-if="isOpen"
         class=" absolute z-50"
-        @away="toggleModal"
+        @away="$store.dispatch('modalModule/changeModal')"
     >
-      <component :is="modal" :wallet="user.data.selectedWallet" @close="toggleModal"></component>
+      <component :is="modal" :wallet="user.data.selectedWallet"
+                 @close="$store.dispatch('modalModule/changeModal')"></component>
     </app-modal>
-    <app-header @open-modal="toggleModal($event)"></app-header>
+    <app-header @open-modal="$store.dispatch('modalModule/changeModal',$event)"></app-header>
     <div class="absolute left-0 right-0 px-4 top-72 z-0 ">
       <div class="flex mx-7" style="top:330px">
         <datepicker v-model="selectedDate"
@@ -40,10 +41,8 @@ import * as dayjs from "dayjs";
 import Datepicker from "vuejs-datepicker";
 import AppModal from "@/components/modal/AppModal";
 import {mapGetters} from "vuex";
-import {toggleMixin} from "@/mixin/toggleMixin";
 
 export default {
-  mixins: [toggleMixin],
   data() {
     return {
       transactions: [],
@@ -59,6 +58,8 @@ export default {
   computed: {
     ...mapGetters({
       user: "userModule/user",
+      isOpen: "modalModule/isOpen",
+      modal: "modalModule/modal"
     }),
     total() {
       return this.filterTransactions.reduce((accumulator, currentValue) => accumulator + Number.parseFloat(currentValue.value), 0)

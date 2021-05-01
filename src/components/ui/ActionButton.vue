@@ -17,26 +17,26 @@
           slot="item_btn"
           class="w-10 h-10 rounded-full bg-control sonar transform translate-y-1"
       ></button>
-      <button
+      <a
           slot="item_1"
           class="fa fa-plus"
-          @click.native="toggleCircle"
-      ></button>
-      <button
+          @click="handle(`/transaction/add`, 'add-transaction')"
+      ></a>
+      <a
           slot="item_4"
           class="fab fa-cc-visa"
-          @click.native="handle(`/wallet/add`, 'wallet')"
-      ></button>
-      <button
+          @click="handle(`/wallet/add`, 'add-wallet')"
+      ></a>
+      <a
           slot="item_3"
           class="fa "
-          @click.native="toggleCircle"
-      ></button>
-      <button
+          @click="toggleCircle"
+      ></a>
+      <a
           slot="item_2"
           class="fa"
-          @click.native="toggleCircle"
-      ></button>
+          @click="toggleCircle"
+      ></a>
     </circle-menu>
   </div>
 </template>
@@ -45,10 +45,8 @@
 import CircleMenu from "vue-circle-menu";
 import {isMobile} from 'mobile-device-detect';
 import {directive as onClickAway} from "vue-clickaway";
-import {toggleMixin} from "@/mixin/toggleMixin";
 
 export default {
-  mixins: [toggleMixin],
   data() {
     return {
       isMobile
@@ -66,7 +64,8 @@ export default {
       if (this.isMobile) {
         this.$router.push(path);
       } else {
-        this.toggleModal(modal)
+        console.log(modal)
+        this.$store.dispatch("modalModule/changeModal", modal)
       }
     }
   },

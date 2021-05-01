@@ -2,7 +2,7 @@
   <add-layout title="Transfer Money">
     <app-modal
         v-if="isOpen"
-        @away="toggleModal"
+        @away="$store.dispatch('modalModule/changeModal')"
     >
       <wallet-modal @change-wallet="changeWallet($event)"></wallet-modal>
     </app-modal>
@@ -18,9 +18,9 @@
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
         <label class="font-bold  mt-2" for="wallet">From</label>
-        <div class="add-input " @click="toggleModal('from')">{{ fromWallet.name || "" }}</div>
+        <div class="add-input " @click="toggleWallet('from')">{{ fromWallet.name || "" }}</div>
         <label class="font-bold  mt-2" for="wallet">To</label>
-        <div class="add-input " @click="toggleModal('to')">{{ toWallet.name || "" }}</div>
+        <div class="add-input " @click="toggleWallet('to')">{{ toWallet.name || "" }}</div>
         <label class="font-bold self-start" for="note">Note</label>
         <textarea
             id="note"
@@ -43,11 +43,10 @@ import {TransactionService} from "@/service/Transaction.service";
 import Transaction from "@/model/Transaction.model";
 import Wallet from "@/model/Wallet.model";
 import {CategoryService} from "@/service/Category.service";
-import {toggleMixin} from "@/mixin/toggleMixin";
 import WalletModal from "@/components/modal/WalletModal";
+import {mapGetters} from "vuex";
 
 export default {
-  mixins: [toggleMixin],
   data() {
     return {
       fromWallet: new Wallet(),
@@ -57,14 +56,25 @@ export default {
       transaction: new Transaction(),
       adjustBalance: {},
       tempDate: "",
+      mode: "from",
       wallets: []
     };
   },
+  computed: {
+    ...mapGetters({
+      isOpen: "modalModule/isOpen",
+      modal: "modalModule/modal"
+    })
+  },
   methods: {
+    toggleWallet(mode) {
+      this.$store.dispatch('modalModule/changeModal', 'wallet-modal');
+      this.mode = mode;
+    },
     changeWallet(wallet) {
       const w = {id: wallet.id, ...wallet};
-      this.modal === "from" ? this.fromWallet = {...w} : this.toWallet = {...w};
-      this.toggleModal()
+      this.mode === "from" ? this.fromWallet = {...w} : this.toWallet = {...w};
+      this.$store.dispatch("modalModule/changeModal")
     },
     createTransaction(type) {
       let transaction = new Transaction();

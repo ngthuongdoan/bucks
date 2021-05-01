@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-80 max-h-80 ">
     <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
-    <div class=" bg-white w-full h-full rounded-xl overflow-auto relative">
+    <div class=" bg-white w-full h-full rounded-xl overflow-auto custom-scrollbar relative">
       <div class="fixed p-3 pb-0 rounded-t-xl bg-white flex">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"

@@ -3,7 +3,7 @@
     <app-modal
         v-if="isOpen"
         :is-category="this.modal==='category-modal'"
-        @away="toggleModal"
+        @away="$store.dispatch('modalModule/changeModal')"
     >
       <component
           :is="modal"
@@ -56,13 +56,17 @@
             rows="5"
         ></textarea>
         <label class="font-bold mt-2" for="wallet">Wallet</label>
-        <div class="add-input " @click="toggleModal('wallet-modal')">{{ transaction.wallet.name || "" }}</div>
+        <div class="add-input " @click="$store.dispatch('modalModule/changeModal','wallet-modal')">
+          {{ transaction.wallet.name || "" }}
+        </div>
         <label class="font-bold mt-2" for="category">Category</label>
-        <div class="add-input" @click="toggleModal('category-modal')">{{ transaction.category.name || "" }}</div>
+        <div class="add-input" @click="$store.dispatch('modalModule/changeModal','category-modal')">
+          {{ transaction.category.name || "" }}
+        </div>
         <label class="font-bold mt-2" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
         <label v-if="isDebtLoan" class="font-bold mt-2">Person</label>
-        <div v-if="isDebtLoan" class="add-input" @click="toggleModal('person-modal')">{{
+        <div v-if="isDebtLoan" class="add-input" @click="$store.dispatch('modalModule/changeModal','person-modal')">{{
             transaction.person.name || ""
           }}
         </div>
@@ -76,7 +80,6 @@ import AppModal from "@/components/modal/AppModal";
 import CategoryModal from "@/components/modal/CategoryModal";
 import PersonModal from "@/components/modal/PersonModal";
 import AddLayout from "@/layout/AddLayout";
-
 import Transaction from "@/model/Transaction.model";
 import {Timestamp} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
@@ -84,10 +87,9 @@ import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
 import WalletModal from "@/components/modal/WalletModal";
-import {toggleMixin} from "@/mixin/toggleMixin";
+import {mapGetters} from "vuex";
 
 export default {
-  mixins: [toggleMixin],
   data() {
     return {
       transaction: new Transaction(),
@@ -97,19 +99,27 @@ export default {
       isDebtLoan: false
     };
   },
+  computed: {
+    ...mapGetters({
+      modal: "modalModule/modal",
+      isOpen: "modalModule/isOpen"
+    })
+  },
   methods: {
     changeWallet(wallet) {
       this.transaction.wallet = {id: wallet.id, ...wallet};
-      this.toggleModal()
+      this.$store.dispatch("modalModule/changeModal")
     },
     changeCategory(category) {
       this.transaction.category = {id: category.id, ...category};
       this.isDebtLoan = this.$getConst("DEBT_LOAN_DICT").includes(category.type);
-      this.toggleModal()
+      this.$store.dispatch("modalModule/changeModal")
+
     },
     changePerson(person) {
       this.transaction.person = {id: person.id, ...person}
-      this.toggleModal()
+      this.$store.dispatch("modalModule/changeModal")
+
     },
     uploadImage() {
       const image = this.$refs.fileInput.files[0];
