@@ -46,7 +46,6 @@ export default {
     ChooseWallet,
     AddTransaction,
     AddWallet
-
   }
 };
 </script>

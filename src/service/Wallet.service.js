@@ -3,7 +3,6 @@ import Wallet from "@/model/Wallet.model";
 import {Timestamp, userStore, walletStore} from "@/plugin/db";
 import store from "@/store";
 
-const uid = store.getters["userModule/user"].data.uid;
 
 export const WalletService = {
     /**
@@ -30,15 +29,19 @@ export const WalletService = {
         return await walletStore.add({createdDate: Timestamp.fromDate(new Date()), ...w});
     },
     async fetchWallet(wallet) {
-        const snapshot = await walletStore.where("uid", "==", uid).where("name", "==", wallet).get();
-        return {id: snapshot.docs[0].id, ...snapshot.docs[0].data()}
+      const uid = store.getters["userModule/user"].data.uid;
+
+      const snapshot = await walletStore.where("uid", "==", uid).where("name", "==", wallet).get();
+      return {id: snapshot.docs[0].id, ...snapshot.docs[0].data()}
     },
     async changeBackToOverView() {
         //Find Overview
         try {
-            const wallet = await this.fetchWallet("Overview");
-            await userStore.doc(uid).update({selectedWallet: wallet})
-            await store.dispatch("userModule/changeSelected", wallet)
+          const uid = store.getters["userModule/user"].data.uid;
+
+          const wallet = await this.fetchWallet("Overview");
+          await userStore.doc(uid).update({selectedWallet: wallet})
+          await store.dispatch("userModule/changeSelected", wallet)
         } catch (e) {
             console.log(e);
         }

@@ -56,7 +56,17 @@
           class="add-input"
       />
     </div>
-    <input class="cursor-pointer main-btn" type="submit" value="Save">
+    <div class="flex w-full items-center justify-center gap-3">
+      <input
+          class="main-btn p-3 w-2/6"
+          type="submit"
+          value="Create">
+      <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
+              type="button"
+              @click="$store.dispatch('modalModule/changeModal')">
+        Cancel
+      </button>
+    </div>
   </form>
 </template>
 
