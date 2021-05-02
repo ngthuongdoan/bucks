@@ -43,11 +43,9 @@ import {TransactionService} from "@/service/Transaction.service";
 import Transaction from "@/model/Transaction.model";
 import Wallet from "@/model/Wallet.model";
 import {CategoryService} from "@/service/Category.service";
-import {toggleMixin} from "@/mixin/toggleMixin";
 import WalletModal from "@/components/modal/WalletModal";
 
 export default {
-  mixins: [toggleMixin],
   data() {
     return {
       fromWallet: new Wallet(),
@@ -63,8 +61,8 @@ export default {
   methods: {
     changeWallet(wallet) {
       const w = {id: wallet.id, ...wallet};
-      this.modal === "from" ? this.fromWallet = {...w} : this.toWallet = {...w};
-      this.toggleModal()
+      this.mode === "from" ? this.fromWallet = {...w} : this.toWallet = {...w};
+      this.$store.dispatch("modalModule/modal")
     },
     createTransaction(type) {
       let transaction = new Transaction();

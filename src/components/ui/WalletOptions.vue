@@ -22,6 +22,11 @@ export default {
       options
     };
   },
+  computed: {
+    wallet() {
+      return this.$store.getters["userModule/user"].data.selectedWallet;
+    }
+  },
   directives: {
     onClickAway
   },
@@ -35,7 +40,7 @@ export default {
         this.$helpers.loading();
         try {
           await WalletService.delete(this.wallet);
-          this.$helpers.showSuccess();
+          await this.$helpers.showSuccess();
         } catch (err) {
           await this.$helpers.showError(err);
         }

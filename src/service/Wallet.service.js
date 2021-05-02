@@ -3,6 +3,8 @@ import Wallet from "@/model/Wallet.model";
 import {Timestamp, userStore, walletStore} from "@/plugin/db";
 import store from "@/store";
 
+const uid = store.getters["userModule/user"].data.uid;
+
 export const WalletService = {
     /**
      * Update wallet whenever add new Transaction, Adjust Balance
@@ -28,41 +30,27 @@ export const WalletService = {
         return await walletStore.add({createdDate: Timestamp.fromDate(new Date()), ...w});
     },
     async fetchWallet(wallet) {
-        const uid = store.getters["userModule/user"].data.uid;
         const snapshot = await walletStore.where("uid", "==", uid).where("name", "==", wallet).get();
         return {id: snapshot.docs[0].id, ...snapshot.docs[0].data()}
     },
     async changeBackToOverView() {
         //Find Overview
         try {
-            const uid = store.getters["userModule/user"].data.uid;
-            const users = await userStore.doc(uid);
-            const walletSnapshot = await walletStore.where("uid", "==", uid).where("name", "==", "Overview").limit(1).get();
-            walletSnapshot.forEach(async (doc) => {
-                const overviewWallet = await doc.data();
-                await users.update({selectedWallet: {id: overviewWallet.id, ...overviewWallet}});
-                await store.dispatch("userModule/changeSelected", overviewWallet);
-            });
+            const wallet = await this.fetchWallet("Overview");
+            await userStore.doc(uid).update({selectedWallet: wallet})
+            await store.dispatch("userModule/changeSelected", wallet)
         } catch (e) {
             console.log(e);
         }
     },
     async delete(w) {
-        return new Promise((resolve, reject) => {
-            if (!(new RegExp("overview", "gi").test(w.name))) {
-                const uid = store.getters["userModule/user"].data.uid;
-                const walletsRef = walletStore.where("uid", "==", uid).where("name", "==", w.name).limit(1);
-                walletsRef.get().then(querySnapshot => {
-                    querySnapshot.forEach(doc => {
-                        doc.ref.delete();
-                        this.changeBackToOverView().then(() => {
-                            resolve();
-                        });
-                    });
-                });
-            } else {
-                reject(new Error("Not permit"));
-            }
-        });
+        if (!(new RegExp("overview", "gi").test(w.name))) {
+            await walletStore
+              .doc(w.id)
+              .delete()
+            await this.changeBackToOverView();
+        } else {
+            return new Error("Not permit")
+        }
     }
 };

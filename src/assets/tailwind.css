@@ -110,7 +110,7 @@
     }
 
     .main-btn {
-        @apply bg-control hover:bg-control-light font-bold text-light-grey cursor-pointer ease-in-out duration-300 transition-all;
+        @apply bg-control font-bold text-light-grey cursor-pointer ease-in-out duration-300 transition-all;
     }
 
     .desktop-dashboard {
