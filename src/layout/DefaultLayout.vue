@@ -28,6 +28,7 @@ import AddWallet from "@/components/modal/AddWallet";
 import AddTransaction from "@/components/modal/AddTransaction";
 
 import AppModal from "@/components/modal/AppModal";
+import WalletModal from "@/components/modal/WalletModal";
 
 export default {
   computed: {
@@ -45,7 +46,8 @@ export default {
     AdjustBalance,
     ChooseWallet,
     AddTransaction,
-    AddWallet
+    AddWallet,
+    WalletModal
   }
 };
 </script>

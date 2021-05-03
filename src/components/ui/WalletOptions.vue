@@ -15,6 +15,7 @@
 import options from "@/config/wallet-options.json";
 import {directive as onClickAway} from "vue-clickaway";
 import {WalletService} from "@/service/Wallet.service";
+import {isMobile} from "mobile-device-detect";
 
 export default {
   data() {
@@ -47,6 +48,11 @@ export default {
       }
     },
     handleOption(option) {
+      if (!isMobile) {
+        this.$store.dispatch("modalModule/changeModal", option.modal)
+        this.away();
+        return;
+      }
       switch (Object.keys(option)[0]) {
         case "path":
           this.$router.push(option.path + this.wallet.id);
@@ -55,7 +61,7 @@ export default {
           this.$router.push(option.tool)
           break;
         case "component":
-          this.$store.dispatch("modalModule/changeModal", "adjust-balance")
+          this.$store.dispatch("modalModule/changeModal", option.component + "Modal")
           break;
         case "methods":
           this.deleteWallet();
