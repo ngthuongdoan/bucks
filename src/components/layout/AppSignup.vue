@@ -34,7 +34,6 @@
 
 <script>
 import User from "@/model/User.model";
-import {walletStore} from "@/plugin/db";
 import {Auth} from "@/plugin/modules/auth";
 import {UserService} from "@/service/User.service";
 import {WalletService} from "@/service/Wallet.service";
@@ -60,9 +59,7 @@ export default {
           displayName: this.user.name
         });
         const response = await WalletService.initOverviewWallet(data.user.uid);
-        const walletSnapshot = await walletStore.doc(response.id).get();
-        const selectedWallet = await walletSnapshot.data();
-        await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, {id: response.id, ...selectedWallet}));
+        await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, response.id));
         await this.$helpers.showSuccess();
       } catch (err) {
         this.$helpers.showError(err);

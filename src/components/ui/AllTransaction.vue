@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full h-80 max-h-80 row-span-2">
+  <div class="w-full h-80 max-h-80 ">
     <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
-    <div class=" bg-white w-full h-full rounded-xl overflow-auto relative">
-      <div class="fixed p-3 pb-0  bg-white flex">
+    <div class=" bg-white w-full h-full rounded-xl overflow-auto custom-scrollbar relative">
+      <div class="fixed p-3 pb-0 rounded-t-xl bg-white flex">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
                     format="dd/MM/yyyy"
-                    input-class="text-gray-400 font-bold cursor-pointer flex-grow"
+                    input-class="text-gray-400 font-bold cursor-pointer flex-grow "
                     placeholder="Select Date"
         ></datepicker>
         <p class="font-bold flex-grow text-right w-full">
@@ -30,6 +30,7 @@ import store from "@/store";
 import {transactionStore} from "@/plugin/db";
 import AppTransaction from "@/components/ui/AppTransaction";
 import Datepicker from "vuejs-datepicker";
+import {mapGetters} from "vuex";
 
 export default {
   name: "AllTransaction",
@@ -46,6 +47,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      user: "userModule/user"
+    }),
     total() {
       return this.filterTransactions.reduce((accumulator, currentValue) => accumulator + Number.parseFloat(currentValue.value), 0)
     }
@@ -61,6 +65,16 @@ export default {
     },
     transactions() {
       this.selectedDate = new Date();
+    },
+    user: {
+      deep: true,
+      handler(user) {
+        this.$bind("transactions",
+            transactionStore
+                .where("uid", "==", user.data.uid)
+                .where("wallet", "==", user.data.selectedWallet)
+        )
+      }
     }
   },
   components: {
@@ -69,11 +83,11 @@ export default {
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
-    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
     return {
       transactions: transactionStore
           .where("uid", "==", uid)
-          .where("wallet.id", "==", wallet),
+          .where("wallet", "==", wallet),
     };
   }
 }

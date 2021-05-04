@@ -7,7 +7,8 @@
           class="relative bg-white py-5 lg:w-2/6 w-full rounded-lg shadow-2xl ">
         <!--content-->
         <div
-            class="border-0 relative flex flex-col w-full justify-center items-center">
+            :class="!isCategory?'border-0 relative flex flex-col w-full justify-center items-center':''"
+        >
           <!--body-->
           <slot></slot>
         </div>
@@ -24,6 +25,12 @@ export default {
   name: "large-modal",
   directives: {
     onClickAway
+  },
+  props: {
+    isCategory: {
+      type: Boolean,
+      default: false,
+    }
   },
   methods: {
     away() {

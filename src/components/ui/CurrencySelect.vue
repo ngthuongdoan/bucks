@@ -3,7 +3,7 @@
     <label id="listbox-label" class="block text-sm font-medium text-gray-700">
       {{ label }}
     </label>
-    <div class="mt-1 relative">
+    <div class="mt-1 relative z-0">
       <button
           aria-expanded="true"
           aria-haspopup="listbox"

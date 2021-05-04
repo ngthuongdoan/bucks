@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import ActionButton from "./ActionButton";
+import ActionButton from "../ui/ActionButton";
 
 export default {
   components: {

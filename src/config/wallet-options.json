@@ -2,19 +2,22 @@
   {
     "name": "Edit Wallet",
     "config": {
-      "path": "/wallet/"
+      "path": "/wallet/",
+      "modal": "WalletModal"
     }
   },
   {
     "name": "Transfer Money",
     "config": {
-      "tool": "/tool/transfer/"
+      "tool": "/tool/transfer/",
+      "modal": "TransferMoney"
     }
   },
   {
     "name": "Adjust Balance",
     "config": {
-      "component": "AdjustBalance"
+      "component": "AdjustBalance",
+      "modal": "AdjustBalance"
     }
   },
   {

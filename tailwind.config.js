@@ -4,10 +4,10 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"light-grey": "#EEEEEE",
+				"light-grey": "#feffde",
 				control: {
-					DEFAULT: "#008000",
-					light: "#539753"
+					DEFAULT: "#52734d",
+					light: "#ddffbc"
 				}
 			},
 			boxShadow: {

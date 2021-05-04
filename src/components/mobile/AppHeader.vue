@@ -30,7 +30,6 @@ export default {
   data() {
     return {
       wallet: {},
-
     }
   },
   methods: {
@@ -42,9 +41,9 @@ export default {
     WalletCard,
   },
   firestore() {
-    const selectedWallet = store.getters["userModule/user"].data.selectedWallet;
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
     return {
-      wallet: walletStore.doc(selectedWallet.id)
+      wallet: walletStore.doc(wallet)
     }
   }
 };

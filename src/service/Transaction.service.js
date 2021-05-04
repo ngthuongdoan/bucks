@@ -1,15 +1,19 @@
 import {transactionStore} from "@/plugin/db";
 import {WalletService} from "@/service/Wallet.service";
+import {PersonService} from "@/service/Person.service";
 
 export const TransactionService = {
     async addNew(transaction) {
         //Refined Data
         await transactionStore.add({...transaction});
+        if (Object.keys(transaction.person).length !== 0) {
+            await PersonService.updatePersonTotal(transaction.person.id, transaction.person)
+        }
         //Update Wallet Value
         await WalletService.updateWalletAmount(
             transaction.value,
             transaction.category.type,
-            transaction.wallet.id
+            transaction.wallet
         );
     },
     // async delete(w) {
@@ -30,4 +34,12 @@ export const TransactionService = {
     //         }
     //     });
     // }
+    async delete(transaction) {
+        await transactionStore.doc(transaction.id).delete();
+        await WalletService.updateWalletAmount(
+          -transaction.value,
+          transaction.category.type,
+          transaction.wallet
+        );
+    }
 };

@@ -1,9 +1,12 @@
 <template>
   <div>
     <div class="flex gap-3">
-      <button :class="['btn', activeOverview==='week'&&'btn-active']" @click="activeOverview='week'">Week</button>
-      <button :class="['btn', activeOverview==='month'&&'btn-active']" @click="activeOverview='month'">Month</button>
-      <button :class="['btn', activeOverview==='year'&&'btn-active']" @click="activeOverview='year'">Year</button>
+      <button :class="['btn ', activeOverview==='week'&&'btn-active main-btn']" @click="activeOverview='week'">Week
+      </button>
+      <button :class="['btn ', activeOverview==='month'&&'btn-active main-btn']" @click="activeOverview='month'">Month
+      </button>
+      <button :class="['btn ', activeOverview==='year'&&'btn-active main-btn']" @click="activeOverview='year'">Year
+      </button>
     </div>
     <div class="grid grid-cols-2 grid-rows-2 gap-2 w-max mt-3">
       <h1 class="font-bold text-lg">INCOME </h1><span

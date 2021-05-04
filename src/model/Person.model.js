@@ -6,13 +6,13 @@ class Person {
 	/**
 	 *
 	 * @param {string} name
-	 * @param {string} phone - ten numbers with region code
 	 * @param {number} total - total debt/loan
+	 * @param {string} uid - to user
 	 */
-	constructor(name, phone, total) {
+	constructor(name, total, uid) {
 		this.name = name;
-		this.phone = phone;
 		this.total = total;
+		this.uid = uid;
 	}
 }
 
