@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {transactionStore} from "@/plugin/db";
+import {transactionStore, walletStore} from "@/plugin/db";
 import store from "@/store"
 import WalletCard from "@/components/ui/WalletCard";
 import {mapGetters} from "vuex";
@@ -26,12 +26,20 @@ import AllTransaction from "@/components/ui/AllTransaction";
 import DebtLoan from "@/components/ui/DebtLoan";
 
 export default {
+  data() {
+    return {wallet: {}}
+  },
   computed: {
     ...mapGetters({
       user: "userModule/user",
     }),
-    wallet() {
-      return this.user.data.selectedWallet;
+  },
+  watch: {
+    user: {
+      deep: true,
+      handler(wallet) {
+        this.$bind('wallet', walletStore.doc(wallet.data.selectedWallet))
+      }
     }
   },
   components: {
@@ -43,11 +51,12 @@ export default {
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
-    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
     return {
       transactions: transactionStore
           .where("uid", "==", uid)
-          .where("wallet.id", "==", wallet),
+          .where("wallet", "==", wallet),
+      wallet: walletStore.doc(wallet)
     };
   }
 };

@@ -18,24 +18,21 @@
 
 <script>
 import Transaction from "@/model/Transaction.model";
-import {Timestamp} from "@/plugin/db";
+import {Timestamp, walletStore} from "@/plugin/db";
 import {CategoryService} from "@/service/Category.service";
 import {TransactionService} from "@/service/Transaction.service";
+import store from "@/store";
 
 export default {
   name: "AdjustBalance",
   data() {
     return {
       balance: 0,
+      wallet: {}
     }
   },
   created() {
     this.balance = this.wallet.amount;
-  },
-  computed: {
-    wallet() {
-      return this.$store.getters["userModule/user"].data.selectedWallet;
-    }
   },
   methods: {
     async adjustBalance() {
@@ -59,6 +56,12 @@ export default {
       }
     }
   },
+  firestore() {
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
+    return {
+      wallet: walletStore.doc(wallet)
+    }
+  }
 }
 </script>
 

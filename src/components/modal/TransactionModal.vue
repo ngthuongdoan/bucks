@@ -22,7 +22,7 @@
         ></textarea>
         <label class="font-bold mt-2" for="wallet">Wallet</label>
         <div class="add-input ">
-          {{ transaction.wallet.name }}
+          {{ wallet.name }}
         </div>
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input">
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import {transactionStore} from "@/plugin/db";
+import {transactionStore, walletStore} from "@/plugin/db";
 import store from "@/store"
 import dayjs from "dayjs";
 import {TransactionService} from "@/service/Transaction.service";
@@ -50,13 +50,19 @@ import {TransactionService} from "@/service/Transaction.service";
 export default {
   data() {
     return {
-      transaction: {}
+      transaction: {},
+      wallet: {}
     }
   },
   computed: {
     tempDate() {
       return dayjs(this.transaction.time.toDate()).format("YYYY-MM-DD")
     },
+  },
+  watch: {
+    transaction() {
+      this.$bind("wallet", walletStore.doc(this.transaction.wallet))
+    }
   },
   methods: {
     async deleteTransaction() {

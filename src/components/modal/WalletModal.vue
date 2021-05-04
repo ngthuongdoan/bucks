@@ -75,15 +75,18 @@ import CurrencySelect from "@/components/ui/CurrencySelect";
 import InputOptional from "@/components/ui/InputOptional";
 import {WalletService} from "@/service/Wallet.service";
 import VSwatches from "vue-swatches";
-
+import store from "@/store"
 // Import the styles too, typically in App.vue or main.js
 import 'vue-swatches/dist/vue-swatches.css';
+import {walletStore} from "@/plugin/db";
 
 export default {
+  data() {
+    return {
+      wallet: {}
+    }
+  },
   computed: {
-    wallet() {
-      return {...this.$store.getters["userModule/user"].data.selectedWallet};
-    },
     currencies() {
       return this.$store.getters["currencyModule/currencies"];
     }
@@ -107,6 +110,12 @@ export default {
     CurrencySelect,
     VSwatches,
     InputOptional
+  },
+  firestore() {
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
+    return {
+      wallet: walletStore.doc(wallet)
+    }
   }
 };
 </script>

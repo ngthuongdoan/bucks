@@ -58,7 +58,7 @@
         ></textarea>
         <label class="font-bold mt-2" for="wallet">Wallet</label>
         <div class="add-input " @click="toggleSubModal('transaction-wallet-modal')">
-          {{ transaction.wallet.name || "" }}
+          {{ wallet.name || "" }}
         </div>
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input" @click="toggleSubModal('category-modal')">
@@ -93,7 +93,7 @@ import AppModal from "@/components/modal/AppModal";
 import CategoryModal from "@/components/modal/CategoryModal";
 import PersonModal from "@/components/modal/PersonModal";
 import Transaction from "@/model/Transaction.model";
-import {Timestamp} from "@/plugin/db";
+import {Timestamp, walletStore} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
@@ -108,6 +108,7 @@ export default {
       cropper: {},
       tempDate: "",
       wallets: [],
+      wallet: {},
       modal: "",
       isSubOpen: false,
       isDebtLoan: false
@@ -118,14 +119,18 @@ export default {
       isOpen: "modalModule/isOpen"
     })
   },
+  watch: {
+    "transaction.wallet"(newValue) {
+      this.$bind('wallet', walletStore.doc(newValue))
+    }
+  },
   methods: {
     toggleSubModal(modal = "") {
-      console.log(modal)
       this.modal = modal;
       this.isSubOpen = !this.isSubOpen;
     },
     changeWallet(wallet) {
-      this.transaction.wallet = {id: wallet.id, ...wallet};
+      this.transaction.wallet = wallet.id;
       this.toggleSubModal()
     },
     changeCategory(category) {
@@ -147,7 +152,7 @@ export default {
       };
     },
     change(result) {
-      this.cropper = Object.assign({}, result);
+      this.cropper = {...result};
     },
     crop() {
       this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);

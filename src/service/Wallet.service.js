@@ -18,8 +18,7 @@ export const WalletService = {
     wallet.amount += Number.parseFloat(value);
     await walletStore.doc(walletId).update({amount: wallet.amount})
     // Update selected wallet
-    wallet.id = walletId;
-    await store.dispatch("userModule/changeSelected", wallet)
+    await store.dispatch("userModule/changeSelected", walletId)
   },
   async initOverviewWallet(uid) {
     const overview = new Wallet("Overview", 0, new Currency("VND", "Vietnam Dong"), "#1b1c6d", uid);
@@ -32,8 +31,8 @@ export const WalletService = {
     const uid = store.getters["userModule/user"].data.uid;
 
     await walletStore.doc(w.id).set(w);
-    await userStore.doc(uid).update({selectedWallet: w})
-    await store.dispatch("userModule/changeSelected", w)
+    await userStore.doc(uid).update({selectedWallet: w.id})
+    await store.dispatch("userModule/changeSelected", w.id)
   },
   async fetchWallet(wallet) {
     const uid = store.getters["userModule/user"].data.uid;
@@ -47,8 +46,8 @@ export const WalletService = {
       const uid = store.getters["userModule/user"].data.uid;
 
       const wallet = await this.fetchWallet("Overview");
-      await userStore.doc(uid).update({selectedWallet: wallet})
-      await store.dispatch("userModule/changeSelected", wallet)
+      await userStore.doc(uid).update({selectedWallet: wallet.id})
+      await store.dispatch("userModule/changeSelected", wallet.id)
     } catch (e) {
       console.log(e);
     }

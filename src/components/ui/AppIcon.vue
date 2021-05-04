@@ -19,7 +19,6 @@
 
 <script>
 import User from "@/model/User.model";
-import {walletStore} from "@/plugin/db";
 import {createProvider, signInWithPopup} from "@/plugin/oauth2";
 import {UserService} from "@/service/User.service";
 import {WalletService} from "@/service/Wallet.service";
@@ -43,9 +42,7 @@ export default {
         const data = await signInWithPopup(provider);
         if (data.additionalUserInfo.isNewUser) {
           const response = await WalletService.initOverviewWallet(data.user.uid);
-          const walletSnapshot = await walletStore.doc(response.id).get();
-          const selectedWallet = await walletSnapshot.data();
-          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, {id: response.id, ...selectedWallet}));
+          await UserService.addNew(new User(data.user.uid, data.user.displayName, data.user.email, response.id));
         }
         this.$helpers.showSuccess();
       } catch (e) {

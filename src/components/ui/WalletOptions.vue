@@ -16,17 +16,14 @@ import options from "@/config/wallet-options.json";
 import {directive as onClickAway} from "vue-clickaway";
 import {WalletService} from "@/service/Wallet.service";
 import {isMobile} from "mobile-device-detect";
+import store from "@/store"
+import {walletStore} from "@/plugin/db";
 
 export default {
   data() {
     return {
       options
     };
-  },
-  computed: {
-    wallet() {
-      return this.$store.getters["userModule/user"].data.selectedWallet;
-    }
   },
   directives: {
     onClickAway
@@ -70,6 +67,12 @@ export default {
           break;
       }
       this.away()
+    }
+  },
+  firestore() {
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
+    return {
+      wallet: walletStore.doc()
     }
   }
 };

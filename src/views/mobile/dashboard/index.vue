@@ -88,11 +88,11 @@ export default {
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
-    const wallet = store.getters["userModule/user"].data.selectedWallet.id;
+    const wallet = store.getters["userModule/user"].data.selectedWallet;
     return {
       transactions: transactionStore
           .where("uid", "==", uid)
-          .where("wallet.id", "==", wallet)
+          .where("wallet", "==", wallet)
     };
   }
 };
