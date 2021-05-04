@@ -39,7 +39,7 @@ export const TransactionService = {
         await WalletService.updateWalletAmount(
           -transaction.value,
           transaction.category.type,
-          transaction.wallet.id
+          transaction.wallet
         );
     }
 };

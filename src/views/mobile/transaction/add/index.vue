@@ -57,7 +57,7 @@
         ></textarea>
         <label class="font-bold mt-2" for="wallet">Wallet</label>
         <div class="add-input " @click="$store.dispatch('modalModule/changeModal',{modal:'wallet-modal'})">
-          {{ transaction.wallet.name || "" }}
+          {{ wallet.name || "" }}
         </div>
         <label class="font-bold mt-2" for="category">Category</label>
         <div class="add-input" @click="$store.dispatch('modalModule/changeModal',{modal:'category-modal'})">
@@ -82,7 +82,7 @@ import CategoryModal from "@/components/modal/CategoryModal";
 import PersonModal from "@/components/modal/PersonModal";
 import AddLayout from "@/layout/AddLayout";
 import Transaction from "@/model/Transaction.model";
-import {Timestamp} from "@/plugin/db";
+import {Timestamp, walletStore} from "@/plugin/db";
 import worker from "@/plugin/tesseract";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
@@ -97,6 +97,7 @@ export default {
       cropper: {},
       tempDate: "",
       wallets: [],
+      wallet: {},
       isDebtLoan: false
     };
   },
@@ -106,9 +107,14 @@ export default {
       isOpen: "modalModule/isOpen"
     })
   },
+  watch: {
+    "transaction.wallet"(newValue) {
+      this.$bind('wallet', walletStore.doc(newValue))
+    }
+  },
   methods: {
     changeWallet(wallet) {
-      this.transaction.wallet = {id: wallet.id, ...wallet};
+      this.transaction.wallet = wallet.id;
       this.$store.dispatch("modalModule/changeModal")
     },
     changeCategory(category) {

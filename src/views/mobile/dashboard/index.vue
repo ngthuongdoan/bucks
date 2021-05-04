@@ -83,8 +83,7 @@ export default {
     AppHeader,
     Datepicker,
     AppModal,
-    TransferMoney: () => import("@/components/modal/TransferMoneyModal"),
-    AdjustBalance: () => import("@/components/modal/AdjustBalanceModal"),
+    AdjustBalanceModal: () => import("@/components/modal/AdjustBalanceModal"),
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;

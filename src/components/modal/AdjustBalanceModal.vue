@@ -31,8 +31,10 @@ export default {
       wallet: {}
     }
   },
-  created() {
-    this.balance = this.wallet.amount;
+  watch: {
+    wallet(w) {
+      this.balance = w.amount;
+    }
   },
   methods: {
     async adjustBalance() {
@@ -45,7 +47,7 @@ export default {
             Timestamp.fromDate(new Date()),
             "Adjust Balance"
         );
-        adjustTransaction.wallet = this.wallet;
+        adjustTransaction.wallet = this.wallet.id;
         adjustTransaction.category = await CategoryService.fetchCategory("Adjust Balance");
         adjustTransaction.category.type = (adjust > 0) ? "income" : "expense"
         await TransactionService.addNew(adjustTransaction)
