@@ -49,7 +49,7 @@ export default {
     },
     handleOption(option) {
       if (!isMobile) {
-        this.$store.dispatch("modalModule/changeModal", option.modal)
+        this.$store.dispatch("modalModule/changeModal", {modal: option.modal})
         this.away();
         return;
       }
@@ -61,7 +61,7 @@ export default {
           this.$router.push(option.tool)
           break;
         case "component":
-          this.$store.dispatch("modalModule/changeModal", option.component + "Modal")
+          this.$store.dispatch("modalModule/changeModal", {modal: option.component + "Modal"})
           break;
         case "methods":
           this.deleteWallet();

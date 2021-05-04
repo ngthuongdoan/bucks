@@ -34,4 +34,12 @@ export const TransactionService = {
     //         }
     //     });
     // }
+    async delete(transaction) {
+        await transactionStore.doc(transaction.id).delete();
+        await WalletService.updateWalletAmount(
+          -transaction.value,
+          transaction.category.type,
+          transaction.wallet.id
+        );
+    }
 };

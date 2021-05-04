@@ -16,7 +16,8 @@
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
           <input
-              v-model="transaction.value"
+              v-model.number="transaction.value"
+              v-unsigned
               class="add-input text-4xl font-bold text-center m-0"
               type="text"
           />
@@ -56,7 +57,7 @@
             rows="5"
         ></textarea>
         <label class="font-bold mt-2" for="wallet">Wallet</label>
-        <div class="add-input " @click="toggleSubModal('wallet-modal')">
+        <div class="add-input " @click="toggleSubModal('transaction-wallet-modal')">
           {{ transaction.wallet.name || "" }}
         </div>
         <label class="font-bold mt-2" for="category">Category</label>
@@ -97,7 +98,7 @@ import worker from "@/plugin/tesseract";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
-import WalletModal from "@/components/modal/WalletModal";
+import TransactionWalletModal from "@/components/modal/TransactionWalletModal";
 import {mapGetters} from "vuex";
 
 export default {
@@ -119,6 +120,7 @@ export default {
   },
   methods: {
     toggleSubModal(modal = "") {
+      console.log(modal)
       this.modal = modal;
       this.isSubOpen = !this.isSubOpen;
     },
@@ -199,7 +201,7 @@ export default {
     Cropper,
     AppModal,
     CategoryModal,
-    WalletModal,
+    TransactionWalletModal,
     PersonModal
   },
 };

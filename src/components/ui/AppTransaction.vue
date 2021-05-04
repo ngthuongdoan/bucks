@@ -1,7 +1,7 @@
 <template>
   <div
       class=" px-3 py-2 my-3 flex w-full transaction items-center shadow bg-white"
-      @click="$helpers.to(`/transaction/${transaction.id}`)"
+      @click="openTransaction"
   >
     <img :src="transaction.category.icon" alt="" class="object-contain w-1 justify-self-start flex-grow"
          style="max-width: 30px">
@@ -16,6 +16,7 @@
 </template>
 <script>
 import * as dayjs from "dayjs"
+import {isMobile} from "mobile-device-detect";
 
 export default {
   name: 'app-transaction',
@@ -33,5 +34,14 @@ export default {
       return dayjs(this.transaction.time.toDate()).format("DD/MM/YYYY")
     }
   },
+  methods: {
+    openTransaction() {
+      if (!isMobile) {
+        this.$store.dispatch("modalModule/changeModal", {modal: "transaction-modal", param: this.transaction.id});
+      } else {
+        this.$helpers.to(`/transaction/${this.transaction.id}`)
+      }
+    }
+  }
 };
 </script>

@@ -64,8 +64,7 @@ export default {
       if (this.isMobile) {
         this.$router.push(path);
       } else {
-        console.log(modal)
-        this.$store.dispatch("modalModule/changeModal", modal)
+        this.$store.dispatch("modalModule/changeModal", {modal})
       }
     }
   },

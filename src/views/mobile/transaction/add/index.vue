@@ -56,17 +56,18 @@
             rows="5"
         ></textarea>
         <label class="font-bold mt-2" for="wallet">Wallet</label>
-        <div class="add-input " @click="$store.dispatch('modalModule/changeModal','wallet-modal')">
+        <div class="add-input " @click="$store.dispatch('modalModule/changeModal',{modal:'wallet-modal'})">
           {{ transaction.wallet.name || "" }}
         </div>
         <label class="font-bold mt-2" for="category">Category</label>
-        <div class="add-input" @click="$store.dispatch('modalModule/changeModal','category-modal')">
+        <div class="add-input" @click="$store.dispatch('modalModule/changeModal',{modal:'category-modal'})">
           {{ transaction.category.name || "" }}
         </div>
         <label class="font-bold mt-2" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
         <label v-if="isDebtLoan" class="font-bold mt-2">Person</label>
-        <div v-if="isDebtLoan" class="add-input" @click="$store.dispatch('modalModule/changeModal','person-modal')">{{
+        <div v-if="isDebtLoan" class="add-input"
+             @click="$store.dispatch('modalModule/changeModal',{modal:'person-modal'})">{{
             transaction.person.name || ""
           }}
         </div>
@@ -86,7 +87,7 @@ import worker from "@/plugin/tesseract";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
-import WalletModal from "@/components/modal/WalletModal";
+import WalletModal from "@/components/modal/TransactionWalletModal";
 import {mapGetters} from "vuex";
 
 export default {

@@ -8,6 +8,9 @@
                     format="dd/MM/yyyy"
                     input-class="text-gray-400 font-bold cursor-pointer flex-grow "
                     placeholder="Select Date"
+                    initialView="month"
+                    maximumView="month"
+                    minimumView="day"
         ></datepicker>
         <p class="font-bold flex-grow text-right w-full">
           Total:

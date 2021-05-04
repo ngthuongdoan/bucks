@@ -4,6 +4,7 @@ import "./assets/tailwind.css";
 import "./filters";
 import helpers from "./helper";
 import "./plugin";
+import "./directive"
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";

@@ -1,6 +1,7 @@
 export const state = () => ({
   modal: "",
   isOpen: false,
+  param: ""
 });
 
 export const getters = {
@@ -9,6 +10,9 @@ export const getters = {
   },
   isOpen(state) {
     return state.isOpen;
+  },
+  param(state) {
+    return state.param
   }
 };
 export const mutations = {
@@ -17,12 +21,20 @@ export const mutations = {
   },
   SET_OPEN(state) {
     state.isOpen = !state.isOpen;
+  },
+  SET_PARAM(state, param) {
+    state.param = param
   }
 };
 
 export const actions = {
-  async changeModal({commit}, modal) {
-    commit("SET_MODAL", modal);
+  async changeModal({commit}, payload) {
+    if (payload) {
+      commit("SET_MODAL", payload.modal);
+      if (Object.keys(payload).includes("param")) commit("SET_PARAM", payload.param)
+    } else {
+      commit("SET_MODAL", "")
+    }
     commit("SET_OPEN")
   },
 };

@@ -8,7 +8,7 @@
       <component :is="modal" :wallet="user.data.selectedWallet"
                  @close="$store.dispatch('modalModule/changeModal')"></component>
     </app-modal>
-    <app-header @open-modal="$store.dispatch('modalModule/changeModal',$event)"></app-header>
+    <app-header @open-modal="$store.dispatch('modalModule/changeModal', {modal:$event})"></app-header>
     <div class="absolute left-0 right-0 px-4 top-72 z-0 ">
       <div class="flex mx-7" style="top:330px">
         <datepicker v-model="selectedDate"

@@ -3,7 +3,7 @@
     <wallet-card
         :wallet="wallet"
         class="relative"
-        @click.native="$store.dispatch('modalModule/changeModal','choose-wallet')"
+        @click.native="$store.dispatch('modalModule/changeModal',{modal:'choose-wallet'})"
     ></wallet-card>
     <!--    Overview Information-->
     <overview-information></overview-information>

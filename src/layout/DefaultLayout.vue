@@ -13,7 +13,6 @@
     <main>
       <router-view></router-view>
     </main>
-
   </div>
 </template>
 
@@ -28,7 +27,10 @@ import AddWallet from "@/components/modal/AddWallet";
 import AddTransaction from "@/components/modal/AddTransaction";
 
 import AppModal from "@/components/modal/AppModal";
+import TransactionWalletModal from "@/components/modal/TransactionWalletModal";
 import WalletModal from "@/components/modal/WalletModal";
+import TransactionModal from "@/components/modal/TransactionModal";
+
 
 export default {
   computed: {
@@ -47,7 +49,9 @@ export default {
     ChooseWallet,
     AddTransaction,
     AddWallet,
-    WalletModal
+    WalletModal,
+    TransactionWalletModal,
+    TransactionModal
   }
 };
 </script>

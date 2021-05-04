@@ -43,7 +43,7 @@ import {TransactionService} from "@/service/Transaction.service";
 import Transaction from "@/model/Transaction.model";
 import Wallet from "@/model/Wallet.model";
 import {CategoryService} from "@/service/Category.service";
-import WalletModal from "@/components/modal/WalletModal";
+import WalletModal from "@/components/modal/TransactionWalletModal";
 import {mapGetters} from "vuex";
 
 export default {
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     toggleWallet(mode) {
-      this.$store.dispatch('modalModule/changeModal', 'wallet-modal');
+      this.$store.dispatch('modalModule/changeModal', {modal: 'wallet-modal'});
       this.mode = mode;
     },
     changeWallet(wallet) {
