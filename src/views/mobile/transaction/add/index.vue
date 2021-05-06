@@ -150,14 +150,17 @@ export default {
         const lines = result.data.lines;
         lines.forEach((line) => {
           const words = line.words;
-          this.transaction.detail += `${words[0].text} ${words[1].text} ${
-              words.slice(-1)[0].text
-          }\n`;
+          console.log(line)
+          this.transaction.detail += line.text
+          //
+          //     `${words[0].text} ${words[1].text} ${
+          //     words.slice(-1)[0].text
+          // }\n`;
         });
-        this.transaction.detail = result.data.words
-            .slice(-1)[0]
-            .text.trim()
-            .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), "");
+        // this.transaction.detail = result.data.words
+        //     .slice(-1)[0]
+        //     .text.trim()
+        //     .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), "");
         this.$helpers.close();
       } catch (err) {
         this.$helpers.showError(err);

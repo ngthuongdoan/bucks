@@ -1,8 +1,8 @@
 <template>
   <div
-      class="bg-light-grey w-screen h-screen min-w-full min-h-full flex flex-col justify-center items-center"
+      class="bg-light-grey w-screen min-w-full min-h-full flex flex-col justify-center items-center lg:h-screen pb-20"
   >
-    <div :class="['flex flex-col w-screen md:w-2/4 lg:pt-0', currentTabComponent === 'app-login'?'pt-0':'pt-40']">
+    <div class="flex flex-col w-screen md:w-2/4 lg:pt-0">
       <app-navigation
           :routes="routes"
           :tab="currentTabComponent"

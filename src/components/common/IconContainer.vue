@@ -25,7 +25,7 @@ export default {
   computed: {
     filterIcon() {
       return this.icons.icons.filter((item) =>
-          [ "facebook", "github", "google" ].some((d) => d === item.tags[0])
+          ["github", "google"].some((d) => d === item.tags[0])
       );
     }
   },

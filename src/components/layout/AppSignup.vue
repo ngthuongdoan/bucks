@@ -3,15 +3,15 @@
       class="relative bg-white py-10 px-20 shadow-lg"
       @submit.prevent="signup"
   >
-    <div class="flex flex-col lg:flex-row">
-      <div class="flex flex-col lg:mr-8">
+    <div class="flex flex-col lg:flex-row flex-grow">
+      <div class="flex flex-col ">
         <label class="font-bold">Email</label>
         <input v-model.trim="user.email" class="input" type="email"/>
         <br/>
         <label class="font-bold">Name</label>
         <input v-model.trim="user.name" class="input" type="text"/>
       </div>
-      <div class="flex flex-col">
+      <div class="lg:ml-8 flex flex-col flex-grow">
         <label class="font-bold">Password</label>
         <input
             ref="pass"
