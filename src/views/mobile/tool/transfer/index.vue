@@ -83,10 +83,10 @@ export default {
       transaction.category.type = type;
       if (type === "expense") {
         transaction.value = Number.parseFloat(this.transaction.value) * -1;
-        transaction.wallet = {...this.fromWallet};
+        transaction.wallet = this.fromWallet.id;
       } else {
         transaction.value = Number.parseFloat(this.transaction.value);
-        transaction.wallet = {...this.toWallet};
+        transaction.wallet = this.toWallet.id;
       }
       return transaction;
     },
