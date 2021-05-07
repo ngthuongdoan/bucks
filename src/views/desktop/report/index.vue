@@ -1,5 +1,8 @@
 <template>
   <div class="bg-white p-10 w-full h-96">
+    <select v-model="range">
+      <option v-for="(m, index) in months" :selected="(index===range)?'true':'false'" :value="index">{{ m }}</option>
+    </select>
     <v-chart v-if="option" :option="option" class="w-full h-96"/>
   </div>
 </template>
@@ -10,6 +13,9 @@ import {CanvasRenderer} from "echarts/renderers";
 import {BarChart} from "echarts/charts";
 import {GridComponent, LegendComponent, TitleComponent, TooltipComponent} from "echarts/components";
 import VChart, {THEME_KEY} from "vue-echarts";
+import {mapGetters} from "vuex";
+import {transactionStore} from "@/plugin/db";
+import * as dayjs from "dayjs";
 
 use([
   CanvasRenderer,
@@ -37,13 +43,16 @@ export default {
       return new Date(0, i).toLocaleString('en-US', {month: 'long'})
     });
 
-    let emphasisStyle = {
+    const emphasisStyle = {
       itemStyle: {
         shadowBlur: 10,
         shadowColor: 'rgba(0,0,0,0.3)'
       }
     };
     return {
+      transactions: [],
+      range: dayjs().month(),
+      months,
       option: {
         autoresize: true,
         title: {
@@ -66,7 +75,6 @@ export default {
         grid: {
           bottom: 100
         },
-
         series: [
           {
             name: 'Income',
@@ -92,6 +100,30 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      user: "userModule/user"
+    }),
+  },
+  watch: {
+    range: {
+      immediate: true,
+      handler: function () {
+        const user = this.$store.getters["userModule/user"].data;
+        this.$bind(
+            "transactions",
+            transactionStore
+                .where("uid", "==", user.uid)
+                .where("wallet", "==", user.selectedWallet)
+                .where("time", "<=", dayjs().month(this.range).endOf('month').toDate())
+                .where("time", ">=", dayjs().month(this.range).startOf('month').toDate())
+        );
+        console.log(dayjs().month(this.range).format("YYYY-MM"),
+            dayjs().month(this.range - 1).format("YYYY-MM"),
+            this.transactions)
+      }
+    }
+  },
   created() {
     setInterval(() => {
       let data0 = this.option.series[0].data;
@@ -101,7 +133,7 @@ export default {
       data1.shift();
       data1.push(-Math.random().toFixed(2));
     }, 2100);
-  }
+  },
 };
 </script>
 
