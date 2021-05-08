@@ -73,7 +73,7 @@ export default {
           left: '10%'
         },
         xAxis: {
-          data: xAxis.data,
+          data: [...xAxis.data],
           name: xAxis.name,
           axisLine: {onZero: true},
           splitLine: {show: false},
@@ -107,17 +107,8 @@ export default {
         ]
       }
     }
-  }
-  // created() {
-  //   setInterval(() => {
-  //     let data0 = this.option.series[0].data;
-  //     let data1 = this.option.series[1].data;
-  //     data0.shift();
-  //     data0.push((Math.random() * 2).toFixed(2));
-  //     data1.shift();
-  //     data1.push(-Math.random().toFixed(2));
-  //   }, 2100);
-  // },
+  },
+
 };
 </script>
 

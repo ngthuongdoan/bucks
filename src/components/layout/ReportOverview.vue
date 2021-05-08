@@ -71,10 +71,6 @@ export default {
     ...mapGetters({
       user: "userModule/user"
     }),
-    // walletId:{
-    //   get: () => this.user.data.selectedWallet,
-    //   set: (value) => {this.walletId = value}
-    // },
     dayOfMonth() {
       const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
       if (dayjs().isLeapYear()) days[1] = 29;
