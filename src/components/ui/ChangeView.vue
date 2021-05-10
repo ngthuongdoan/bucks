@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     changeView(view) {
-      this.activeOverview = view
+      this.$emit("change-view", view)
     }
   }
 }
