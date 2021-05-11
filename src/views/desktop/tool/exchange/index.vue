@@ -22,7 +22,7 @@
         <!--        -->
 
       </div>
-      <input class="w-full rounded bg-yellow-500 text-gray-50 font-bold mt-4 p-2" type="submit" value="Exchange">
+      <input class="w-full rounded mt-4 p-2 main-btn" type="submit" value="Exchange">
     </form>
     <div v-if="isSubmit"
          class="w-full max-w-screen-sm rounded shadow p-5 mt-4 mx-auto bg-white">

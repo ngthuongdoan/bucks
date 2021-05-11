@@ -1,30 +1,5 @@
 <template>
-  <div class="bg-white  w-full h-1/2 pt-5">
-    <change-view :active-overview="activeOverview" @change-view="changeView($event)"></change-view>
-    <div class="ml-10 flex gap-2 justify-start items-start">
-      <div class="flex flex-col">
-        <label class="text-sm text-gray-400 capitalize">{{ activeOverview }}</label>
-        <select v-model="range">
-          <option
-              v-for="opt in option"
-              :key="opt.value"
-              :value="opt.value"
-          >{{ opt.name }}
-          </option>
-        </select>
-      </div>
-      <div class="flex flex-col">
-        <label class="text-sm text-gray-400" for="">Wallets</label>
-        <select v-model="walletId">
-          <option
-              v-for="wallet in wallets"
-              :key="wallet.id"
-              :value="wallet.id"
-          >{{ wallet.name }}
-          </option>
-        </select>
-      </div>
-    </div>
+  <div class="bg-white w-full h-1/2 pt-5">
     <bar-chart
         :above="above"
         :below="below"
@@ -37,13 +12,10 @@
 
 <script>
 import {mapGetters} from "vuex";
-import {transactionStore, walletStore} from "@/plugin/db";
 import BarChart from "@/components/chart/BarChart";
-import store from "@/store"
 import * as dayjs from "dayjs";
 import * as isLeapYear from 'dayjs/plugin/isLeapYear';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
-import ChangeView from "@/components/ui/ChangeView";
 
 dayjs.extend(weekOfYear)
 dayjs.extend(isLeapYear)
@@ -51,15 +23,21 @@ dayjs.extend(isLeapYear)
 export default {
   components: {
     BarChart,
-    ChangeView
+  },
+  props: {
+    activeOverview: {
+      default: "month",
+      type: String
+    },
+    transactions: {
+      type: Array,
+    },
+    range: {
+      type: Number,
+    }
   },
   data() {
     return {
-      transactions: [],
-      walletId: "",
-      wallets: [],
-      range: dayjs().month(),
-      activeOverview: "month",
       above: {
         name: "income"
       },
@@ -72,14 +50,6 @@ export default {
     ...mapGetters({
       user: "userModule/user"
     }),
-    startRange() {
-      if (this.activeOverview === "week") return dayjs().week(this.range + 1).startOf("week").toDate()
-      return dayjs().set(this.activeOverview, this.range).startOf(this.activeOverview).toDate();
-    },
-    endRange() {
-      if (this.activeOverview === "week") return dayjs().week(this.range + 1).endOf("week").toDate()
-      return dayjs().set(this.activeOverview, this.range).endOf(this.activeOverview).toDate();
-    },
     xAxis() {
       let data = [];
       switch (this.activeOverview) {
@@ -106,66 +76,17 @@ export default {
       }
       return {name: this.activeOverview, data}
     },
-    option() {
-      let data = [];
-      switch (this.activeOverview) {
-        case "week": {
-          const today = new Date();
-          const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
-          const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
-          const len = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-          data = Array.from({length: len}, (_, i) => {
-            return {
-              name: `Week ${i + 1}`,
-              value: i
-            }
-          })
-          break;
-        }
-        case "month": {
-          data = Array.from({length: 12}, (item, i) => {
-            return {
-              name: new Date(0, i).toLocaleString('en-US', {month: 'long'}),
-              value: i,
-            }
-          });
-          break;
-        }
-        case "year": {
-          const min = 2000, max = dayjs().year();
-          for (let i = min; i <= max; i++) {
-            data.push({
-              name: i,
-              value: i
-            })
-          }
-          break;
-        }
-      }
-      return data;
-    }
   },
   watch: {
-    range() {
-      this.fetchTransaction()
-    },
-    walletId() {
-      this.fetchTransaction()
+    transactions: {
+      immediate: true,
+      handler: function () {
+        this.above = {...this.createData("income")}
+        this.below = {...this.createData("expense")}
+      }
     }
   },
   methods: {
-    async fetchTransaction() {
-      await this.$bind(
-          "transactions",
-          transactionStore
-              .where("uid", "==", this.user.data.uid)
-              .where("wallet", "==", this.walletId)
-              .where("time", "<=", this.endRange)
-              .where("time", ">=", this.startRange)
-      );
-      this.above = this.createData("income");
-      this.below = this.createData("expense");
-    },
     createData(type) {
       let data = []
       const start =
@@ -196,16 +117,7 @@ export default {
         data: data
       }
     },
-    changeView(view) {
-      this.activeOverview = view;
-    }
   },
-  firestore() {
-    const uid = store.getters["userModule/user"].data.uid;
-    return {
-      wallets: walletStore.where("uid", "==", uid)
-    }
-  }
 };
 </script>
 
