@@ -2,22 +2,24 @@
   <div class="ml-10 flex gap-2 justify-start items-start">
     <div class="flex flex-col">
       <label class="text-sm text-gray-400 capitalize">{{ activeOverview }}</label>
-      <select @change="setRange($event)">
+      <select class="rounded-xl px-3 py-1" @change="setRange($event)">
         <option
             v-for="opt in option"
             :key="opt.value"
             :value="opt.value"
+            :selected="opt.value===range"
         >{{ opt.name }}
         </option>
       </select>
     </div>
     <div class="flex flex-col">
       <label class="text-sm text-gray-400" for="">Wallets</label>
-      <select @change="setWallet($event)">
+      <select class="rounded-xl px-3 py-1" @change="setWallet($event)">
         <option
             v-for="wallet in wallets"
             :key="wallet.id"
             :value="wallet.id"
+            :selected="wallet.id===walletId"
         >{{ wallet.name }}
         </option>
       </select>
@@ -35,6 +37,12 @@ export default {
   props: {
     activeOverview: {
       type: String
+    },
+    range: {
+      type: Number,
+    },
+    walletId: {
+      type: String,
     }
   },
   data() {

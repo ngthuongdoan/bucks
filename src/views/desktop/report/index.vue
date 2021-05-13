@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="flex w-full">
+    <div class="flex w-full items-end">
       <change-view :active-overview="activeOverview" class="mb-3" @change-view="changeView($event)"></change-view>
       <chart-criteria
           :active-overview="activeOverview"
+          :range="range"
+          :wallet-id="walletId"
           @change-wallet="walletId=$event"
           @change-range="range=$event"
       ></chart-criteria>
@@ -47,8 +49,7 @@ export default {
   data() {
     return {
       transactions: [],
-      walletId: "",
-      range: dayjs().month(),
+      range: 0,
       activeOverview: "month"
     }
   },
@@ -56,6 +57,9 @@ export default {
     ...mapGetters({
       user: "userModule/user"
     }),
+    walletId() {
+      return this.user.data.selectedWallet;
+    },
     startRange() {
       if (this.activeOverview === "week") return dayjs().week(this.range + 1).startOf("week").toDate()
       return dayjs().set(this.activeOverview, this.range).startOf(this.activeOverview).toDate();
@@ -66,11 +70,33 @@ export default {
     },
   },
   watch: {
-    range() {
-      this.fetchTransaction()
+    range: {
+      immediate: true,
+      handler: function () {
+        this.fetchTransaction();
+      }
     },
-    walletId() {
-      this.fetchTransaction()
+    walletId: {
+      immediate: true,
+      handler: function () {
+        this.fetchTransaction()
+      }
+    },
+    activeOverview: {
+      immediate: true,
+      handler: function (view) {
+        switch (view) {
+          case "week":
+            this.range = dayjs().week() - 1;
+            break;
+          case "month":
+            this.range = dayjs().month();
+            break;
+          case "year":
+            this.range = dayjs().year();
+            break;
+        }
+      }
     }
   },
   components: {

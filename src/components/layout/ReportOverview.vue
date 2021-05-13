@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full h-1/2 pt-5">
+  <div class="bg-white mt-3 w-full h-1/2 pt-5">
     <bar-chart
         :above="above"
         :below="below"
@@ -87,6 +87,15 @@ export default {
     }
   },
   methods: {
+    generateByUnit(unit, d, type) {
+      return this.transactions
+          .filter(trans =>
+              (trans.category.type === type)
+              &&
+              dayjs(trans.time.toDate()).isSame(dayjs(d), unit)
+          )
+          .reduce((accumulator, currentValue) => accumulator + currentValue.value, 0);
+    },
     createData(type) {
       let data = []
       const start =
@@ -100,17 +109,14 @@ export default {
               :
               dayjs().set(this.activeOverview, this.range).endOf(this.activeOverview).toDate();
       //BUG: data if view="year" take all 365 days, not month
-      for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
-        const sum = this.transactions
-            .filter(trans =>
-                (trans.category.type === type)
-                &&
-                (dayjs(trans.time.toDate())
-                        .isSame(dayjs(d), "day")
-                )
-            )
-            .reduce((accumulator, currentValue) => accumulator + currentValue.value, 0);
-        data.push(sum);
+      if (this.activeOverview === "year") {
+        for (let d = start; d <= end; d.setMonth(d.getMonth() + 1)) {
+          data.push(this.generateByUnit("month", d, type));
+        }
+      } else {
+        for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
+          data.push(this.generateByUnit("day", d, type));
+        }
       }
       return {
         name: type,
