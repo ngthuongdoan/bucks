@@ -10,6 +10,7 @@ import {CanvasRenderer} from "echarts/renderers";
 import {PieChart} from "echarts/charts";
 import {LegendComponent, TitleComponent, TooltipComponent} from "echarts/components";
 import VChart, {THEME_KEY} from "vue-echarts";
+import {isMobile} from "mobile-device-detect";
 
 use([
   CanvasRenderer,
@@ -35,12 +36,20 @@ export default {
     },
     range: {
       type: Number,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
     }
   },
   computed: {
     refinedData() {
       let result = [];
-      const incomeFilter = this.transactions.filter(trans => trans.category.type === "income");
+      const incomeFilter = this.transactions.filter(trans => trans.category.type === this.type);
       const categoryList = new Set(incomeFilter.map(trans => trans.category.name));
       categoryList.forEach(category => {
         const sum = this.transactions
@@ -55,9 +64,11 @@ export default {
     },
     option() {
       const refinedData = this.refinedData;
+      const title = isMobile ? "" : this.title;
+
       return {
         title: {
-          text: 'Income Category',
+          text: title,
           left: 'center'
         },
         tooltip: {

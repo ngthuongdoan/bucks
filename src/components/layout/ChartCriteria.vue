@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-10 flex gap-2 justify-start items-start">
+  <div class="lg:ml-10 flex gap-2 justify-start items-start">
     <div class="flex flex-col">
       <label class="text-sm text-gray-400 capitalize">{{ activeOverview }}</label>
       <select class="rounded-xl px-3 py-1" @change="setRange($event)">

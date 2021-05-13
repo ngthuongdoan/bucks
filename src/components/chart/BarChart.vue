@@ -9,6 +9,7 @@ import {BarChart} from "echarts/charts";
 import {GridComponent, LegendComponent, TitleComponent, TooltipComponent} from "echarts/components";
 import VChart, {THEME_KEY} from "vue-echarts";
 import {mapGetters} from "vuex";
+import {isMobile} from "mobile-device-detect";
 
 use([
   CanvasRenderer,
@@ -55,7 +56,7 @@ export default {
           shadowColor: 'rgba(0,0,0,0.3)'
         }
       };
-      const title = this.title;
+      const title = isMobile ? "" : this.title;
       const legends = this.legends;
       const xAxis = this.xAxis;
       const above = this.above;

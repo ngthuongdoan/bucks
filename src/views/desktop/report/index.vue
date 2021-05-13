@@ -16,16 +16,20 @@
         :transactions="transactions"
     ></report-overview>
     <div class="mt-5 flex justify-center items-center w-full h-full">
-      <income-chart
+      <pie-chart
           :active-overview="activeOverview"
           :range="range"
           :transactions="transactions"
-      ></income-chart>
-      <expense-chart
+          title="Income Category"
+          type="income"
+      ></pie-chart>
+      <pie-chart
           :active-overview="activeOverview"
           :range="range"
           :transactions="transactions"
-      ></expense-chart>
+          title="Expense Category"
+          type="expense"
+      ></pie-chart>
     </div>
   </div>
 </template>
@@ -33,8 +37,7 @@
 <script>
 import ReportOverview from "@/components/layout/ReportOverview";
 import ChangeView from "@/components/ui/ChangeView";
-import IncomeChart from "@/components/layout/IncomeChart";
-import ExpenseChart from "@/components/layout/ExpenseChart";
+import PieChart from "@/components/layout/PieChart";
 import * as dayjs from "dayjs";
 import {mapGetters} from "vuex";
 import {transactionStore} from "@/plugin/db";
@@ -103,8 +106,7 @@ export default {
     ChartCriteria,
     ReportOverview,
     ChangeView,
-    IncomeChart,
-    ExpenseChart
+    PieChart,
   },
   methods: {
     changeView(view) {
