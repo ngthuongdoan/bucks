@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="flex gap-3">
-      <button :class="['btn ', activeOverview==='week'&&'btn-active main-btn']" @click="activeOverview='week'">Week
-      </button>
-      <button :class="['btn ', activeOverview==='month'&&'btn-active main-btn']" @click="activeOverview='month'">Month
-      </button>
-      <button :class="['btn ', activeOverview==='year'&&'btn-active main-btn']" @click="activeOverview='year'">Year
-      </button>
-    </div>
+    <change-view :active-overview="activeOverview"/>
     <div class="grid grid-cols-2 grid-rows-2 gap-2 w-max mt-3">
       <h1 class="font-bold text-lg">INCOME </h1><span
         class="ml-3 font-bold text-lg text-green-400">{{ 3000000 | separateValue }}</span>
@@ -22,8 +15,11 @@
 </template>
 
 <script>
+import ChangeView from "@/components/ui/ChangeView";
+
 export default {
   name: "OverviewInformation",
+  components: {ChangeView},
   data() {
     return {
       activeOverview: "week"
@@ -32,6 +28,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

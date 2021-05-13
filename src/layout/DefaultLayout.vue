@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-300 min-h-screen min-w-full">
-    <action-button class="absolute right-10 bottom-10"></action-button>
+    <action-button class="fixed right-10 bottom-10 z-50"></action-button>
     <app-modal
         v-if="isOpen"
         class="z-50 absolute "
