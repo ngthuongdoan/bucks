@@ -37,7 +37,7 @@
 <script>
 import ReportOverview from "@/components/layout/ReportOverview";
 import ChangeView from "@/components/ui/ChangeView";
-import PieChart from "@/components/layout/PieChart";
+import PieChart from "@/components/chart/PieChart";
 import * as dayjs from "dayjs";
 import {mapGetters} from "vuex";
 import {transactionStore} from "@/plugin/db";
@@ -50,19 +50,18 @@ dayjs.extend(isLeapYear)
 
 export default {
   data() {
+    const walletId = this.$store.getters["userModule/user"].data.selectedWallet;
     return {
       transactions: [],
       range: 0,
-      activeOverview: "month"
+      activeOverview: "month",
+      walletId,
     }
   },
   computed: {
     ...mapGetters({
       user: "userModule/user"
     }),
-    walletId() {
-      return this.user.data.selectedWallet;
-    },
     startRange() {
       if (this.activeOverview === "week") return dayjs().week(this.range + 1).startOf("week").toDate()
       return dayjs().set(this.activeOverview, this.range).startOf(this.activeOverview).toDate();

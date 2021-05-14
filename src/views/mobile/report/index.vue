@@ -45,7 +45,7 @@
 <script>
 import ReportOverview from "@/components/layout/ReportOverview";
 import ChangeView from "@/components/ui/ChangeView";
-import PieChart from "@/components/layout/PieChart";
+import PieChart from "@/components/chart/PieChart";
 import * as dayjs from "dayjs";
 import {mapGetters} from "vuex";
 import {transactionStore} from "@/plugin/db";
