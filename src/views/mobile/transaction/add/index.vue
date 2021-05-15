@@ -89,6 +89,7 @@ import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
 import WalletModal from "@/components/modal/TransactionWalletModal";
 import {mapGetters} from "vuex";
+import {ImageService} from "@/service/Image.service";
 
 export default {
   data() {
@@ -144,9 +145,11 @@ export default {
       this.recognize();
     },
     async recognize() {
+      const image = ImageService.preprocessImage(this.cropper.canvas);
+      this.transaction.image = image.src
       this.$helpers.loading();
       try {
-        const result = await worker.recognize(this.cropper.canvas.toDataURL("image/png", 1));
+        const result = await worker.recognize(image);
         const lines = result.data.lines;
         lines.forEach((line) => {
           const words = line.words;
