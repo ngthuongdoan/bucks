@@ -136,7 +136,7 @@
     }
 
     .grayscale {
-        filter: grayscale(20%);
+        filter: grayscale(100%);
     }
 
     .shake {

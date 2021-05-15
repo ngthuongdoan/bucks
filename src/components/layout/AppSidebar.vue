@@ -26,7 +26,8 @@
     </ul>
     <ul class="">
       <li class="mb-3">
-        <button class="rounded-full w-full py-2 px-7 bg-gray-300 text-sm flex gap-2">
+        <button class="rounded-full w-full py-2 px-7 bg-gray-300 text-sm flex gap-2"
+                @click="$store.dispatch('modalModule/changeModal',{modal:'setting-modal'})">
           <img
               class="object-contain"
               src="https://img.icons8.com/small/16/000000/gear.png"/>

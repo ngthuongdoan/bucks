@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Monday is start of week",
+    "value": false
+  },
+  {
+    "name": "Show the negative sign for transactions",
+    "value": true
+  },
+  {
+    "name": "Use Beta features",
+    "value": false
+  }
+]
