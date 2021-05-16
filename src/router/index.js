@@ -1,11 +1,11 @@
 import firebase from "firebase";
 import Vue from "vue";
 import VueRouter from "vue-router";
-import {isMobile} from "mobile-device-detect";
+import {isMobileOnly} from "mobile-device-detect";
 import features from "@/config/features.json"
 
 Vue.use(VueRouter);
-const getFolder = () => isMobile ? 'mobile' : 'desktop';
+const getFolder = () => isMobileOnly ? 'mobile' : 'desktop';
 const featureRoutes = features.map(f => {
   return {
     path: f.path,

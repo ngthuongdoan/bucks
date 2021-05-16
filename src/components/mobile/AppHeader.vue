@@ -2,7 +2,7 @@
   <div class="fixed">
     <img alt="" class="w-screen" src="~@/assets/img/top-panel.svg"/>
     <h1
-        class="absolute z-10 top-5 left-5  text-xl text-white font-monoton"
+        class="absolute z-10 top-5 left-5 text-xl text-white font-monoton"
     >
       bucks
     </h1>

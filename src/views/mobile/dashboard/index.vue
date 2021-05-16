@@ -9,7 +9,7 @@
                  @close="$store.dispatch('modalModule/changeModal')"></component>
     </app-modal>
     <app-header @open-modal="$store.dispatch('modalModule/changeModal', {modal:$event})"></app-header>
-    <div class="absolute left-0 right-0 px-4 top-72 z-0 ">
+    <div class="absolute left-0 right-0 px-4 z-0" style="top: 290px">
       <div class="flex mx-7" style="top:330px">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
