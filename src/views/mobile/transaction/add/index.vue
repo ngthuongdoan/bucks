@@ -43,7 +43,7 @@
             class="cropper"
             @change="change"
         ></cropper>
-        <button v-if="transaction.image" type="button" @click="crop">
+        <button v-if="transaction.image" class="main-btn" type="button" @click="recognize">
           Crop it
         </button>
       </div>
@@ -140,13 +140,8 @@ export default {
     change(result) {
       this.cropper = Object.assign({}, result);
     },
-    crop() {
-      this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
-      this.recognize();
-    },
     async recognize() {
       const image = ImageService.preprocessImage(this.cropper.canvas);
-      this.transaction.image = image.src
       this.$helpers.loading();
       try {
         const result = await worker.recognize(image);
