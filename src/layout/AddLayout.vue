@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen overflow-auto w-screen">
+  <div class="h-screen overflow-auto w-screen pb-20">
     <div
         class="bg-gray-600 text-white flex justify-around items-center w-full py-5"
     >

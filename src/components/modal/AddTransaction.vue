@@ -94,7 +94,6 @@ import CategoryModal from "@/components/modal/CategoryModal";
 import PersonModal from "@/components/modal/PersonModal";
 import Transaction from "@/model/Transaction.model";
 import {Timestamp, walletStore} from "@/plugin/db";
-import worker from "@/plugin/tesseract";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
@@ -153,32 +152,6 @@ export default {
     },
     change(result) {
       this.cropper = {...result};
-    },
-    crop() {
-      this.transaction.image = this.cropper.canvas.toDataURL("image/png", 1);
-      this.recognize();
-    },
-    async recognize() {
-      this.$helpers.loading();
-      try {
-        const result = await worker.recognize(this.cropper.canvas.toDataURL("image/png", 1));
-        const lines = result.data.lines;
-        lines.forEach((line) => {
-          const words = line.words;
-          this.transaction.detail += `${words[0].text} ${words[1].text} ${
-              words.slice(-1)[0].text
-          }\n`;
-        });
-        this.transaction.detail = result.data.words
-            .slice(-1)[0]
-            .text.trim()
-            .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), "");
-        this.$helpers.close();
-      } catch (err) {
-        this.$helpers.showError(err);
-      } finally {
-        await worker.terminate();
-      }
     },
     async addTransaction() {
       this.$helpers.loading();

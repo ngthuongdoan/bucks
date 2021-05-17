@@ -43,7 +43,7 @@
             class="cropper"
             @change="change"
         ></cropper>
-        <button v-if="transaction.image" class="main-btn" type="button" @click="recognize">
+        <button v-if="transaction.image" class="main-btn w-full p-2" type="button" @click="recognize">
           Crop it
         </button>
       </div>
@@ -83,13 +83,14 @@ import PersonModal from "@/components/modal/PersonModal";
 import AddLayout from "@/layout/AddLayout";
 import Transaction from "@/model/Transaction.model";
 import {Timestamp, walletStore} from "@/plugin/db";
-import worker from "@/plugin/tesseract";
+import {load} from "@/plugin/tesseract";
 import {Cropper} from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import {TransactionService} from "@/service/Transaction.service";
 import WalletModal from "@/components/modal/TransactionWalletModal";
 import {mapGetters} from "vuex";
 import {ImageService} from "@/service/Image.service";
+
 
 export default {
   data() {
@@ -127,7 +128,6 @@ export default {
     changePerson(person) {
       this.transaction.person = {id: person.id, ...person}
       this.$store.dispatch("modalModule/changeModal")
-
     },
     uploadImage() {
       const image = this.$refs.fileInput.files[0];
@@ -142,28 +142,32 @@ export default {
     },
     async recognize() {
       const image = ImageService.preprocessImage(this.cropper.canvas);
+      const worker = await load();
+
+      this.transaction.detail = "";
       this.$helpers.loading();
       try {
         const result = await worker.recognize(image);
         const lines = result.data.lines;
         lines.forEach((line) => {
           const words = line.words;
-          console.log(line)
+          console.log(words)
           this.transaction.detail += line.text
-          //
-          //     `${words[0].text} ${words[1].text} ${
-          //     words.slice(-1)[0].text
-          // }\n`;
         });
-        // this.transaction.detail = result.data.words
-        //     .slice(-1)[0]
-        //     .text.trim()
-        //     .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), "");
+        const tempValue = Number.parseFloat(result.data.words
+            .slice(-1)[0]
+            .text.trim()
+            .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), ""));
+        if (isNaN(tempValue)) {
+          throw new Error("Sorry please input the value manually");
+        } else {
+          this.transaction.value = tempValue
+        }
+        await worker.terminate();
         this.$helpers.close();
       } catch (err) {
-        this.$helpers.showError(err);
-      } finally {
         await worker.terminate();
+        this.$helpers.showError(err);
       }
     },
     async addTransaction() {
