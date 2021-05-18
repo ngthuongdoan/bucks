@@ -6,11 +6,12 @@
         class="z-50 absolute "
         @away="$store.dispatch('modalModule/changeModal')"
     >
-      <component :is="modal"></component>
+        <component :is="modal"></component>
     </app-modal>
     <app-sidebar></app-sidebar>
     <!--    <app-right-sidebar></app-right-sidebar>-->
     <main>
+      {{ $t("message") }}
       <router-view></router-view>
     </main>
   </div>
