@@ -10,6 +10,11 @@
     "icon": "https://img.icons8.com/android/96/000000/money-transfer.png"
   },
   {
+    "name": "FAQ",
+    "path": "faq",
+    "icon": "https://img.icons8.com/ios/50/000000/faq.png"
+  },
+  {
     "name": "Debt/Loan Management",
     "path": "debt-loan",
     "icon": "https://img.icons8.com/fluent-systems-filled/96/000000/debt.png"

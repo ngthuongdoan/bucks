@@ -24,8 +24,8 @@ export default {
   },
   methods: {
     async handleTool(tool) {
-      if (tool.path === "debt-loan") {
-        await this.$router.push("/tool/debt-loan");
+      if (["debt-loan", "faq"].includes(tool.path)) {
+        await this.$router.push(`/tool/${tool.path}`);
         return;
       }
       await this.$store.dispatch("modalModule/changeModal", {modal: tool.path})

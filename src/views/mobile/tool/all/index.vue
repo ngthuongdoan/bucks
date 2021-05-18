@@ -1,7 +1,11 @@
 <template>
   <div>
     <ul class="lg:inline-flex lg:flex-wrap lg:gap-5 lg:items-center">
-      <router-link v-for="feat in features" :key="feat.path" :to="'/tool/' + feat.path" class="card" tag="li">
+      <router-link
+          v-for="feat in features"
+          :key="feat.path"
+          :to="'/tool/' + feat.path"
+          class="card" tag="li">
         <img
             :src="feat.icon"
             alt=""
