@@ -29,14 +29,20 @@
       ></a>
       <a
           slot="item_3"
-          class="fa "
           @click="handle(`/budget/add`, 'add-budget')"
-      ></a>
+      >
+        <img class="object-contain w-6 transform translate-x-3 translate-y-2"
+             src="https://img.icons8.com/ios/50/000000/money-bag-shekel-.png"/>
+      </a>
       <a
           slot="item_2"
           class="fa fa-sign-out"
+          aria-hidden="true"
           @click="logout"
-      ></a>
+      >
+        <img class="object-contain w-5 transform  translate-y-1" data-v-7d025640=""
+             src="https://img.icons8.com/android/16/000000/logout-rounded-left.png">
+      </a>
     </circle-menu>
   </div>
 </template>
