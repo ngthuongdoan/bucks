@@ -30,6 +30,7 @@ import AddTransaction from "@/components/modal/AddTransaction";
 import AppModal from "@/components/modal/AppModal";
 import TransactionWalletModal from "@/components/modal/TransactionWalletModal";
 import WalletModal from "@/components/modal/WalletModal";
+import Budget from "@/components/modal/BudgetModal";
 import TransactionModal from "@/components/modal/TransactionModal";
 import SettingModal from "@/components/modal/SettingModal";
 import Exchange from "@/components/modal/ExchangeModal";
@@ -55,7 +56,8 @@ export default {
     TransactionWalletModal,
     TransactionModal,
     Exchange,
-    SettingModal
+    SettingModal,
+    Budget
   }
 };
 </script>

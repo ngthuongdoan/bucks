@@ -7,7 +7,7 @@ export const db = firebase.firestore();
 
 export const walletStore = db.collection("wallets");
 export const personStore = db.collection("persons");
-
+export const budgetStore = db.collection("budgets");
 export const categoryStore = db.collection("categories");
 export const userStore = db.collection("users");
 export const transactionStore = db.collection("transactions");
