@@ -30,7 +30,7 @@
       <a
           slot="item_3"
           class="fa "
-          @click="toggleCircle"
+          @click="handle(`/budget/add`, 'add-budget')"
       ></a>
       <a
           slot="item_2"
