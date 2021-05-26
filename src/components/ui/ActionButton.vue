@@ -34,8 +34,8 @@
       ></a>
       <a
           slot="item_2"
-          class="fa"
-          @click="toggleCircle"
+          class="fa fa-sign-out"
+          @click="logout"
       ></a>
     </circle-menu>
   </div>
@@ -45,6 +45,7 @@
 import CircleMenu from "vue-circle-menu";
 import {isMobile} from 'mobile-device-detect';
 import {directive as onClickAway} from "vue-clickaway";
+import {logout} from "@/plugin/oauth2";
 
 export default {
   data() {
@@ -56,6 +57,7 @@ export default {
     onClickAway
   },
   methods: {
+    logout,
     toggleCircle() {
       this.$refs.circle.open = false;
     },
