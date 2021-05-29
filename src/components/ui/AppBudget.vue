@@ -13,7 +13,7 @@
           budget.total | separateValue
         }}</span>
     </div>
-    <k-progress :percent="budget.currentValue*100/budget.total"></k-progress>
+    <k-progress :percent="budget.currentVa.lue*100/budget.total"></k-progress>
   </div>
 </template>
 

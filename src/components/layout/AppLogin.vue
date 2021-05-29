@@ -23,11 +23,15 @@
           @click="showPassword"
       ></i>
     </div>
+
     <input
-        class="bg-green-500 py-3 font-semibold mt-4 cursor-pointer w-full"
+        class="bg-green-500 py-3 font-semibold my-4 cursor-pointer w-full"
         type="submit"
         value="Login"
     />
+    <a
+        class="text-sm text-blue-500 italic underline justify-self-start text-left cursor-pointer"
+        @click="forgotPassword">You don't remember your password?</a>
   </form>
 </template>
 
@@ -48,6 +52,9 @@ export default {
     showPassword() {
       this.isShow = !this.isShow;
       this.$refs.pass.type = this.isShow ? "text" : "password";
+    },
+    forgotPassword() {
+      this.$store.dispatch("modalModule/changeModal", {modal: "forgot-modal"})
     },
     async login() {
       try {
