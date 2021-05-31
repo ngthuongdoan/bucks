@@ -1,14 +1,5 @@
 <template>
   <div>
-    <app-modal
-        v-if="isSubOpen"
-        :is-category="this.modal==='category-modal'"
-        @away="toggleSubModal"
-    >
-      <component
-          :is="modal"
-      ></component>
-    </app-modal>
     <form id="addForm" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="addBudget">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
