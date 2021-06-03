@@ -87,7 +87,7 @@ import PersonModal from '@/components/modal/PersonModal'
 import AddLayout from '@/layout/AddLayout'
 import Transaction from '@/model/Transaction.model'
 import {Timestamp, walletStore} from '@/plugin/db'
-import {load} from '@/plugin/tesseract'
+import {load, postProcessing} from '@/plugin/tesseract'
 import {Cropper} from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
 import {TransactionService} from '@/service/Transaction.service'
@@ -136,6 +136,8 @@ export default {
       this.$store.dispatch('modalModule/changeModal')
     },
     uploadImage() {
+      this.$helpers.loading();
+
       const image = this.$refs.fileInput.files[0]
       const reader = new FileReader()
       reader.readAsDataURL(image)
@@ -160,6 +162,7 @@ export default {
             // Upload completed successfully, now we can get the download URL
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
               this.transaction.images.push(downloadURL)
+              this.$helpers.close();
             })
           },
       )
@@ -168,28 +171,39 @@ export default {
       this.cropper = Object.assign({}, result)
     },
     async recognize() {
+      this.$helpers.loading()
+
       const image = ImageService.preprocessImage(this.cropper.canvas)
       const worker = await load()
+      const form_data = {
+        'file': image, 'data': JSON.stringify([
+          {
+            "filename": image.name,
+            "object": [{
+              "name": "category1",
+              "ocr_text": "text inside the bounding box",
+              "bndbox": {"xmin": 1, "ymin": 1, "xmax": 100, "ymax": 100}
+            }]
+          }])
+      }
+      const response = await this.$axios.post(
+          'https://app.nanonets.com/api/v2/OCR/Model/455272b6-027f-482c-b48d-84e83ac5eefa/UploadFile/',
+          form_data,
+          {
+            headers: {
+              'Authorization': 'Basic ' + Buffer.from('0XsNAZRP0jxilEgteq5XD_L81GqdU5Mg' + ':').toString('base64')
+            }
+          }
+      );
+      console.log(response);
 
       this.transaction.detail = ''
-      this.$helpers.loading()
       try {
         const result = await worker.recognize(image)
         const lines = result.data.lines
-        lines.forEach((line) => {
-          const words = line.words
-          console.log(words)
-          this.transaction.detail += line.text
-        })
-        const tempValue = Number.parseFloat(result.data.words
-            .slice(-1)[0]
-            .text.trim()
-            .replace(new RegExp('[\u{0080}-\u{FFFF}]', 'gu'), ''))
-        if (isNaN(tempValue)) {
-          throw new Error('Sorry please input the value manually')
-        } else {
-          this.transaction.value = tempValue
-        }
+        const {detail, value} = postProcessing(lines);
+        this.transaction.detail = detail;
+        this.transaction.value = value;
         await worker.terminate()
         this.$helpers.close()
       } catch (err) {
