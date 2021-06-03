@@ -178,7 +178,7 @@ export default {
       const form_data = {
         'file': image, 'data': JSON.stringify([
           {
-            "filename": image.name,
+            "filename": image.filename,
             "object": [{
               "name": "category1",
               "ocr_text": "text inside the bounding box",
@@ -191,7 +191,7 @@ export default {
           form_data,
           {
             headers: {
-              'Authorization': 'Basic ' + Buffer.from('0XsNAZRP0jxilEgteq5XD_L81GqdU5Mg' + ':').toString('base64')
+              'Authorization': 'Basic ' + Buffer.from(process.env.VUE_APP_NANONEST_API_KEY + ':').toString('base64')
             }
           }
       );
