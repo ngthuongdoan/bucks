@@ -7,6 +7,8 @@
     >
       <component
           :is="modal"
+          :detail="transaction.detail"
+          @change-detail="transaction.detail = $event"
           @change-wallet="changeWallet($event)"
           @change-person="changePerson($event)"
           @change-category="changeCategory($event)"
@@ -38,12 +40,12 @@
             @change="uploadImage"
         />
         <cropper
-            v-if="transaction.image"
-            :src="transaction.image"
+            v-if="ocr"
+            :src="ocr"
             class="cropper"
             @change="change"
         ></cropper>
-        <button v-if="transaction.image" class="main-btn w-full p-2" type="button" @click="recognize">
+        <button v-if="ocr" class="main-btn w-full p-2" type="button" @click="recognize">
           Crop it
         </button>
       </div>
@@ -54,21 +56,23 @@
             v-model="transaction.detail"
             class="add-input"
             rows="5"
+            @click="$store.dispatch('modalModule/changeModal',{modal:'blank-modal'})"
         ></textarea>
-        <label class="font-bold mt-2" for="wallet">Wallet</label>
+        <label class="font-bold mt-2">Wallet</label>
         <div class="add-input " @click="$store.dispatch('modalModule/changeModal',{modal:'wallet-modal'})">
-          {{ wallet.name || "" }}
+          {{ wallet.name || '' }}
         </div>
-        <label class="font-bold mt-2" for="category">Category</label>
+        <label class="font-bold mt-2">Category</label>
         <div class="add-input" @click="$store.dispatch('modalModule/changeModal',{modal:'category-modal'})">
-          {{ transaction.category.name || "" }}
+          {{ transaction.category.name || '' }}
         </div>
         <label class="font-bold mt-2" for="createdDate">Date</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
         <label v-if="isDebtLoan" class="font-bold mt-2">Person</label>
-        <div v-if="isDebtLoan" class="add-input"
-             @click="$store.dispatch('modalModule/changeModal',{modal:'person-modal'})">{{
-            transaction.person.name || ""
+        <div
+            v-if="isDebtLoan" class="add-input"
+            @click="$store.dispatch('modalModule/changeModal',{modal:'person-modal'})">{{
+            transaction.person.name || ''
           }}
         </div>
       </div>
@@ -77,120 +81,143 @@
 </template>
 
 <script>
-import AppModal from "@/components/modal/AppModal";
-import CategoryModal from "@/components/modal/CategoryModal";
-import PersonModal from "@/components/modal/PersonModal";
-import AddLayout from "@/layout/AddLayout";
-import Transaction from "@/model/Transaction.model";
-import {Timestamp, walletStore} from "@/plugin/db";
-import {load} from "@/plugin/tesseract";
-import {Cropper} from "vue-advanced-cropper";
-import "vue-advanced-cropper/dist/style.css";
-import {TransactionService} from "@/service/Transaction.service";
-import WalletModal from "@/components/modal/TransactionWalletModal";
-import {mapGetters} from "vuex";
-import {ImageService} from "@/service/Image.service";
-
+import AppModal from '@/components/modal/AppModal'
+import CategoryModal from '@/components/modal/CategoryModal'
+import PersonModal from '@/components/modal/PersonModal'
+import AddLayout from '@/layout/AddLayout'
+import Transaction from '@/model/Transaction.model'
+import {Timestamp, walletStore} from '@/plugin/db'
+import {load} from '@/plugin/tesseract'
+import {Cropper} from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css'
+import {TransactionService} from '@/service/Transaction.service'
+import WalletModal from '@/components/modal/TransactionWalletModal'
+import {mapGetters} from 'vuex'
+import {ImageService} from '@/service/Image.service'
+import {storage} from '@/plugin/storage'
+import BlankModal from "@/components/modal/BlankModal";
 
 export default {
   data() {
     return {
       transaction: new Transaction(),
       cropper: {},
-      tempDate: "",
+      tempDate: '',
+      ocr: '',
       wallets: [],
       wallet: {},
-      isDebtLoan: false
-    };
+      isDebtLoan: false,
+    }
   },
   computed: {
     ...mapGetters({
-      modal: "modalModule/modal",
-      isOpen: "modalModule/isOpen"
-    })
+      modal: 'modalModule/modal',
+      isOpen: 'modalModule/isOpen',
+    }),
   },
   watch: {
-    "transaction.wallet"(newValue) {
+    'transaction.wallet'(newValue) {
       this.$bind('wallet', walletStore.doc(newValue))
-    }
+    },
   },
   methods: {
     changeWallet(wallet) {
-      this.transaction.wallet = wallet.id;
-      this.$store.dispatch("modalModule/changeModal")
+      this.transaction.wallet = wallet.id
+      this.$store.dispatch('modalModule/changeModal')
     },
     changeCategory(category) {
-      this.transaction.category = {id: category.id, ...category};
-      this.isDebtLoan = this.$getConst("DEBT_LOAN_DICT").includes(category.type);
-      this.$store.dispatch("modalModule/changeModal")
+      this.transaction.category = {id: category.id, ...category}
+      this.isDebtLoan = this.$getConst('DEBT_LOAN_DICT').includes(category.type)
+      this.$store.dispatch('modalModule/changeModal')
 
     },
     changePerson(person) {
       this.transaction.person = {id: person.id, ...person}
-      this.$store.dispatch("modalModule/changeModal")
+      this.$store.dispatch('modalModule/changeModal')
     },
     uploadImage() {
-      const image = this.$refs.fileInput.files[0];
-      let reader = new FileReader();
-      reader.readAsDataURL(image);
+      const image = this.$refs.fileInput.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(image)
       reader.onload = (evt) => {
-        this.transaction.image = evt.target.result;
-      };
+        this.ocr = evt.target.result
+      }
+      const metadata = {
+        contentType: 'image/jpeg',
+      }
+
+// Upload file and metadata to the object 'images/mountains.jpg'
+      let uploadTask = storage.ref('transaction/' + image.name).put(image, metadata)
+
+// Listen for state changes, errors, and completion of the upload.
+      uploadTask.on('state_changed', // or 'state_changed'
+          () => {
+          },
+          (error) => {
+            this.$helpers.showError(error)
+          },
+          () => {
+            // Upload completed successfully, now we can get the download URL
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              this.transaction.images.push(downloadURL)
+            })
+          },
+      )
     },
     change(result) {
-      this.cropper = Object.assign({}, result);
+      this.cropper = Object.assign({}, result)
     },
     async recognize() {
-      const image = ImageService.preprocessImage(this.cropper.canvas);
-      const worker = await load();
+      const image = ImageService.preprocessImage(this.cropper.canvas)
+      const worker = await load()
 
-      this.transaction.detail = "";
-      this.$helpers.loading();
+      this.transaction.detail = ''
+      this.$helpers.loading()
       try {
-        const result = await worker.recognize(image);
-        const lines = result.data.lines;
+        const result = await worker.recognize(image)
+        const lines = result.data.lines
         lines.forEach((line) => {
-          const words = line.words;
+          const words = line.words
           console.log(words)
           this.transaction.detail += line.text
-        });
+        })
         const tempValue = Number.parseFloat(result.data.words
             .slice(-1)[0]
             .text.trim()
-            .replace(new RegExp("[\u{0080}-\u{FFFF}]", "gu"), ""));
+            .replace(new RegExp('[\u{0080}-\u{FFFF}]', 'gu'), ''))
         if (isNaN(tempValue)) {
-          throw new Error("Sorry please input the value manually");
+          throw new Error('Sorry please input the value manually')
         } else {
           this.transaction.value = tempValue
         }
-        await worker.terminate();
-        this.$helpers.close();
+        await worker.terminate()
+        this.$helpers.close()
       } catch (err) {
-        await worker.terminate();
-        this.$helpers.showError(err);
+        await worker.terminate()
+        this.$helpers.showError(err)
       }
     },
     async addTransaction() {
-      this.$helpers.loading();
+      this.$helpers.loading()
       try {
         //Refined Data
-        this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
+        this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)))
         this.transaction.value = Number.parseFloat(this.transaction.value) *
-            (this.$getConst("INCREASE_DICT").includes(this.transaction.category.type) ? 1 : -1)
+            (this.$getConst('INCREASE_DICT').includes(this.transaction.category.type) ? 1 : -1)
 
-        if (this.$getConst("DEBT_DICT").includes(this.transaction.category.type)) {
-          this.transaction.person.totalDebt += this.transaction.value;
-        } else if (this.$getConst("LOAN_DICT").includes(this.transaction.category.type)) {
-          this.transaction.person.totalLoan += this.transaction.value;
+        if (this.$getConst('DEBT_DICT').includes(this.transaction.category.type)) {
+          this.transaction.person.totalDebt += this.transaction.value
+        } else if (this.$getConst('LOAN_DICT').includes(this.transaction.category.type)) {
+          this.transaction.person.totalLoan += this.transaction.value
         }
 
-        await TransactionService.addNew(this.transaction);
-        this.$helpers.showSuccess();
-        await this.$helpers.to("/dashboard");
+        await TransactionService.addNew(this.transaction)
+        this.$helpers.showSuccess()
+        await this.$helpers.to('/dashboard')
       } catch (e) {
-        this.$helpers.showError(e);
+        this.$helpers.showError(e)
       }
-    }
+    },
   },
   components: {
     Cropper,
@@ -198,9 +225,10 @@ export default {
     AppModal,
     CategoryModal,
     WalletModal,
-    PersonModal
+    PersonModal,
+    BlankModal,
   },
-};
+}
 </script>
 
 <style>
