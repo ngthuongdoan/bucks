@@ -175,27 +175,6 @@ export default {
 
       const image = ImageService.preprocessImage(this.cropper.canvas)
       const worker = await load()
-      const form_data = {
-        'file': image, 'data': JSON.stringify([
-          {
-            "filename": image.filename,
-            "object": [{
-              "name": "category1",
-              "ocr_text": "text inside the bounding box",
-              "bndbox": {"xmin": 1, "ymin": 1, "xmax": 100, "ymax": 100}
-            }]
-          }])
-      }
-      const response = await this.$axios.post(
-          'https://app.nanonets.com/api/v2/OCR/Model/455272b6-027f-482c-b48d-84e83ac5eefa/UploadFile/',
-          form_data,
-          {
-            headers: {
-              'Authorization': 'Basic ' + Buffer.from(process.env.VUE_APP_NANONEST_API_KEY + ':').toString('base64')
-            }
-          }
-      );
-      console.log(response);
 
       this.transaction.detail = ''
       try {
