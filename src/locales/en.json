@@ -13,6 +13,16 @@
     "debtloan": "Debt/Loan",
     "total": "Total"
   },
+  "report": {
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "wallets": "Wallets"
+  },
+  "account": {
+    "hi": "Hi",
+    "name": "Name"
+  },
   "navigation": {
     "debt": "Debt",
     "loan": "Loan"

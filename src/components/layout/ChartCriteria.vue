@@ -1,7 +1,7 @@
 <template>
   <div class="lg:ml-10 flex gap-2 justify-start items-start">
     <div class="flex flex-col">
-      <label class="text-sm text-gray-400 capitalize">{{ activeOverview }}</label>
+      <label class="text-sm text-gray-400 capitalize">{{ $t(`report.${activeOverview}`) }}</label>
       <select class="rounded-xl px-3 py-1" @change="setRange($event)">
         <option
             v-for="opt in option"
@@ -13,7 +13,7 @@
       </select>
     </div>
     <div class="flex flex-col">
-      <label class="text-sm text-gray-400" for="">Wallets</label>
+      <label class="text-sm text-gray-400" for="">{{ $t("report.wallets") }}</label>
       <select class="rounded-xl px-3 py-1" @change="setWallet($event)">
         <option
             v-for="wallet in wallets"

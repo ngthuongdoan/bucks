@@ -13,6 +13,16 @@
     "debtloan": "Vay/nợ",
     "total": "Tổng cộng"
   },
+  "report": {
+    "week": "Tuần",
+    "month": "Tháng",
+    "year": "Năm",
+    "wallets": "Ví"
+  },
+  "account": {
+    "hi": "Chào",
+    "name": "Tên"
+  },
   "navigation": {
     "debt": "Vay",
     "loan": "Nợ"
