@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow px-3 py-2">
+  <div :class="['shadow-lg px-3 py-2', budget.status==='inactive'?'grayscale':'']">
     <div
         class="my-3 flex w-full transaction items-center bg-white"
     >

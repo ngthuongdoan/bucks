@@ -26,7 +26,7 @@ export default {
     const uid = store.getters["userModule/user"].data.uid;
     console.log(uid)
     return {
-      budgets: budgetStore.where("uid", "==", uid)
+      budgets: budgetStore.where("uid", "==", uid).orderBy("dueDate", "asc")
     }
   }
 }

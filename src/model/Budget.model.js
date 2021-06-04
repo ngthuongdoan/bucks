@@ -13,7 +13,7 @@ class Budget {
     this.uid = store.getters["userModule/user"].data.uid;
     this.beginDate = beginDate;
     this.dueDate = dueDate;
-
+    this.status = "active"
     this.category = {};
   }
 }

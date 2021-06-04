@@ -55,7 +55,6 @@ import {mapGetters} from "vuex";
 import Budget from "@/model/Budget.model";
 import {BudgetService} from "@/service/Budget.service";
 
-
 export default {
   data() {
     return {

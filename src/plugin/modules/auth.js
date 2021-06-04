@@ -16,10 +16,9 @@ Auth.onAuthStateChanged(async (u) => {
     const userData = await snapshot.data();
     await store.dispatch("userModule/fetchUser", {selectedWallet: userData.selectedWallet, ...user});
     await router.replace("/dashboard");
-
   } else {
-    console.log("%cNot Logged In", "color:red;font-family:system-ui;font-size:4rem;-webkit-text-stroke: 1px black;font-weight:bold")
-
+    console.log("%cNot Logged In", "color:red;font-family:system-ui;font-size:4rem;-webkit-text-stroke: 1px black;font-weight:bold");
+    await router.replace("/login");
   }
 });
 
