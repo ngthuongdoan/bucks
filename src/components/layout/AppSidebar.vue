@@ -21,7 +21,7 @@
             :src="item.icon"
             class="w-7"
         />
-        <h1>{{ item.name }}</h1>
+        <h1>{{ $t(`sidebar.${item.name}`) }}</h1>
       </router-link>
     </ul>
     <ul class="">
@@ -31,13 +31,13 @@
           <img
               class="object-contain"
               src="https://img.icons8.com/small/16/000000/gear.png"/>
-          Setting
+          {{ $t("sidebar.setting") }}
         </button>
       </li>
       <li>
         <button class="rounded-full w-full py-2 px-7 bg-red-500 text-sm flex gap-2" @click="logout">
           <img class="object-contain" src="https://img.icons8.com/android/16/000000/logout-rounded-left.png"/>
-          Sign out
+          {{ $t("sidebar.logout") }}
         </button>
       </li>
     </ul>

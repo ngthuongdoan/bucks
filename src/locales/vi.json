@@ -1,0 +1,10 @@
+{
+  "sidebar": {
+    "dashboard": "Trang chủ",
+    "report": "Thống kê",
+    "tools": "Công cụ",
+    "account": "Tài khoản",
+    "setting": "Cài đặt",
+    "logout": "Đăng xuất"
+  }
+}

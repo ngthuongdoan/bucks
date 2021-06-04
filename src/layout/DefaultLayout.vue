@@ -11,7 +11,6 @@
     <app-sidebar></app-sidebar>
     <!--    <app-right-sidebar></app-right-sidebar>-->
     <main>
-      <!--      {{ $t("message")}}-->
       <router-view></router-view>
     </main>
   </div>

@@ -1,3 +1,10 @@
 {
-  "message": "hello i18n !!"
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "report": "Report",
+    "tools": "Tools",
+    "account": "Account",
+    "setting": "Setting",
+    "logout": "Sign Out"
+  }
 }
