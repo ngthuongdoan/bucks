@@ -12,7 +12,7 @@
         ]"
           @click="$emit('route', route.dictionary)"
       >
-        {{ route.name.toUpperCase() }}
+        {{ $t(`navigation.${route.name}`).toUpperCase() }}
       </li>
     </ul>
   </nav>

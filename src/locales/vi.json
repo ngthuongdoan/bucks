@@ -6,5 +6,27 @@
     "account": "Tài khoản",
     "setting": "Cài đặt",
     "logout": "Đăng xuất"
-  }
+  },
+  "dashboard": {
+    "budgets": "Ngân sách",
+    "transactions": "Giao dịch",
+    "debtloan": "Vay/nợ",
+    "total": "Tổng cộng"
+  },
+  "navigation": {
+    "debt": "Vay",
+    "loan": "Nợ"
+  },
+  "walletOptions": {
+    "editWallet": "Sửa ví",
+    "transferMoney": "Chuyển tiền",
+    "adjustBalance": "Điều chỉnh",
+    "deleteWallet": "Xoá ví"
+  },
+  "modal": {
+    "language": "Ngôn ngữ"
+  },
+  "noTransaction": "Không có giao dịch",
+  "noBudgets": "Không có ngân sách",
+  "noDebtLoan": "Không có vay nợ"
 }

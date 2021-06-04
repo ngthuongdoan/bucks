@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-80 max-h-80 ">
-    <h1 class="font-bold text-gray-700 text-lg">Transactions</h1>
+    <h1 class="font-bold text-gray-700 text-lg">{{ $t("dashboard.transactions") }}</h1>
     <div class=" bg-white w-full h-full rounded-xl overflow-auto custom-scrollbar relative">
       <div class="fixed p-3 pb-0 rounded-t-xl bg-white flex">
         <datepicker v-model="selectedDate"
@@ -10,13 +10,14 @@
                     placeholder="Select Date"
         ></datepicker>
         <p class="font-bold flex-grow text-right w-full">
-          Total:
+          {{ $t("dashboard.total") }}:
           <span :class="(total<0)?'text-red-400':'text-green-400'">{{
               total | separateValue
             }}</span></p>
       </div>
       <div class="py-10 ">
-        <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">No Transactions</div>
+        <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">{{ $t("noTransaction") }}
+        </div>
         <app-transaction v-for="trans in filterTransactions" v-else :key="trans.id" :transaction="trans"
                          class="shadow-none"/>
       </div>

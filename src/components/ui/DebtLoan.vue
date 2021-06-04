@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full h-80 max-h-80">
-    <h1 class="font-bold text-gray-700 text-lg">Debt/Loan</h1>
+    <h1 class="font-bold text-gray-700 text-lg">{{ $t("dashboard.debtloan") }}</h1>
     <div class="bg-white w-full h-full rounded-xl">
       <app-navigation
           :routes="routes"

@@ -6,5 +6,27 @@
     "account": "Account",
     "setting": "Setting",
     "logout": "Sign Out"
-  }
+  },
+  "dashboard": {
+    "budgets": "Budgets",
+    "transactions": "Transactions",
+    "debtloan": "Debt/Loan",
+    "total": "Total"
+  },
+  "navigation": {
+    "debt": "Debt",
+    "loan": "Loan"
+  },
+  "walletOptions": {
+    "editWallet": "Edit Wallet",
+    "transferMoney": "Transfer Money",
+    "adjustBalance": "Adjust Balance",
+    "deleteWallet": "Delete Wallet"
+  },
+  "modal": {
+    "language": "Language"
+  },
+  "noTransaction": "No Transaction",
+  "noBudgets": "No Budgets",
+  "noDebtLoan": "No Debt/Loan"
 }
