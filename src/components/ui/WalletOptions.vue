@@ -6,7 +6,7 @@
         class="px-3 py-2 cursor-pointer"
         @click.stop="handleOption(opt.config)"
     >
-      {{ opt.name }}
+      {{ $t(`walletOptions.${opt.name}`) }}
     </li>
   </ul>
 </template>

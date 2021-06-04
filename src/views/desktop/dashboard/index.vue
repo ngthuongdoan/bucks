@@ -6,7 +6,7 @@
         @click.native="$store.dispatch('modalModule/changeModal',{modal:'choose-wallet'})"
     ></wallet-card>
     <!--    Overview Information-->
-    <overview-information></overview-information>
+    <all-budgets></all-budgets>
     <!--    All Trans-->
     <all-transaction></all-transaction>
     <!--    Debt/Loan-->
@@ -21,7 +21,7 @@ import {transactionStore, walletStore} from "@/plugin/db";
 import store from "@/store"
 import WalletCard from "@/components/ui/WalletCard";
 import {mapGetters} from "vuex";
-import OverviewInformation from "@/components/ui/OverviewInformation";
+import AllBudgets from "@/components/ui/AllBudgets";
 import AllTransaction from "@/components/ui/AllTransaction";
 import DebtLoan from "@/components/ui/DebtLoan";
 
@@ -44,7 +44,7 @@ export default {
   },
   components: {
     WalletCard,
-    OverviewInformation,
+    AllBudgets,
     AllTransaction,
     DebtLoan,
 
