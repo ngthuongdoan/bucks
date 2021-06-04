@@ -20,14 +20,14 @@
           :active-overview="activeOverview"
           :range="range"
           :transactions="transactions"
-          title="Income Category"
+          :title="$t('report.incomeCategory')"
           type="income"
       ></pie-chart>
       <pie-chart
           :active-overview="activeOverview"
           :range="range"
           :transactions="transactions"
-          title="Expense Category"
+          :title="$t('report.expenseCategory')"
           type="expense"
       ></pie-chart>
     </div>

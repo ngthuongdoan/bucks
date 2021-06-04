@@ -14,10 +14,17 @@
     "total": "Total"
   },
   "report": {
+    "day": "Day",
+    "date": "Date",
     "week": "Week",
     "month": "Month",
     "year": "Year",
-    "wallets": "Wallets"
+    "wallets": "Wallets",
+    "overview": "Income-Expense",
+    "income": "income",
+    "expense": "expense",
+    "incomeCategory": "Income Category",
+    "expenseCategory": "Expense Category"
   },
   "account": {
     "hi": "Hi",

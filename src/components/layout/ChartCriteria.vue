@@ -6,8 +6,8 @@
         <option
             v-for="opt in option"
             :key="opt.value"
-            :value="opt.value"
             :selected="opt.value===range"
+            :value="opt.value"
         >{{ opt.name }}
         </option>
       </select>
@@ -18,8 +18,8 @@
         <option
             v-for="wallet in wallets"
             :key="wallet.id"
-            :value="wallet.id"
             :selected="wallet.id===walletId"
+            :value="wallet.id"
         >{{ wallet.name }}
         </option>
       </select>
@@ -61,16 +61,17 @@ export default {
           const len = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
           data = Array.from({length: len}, (_, i) => {
             return {
-              name: `Week ${i + 1}`,
+              name: `${this.$t("report.week")} ${i + 1}`,
               value: i
             }
           })
           break;
         }
         case "month": {
+          const locales = this.$i18n.locale === "en" ? "en-US" : "vi-VN";
           data = Array.from({length: 12}, (item, i) => {
             return {
-              name: new Date(0, i).toLocaleString('en-US', {month: 'long'}),
+              name: new Date(0, i).toLocaleString(locales, {month: 'long'}),
               value: i,
             }
           });

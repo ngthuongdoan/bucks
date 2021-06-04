@@ -14,10 +14,17 @@
     "total": "Tổng cộng"
   },
   "report": {
+    "day": "Ngày",
+    "date": "Ngày",
     "week": "Tuần",
     "month": "Tháng",
     "year": "Năm",
-    "wallets": "Ví"
+    "wallets": "Ví",
+    "overview": "Báo cáo thu chi tổng quan",
+    "income": "thu",
+    "expense": "chi",
+    "incomeCategory": "Danh mục thu",
+    "expenseCategory": "Danh mục chi"
   },
   "account": {
     "hi": "Chào",

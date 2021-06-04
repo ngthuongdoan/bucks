@@ -3,9 +3,9 @@
     <bar-chart
         :above="above"
         :below="below"
-        :legends="['income', 'expense']"
+        :legends="[$t('report.income'),$t('report.expense')]"
         :x-axis="xAxis"
-        title="Monthly Income-Expense"
+        :title="$t('report.overview')"
     ></bar-chart>
   </div>
 </template>
@@ -37,12 +37,15 @@ export default {
     }
   },
   data() {
+    const income = this.$t('report.income');
+    const expense = this.$t('report.expense');
+
     return {
       above: {
-        name: "income"
+        name: income
       },
       below: {
-        name: "expense"
+        name: expense
       }
     }
   },
@@ -52,29 +55,33 @@ export default {
     }),
     xAxis() {
       let data = [];
+      const locales = this.$i18n.locale === "en" ? "en-US" : "vi-VN";
+
       switch (this.activeOverview) {
         case "week": {
           data = Array.from(
               {length: 7},
-              (_, i) => new Date(0, 0, i).toLocaleString('en-US', {weekday: 'long'})
+              (_, i) => new Date(0, 0, i).toLocaleString(locales, {weekday: 'long'})
           )
-          break;
+          return {name: this.$t("report.day"), data}
         }
         case "month": {
           const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
           if (dayjs().isLeapYear()) days[1] = 29;
           data = Array.from({length: days[this.range]}, (_, i) => i + 1)
-          break;
+          return {name: this.$t("report.date"), data}
+
         }
         case "year": {
           data = Array.from(
               {length: 12},
-              (_, i) => new Date(0, i).toLocaleString('en-US', {month: 'long'})
+              (_, i) => new Date(0, i).toLocaleString(locales, {month: 'long'})
           )
-          break;
+          return {name: this.$t("report.month"), data}
         }
+        default:
+          return {};
       }
-      return {name: this.activeOverview, data}
     },
   },
   watch: {
@@ -108,7 +115,7 @@ export default {
               dayjs().week(this.range + 1).endOf("week").toDate()
               :
               dayjs().set(this.activeOverview, this.range).endOf(this.activeOverview).toDate();
-      //BUG: data if view="year" take all 365 days, not month
+
       if (this.activeOverview === "year") {
         for (let d = start; d <= end; d.setMonth(d.getMonth() + 1)) {
           data.push(this.generateByUnit("month", d, type));
@@ -118,8 +125,9 @@ export default {
           data.push(this.generateByUnit("day", d, type));
         }
       }
+      const name = this.$t(`report.${type}`)
       return {
-        name: type,
+        name,
         data: data
       }
     },
