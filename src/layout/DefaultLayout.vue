@@ -3,15 +3,15 @@
     <action-button class="fixed right-10 bottom-10 z-50"></action-button>
     <app-modal
         v-if="isOpen"
-        class="z-50 absolute "
+        class="z-50 absolute"
         @away="$store.dispatch('modalModule/changeModal')"
     >
-        <component :is="modal"></component>
+      <component :is="modal"></component>
     </app-modal>
     <app-sidebar></app-sidebar>
     <!--    <app-right-sidebar></app-right-sidebar>-->
     <main>
-<!--      {{ $t("message")}}-->
+      <!--      {{ $t("message")}}-->
       <router-view></router-view>
     </main>
   </div>
@@ -26,6 +26,7 @@ import AdjustBalance from "@/components/modal/AdjustBalanceModal";
 import ChooseWallet from "@/components/modal/ChooseWallet";
 import AddWallet from "@/components/modal/AddWallet";
 import AddTransaction from "@/components/modal/AddTransaction";
+import AddBudget from "@/components/modal/AddBudget";
 
 import AppModal from "@/components/modal/AppModal";
 import TransactionWalletModal from "@/components/modal/TransactionWalletModal";
@@ -57,7 +58,8 @@ export default {
     TransactionModal,
     Exchange,
     SettingModal,
-    Budget
+    Budget,
+    AddBudget
   }
 };
 </script>

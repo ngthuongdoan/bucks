@@ -1,45 +1,39 @@
-import {transactionStore} from "@/plugin/db";
+import {budgetStore, transactionStore} from "@/plugin/db";
 import {WalletService} from "@/service/Wallet.service";
 import {PersonService} from "@/service/Person.service";
 
 export const TransactionService = {
-    async addNew(transaction) {
-        //Refined Data
-        await transactionStore.add({...transaction});
-        if (Object.keys(transaction.person).length !== 0) {
-            await PersonService.updatePersonTotal(transaction.person.id, transaction.person)
-        }
-        //Update Wallet Value
-        await WalletService.updateWalletAmount(
-            transaction.value,
-            transaction.category.type,
-            transaction.wallet
-        );
-    },
-    // async delete(w) {
-    //     return new Promise((resolve, reject) => {
-    //         if (!(new RegExp("overview", "gi").test(w.name))) {
-    //             const uid = store.getters["userModule/user"].data.uid;
-    //             const walletsRef = walletStore.where("uid", "==", uid).where("name", "==", w.name).limit(1);
-    //             walletsRef.get().then(querySnapshot => {
-    //                 querySnapshot.forEach(doc => {
-    //                     doc.ref.delete();
-    //                     this.changeBackToOverView().then(() => {
-    //                         resolve();
-    //                     });
-    //                 });
-    //             });
-    //         } else {
-    //             reject(new Error("Not permit"));
-    //         }
-    //     });
-    // }
-    async delete(transaction) {
-        await transactionStore.doc(transaction.id).delete();
-        await WalletService.updateWalletAmount(
-          -transaction.value,
-          transaction.category.type,
-          transaction.wallet
-        );
+  async addNew(transaction) {
+    //Refined Data
+    await transactionStore.add({...transaction});
+    if (Object.keys(transaction.person).length !== 0) {
+      await PersonService.updatePersonTotal(transaction.person.id, transaction.person)
     }
+    //Update Wallet Value
+    await WalletService.updateWalletAmount(
+      transaction.value,
+      transaction.category.type,
+      transaction.wallet
+    );
+
+    //Update budget
+    const budgetRef = budgetStore
+      .where("uid", "==", transaction.uid)
+      .where("category.id", "==", transaction.category.id)
+
+    const budgetSnapshot = await budgetRef.get();
+
+    if (budgetSnapshot.docs.length !== 0) {
+      const currentValue = budgetSnapshot.docs[0].data().currentValue + Math.abs(transaction.value);
+      await budgetStore.doc(budgetSnapshot.docs[0].id).update({currentValue})
+    }
+  },
+  async delete(transaction) {
+    await transactionStore.doc(transaction.id).delete();
+    await WalletService.updateWalletAmount(
+      -transaction.value,
+      transaction.category.type,
+      transaction.wallet
+    );
+  }
 };

@@ -9,7 +9,9 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import {i18n} from './i18n'
+import VueCurrencyInput from 'vue-currency-input'
 
+Vue.use(VueCurrencyInput)
 if (process.env.VUE_APP_CURRENCY) store.dispatch("currencyModule/fetchCurrency").then();
 
 Vue.config.productionTip = false;

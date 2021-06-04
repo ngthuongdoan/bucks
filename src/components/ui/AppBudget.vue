@@ -9,11 +9,20 @@
         <h1 class="font-bold text-sm m-0">{{ budget.category.name }}</h1>
         <p class="italic text-xs text-gray-400">{{ refinedBeginDay }}<span class="mx-2">-</span>{{ refinedDueDay }}</p>
       </div>
-      <span class="flex-grow justify-self-end text-right font-bold text-green-400">{{
-          budget.total | separateValue
-        }}</span>
+      <div class="flex-grow justify-self-end text-right text-sm font-bold ">
+        <span class="text-green-400">{{
+            budget.total | separateValue
+          }}</span><br>
+        <span class="text-gray-400">{{
+            budget.currentValue | separateValue
+          }}</span>
+      </div>
+
     </div>
-    <k-progress :percent="budget.currentVa.lue*100/budget.total"></k-progress>
+    <k-progress
+        :percent="percent"
+        :status="status"
+    ></k-progress>
   </div>
 </template>
 
@@ -35,6 +44,14 @@ export default {
     },
     refinedDueDay() {
       return dayjs(this.budget.dueDate.toDate()).format("DD/MM/YYYY")
+    },
+    percent() {
+      return (this.budget.currentValue < this.budget.total) ? (this.budget.currentValue * 100 / this.budget.total).toFixed(2) : 100;
+    },
+    status() {
+      if (this.percent < 80) return "success";
+      if (this.percent >= 100) return "error";
+      return "warning"
     }
   },
   components: {

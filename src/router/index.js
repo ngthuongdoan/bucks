@@ -3,6 +3,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import {isMobileOnly} from "mobile-device-detect";
 import features from "@/config/features.json"
+import store from "@/store"
 
 Vue.use(VueRouter);
 const getFolder = () => isMobileOnly ? 'mobile' : 'desktop';
@@ -60,6 +61,14 @@ const routes = [
           {
             path: "loan/:id",
             component: () => import(`../views/${getFolder()}/tool/debt-loan/loan/_id`)
+          },
+          {
+            path: "budget/add",
+            component: () => import(`../views/${getFolder()}/tool/budget/add`)
+          },
+          {
+            path: "loan/:id",
+            component: () => import(`../views/${getFolder()}/tool/budget/_id`)
           }
         ]
       },
@@ -121,11 +130,12 @@ if (process.env.VUE_APP_GUARD === "true") {
       await next();
       return;
     }
+    const uid = store.getters["userModule/user"].data.uid;
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-    if (requiresAuth && !await firebase.getCurrentUser()) {
-      await next("/login");
-    } else {
+    if (requiresAuth && await firebase.getCurrentUser() && uid) {
       await next();
+    } else {
+      await next("/login");
     }
   });
 }

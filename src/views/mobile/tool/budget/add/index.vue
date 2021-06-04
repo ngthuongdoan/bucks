@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <add-layout title="Add Budget">
     <app-modal
         v-if="isSubOpen"
         :is-category="true"
@@ -44,7 +44,7 @@
         </button>
       </div>
     </form>
-  </div>
+  </add-layout>
 </template>
 
 <script>
@@ -54,7 +54,7 @@ import {Timestamp} from "@/plugin/db";
 import {mapGetters} from "vuex";
 import Budget from "@/model/Budget.model";
 import {BudgetService} from "@/service/Budget.service";
-
+import AddLayout from "@/layout/AddLayout";
 
 export default {
   data() {
@@ -102,6 +102,7 @@ export default {
     }
   },
   components: {
+    AddLayout,
     AppModal,
     CategoryModal,
   },

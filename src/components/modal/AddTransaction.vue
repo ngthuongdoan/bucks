@@ -33,7 +33,7 @@
         ></textarea>
         <label class="font-bold mt-2">Wallet</label>
         <div
-            class="add-input " @click="toggleSubModal(' transaction-wallet-modal')">
+            class="add-input " @click="toggleSubModal('transaction-wallet-modal')">
           {{ wallet.name || '' }}
         </div>
         <label class="font-bold mt-2">Category</label>
