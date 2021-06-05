@@ -26,7 +26,7 @@ export default {
   methods: {
     to(id) {
       const path = this.isDebt ? "debt/" : "loan/";
-      this.$helpers.to(path + id);
+      this.$helpers.to("/tool/" + path + id);
     }
   }
 }

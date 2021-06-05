@@ -6,7 +6,7 @@
       <img :src="budget.category.icon" alt="" class="object-contain w-1 justify-self-start flex-grow"
            style="max-width: 30px">
       <div class="ml-3 flex-grow">
-        <h1 class="font-bold text-sm m-0">{{ budget.category.name }}</h1>
+        <h1 class="font-bold text-sm m-0">{{ budget.category.name[$i18n.locale] }}</h1>
         <p class="italic text-xs text-gray-400">{{ refinedBeginDay }}<span class="mx-2">-</span>{{ refinedDueDay }}</p>
       </div>
       <div class="flex-grow justify-self-end text-right text-sm font-bold ">
