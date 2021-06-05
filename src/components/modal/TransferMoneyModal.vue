@@ -17,28 +17,28 @@
         </label>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
-        <label class="font-bold  mt-2" for="wallet">From</label>
+        <label class="font-bold  mt-2" for="wallet">{{ $t("from") }}</label>
         <div class="add-input " @click="toggleWallet('from')">{{ fromWallet.name || "" }}</div>
-        <label class="font-bold  mt-2" for="wallet">To</label>
+        <label class="font-bold  mt-2" for="wallet">{{ $t("to") }}</label>
         <div class="add-input " @click="toggleWallet('to')">{{ toWallet.name || "" }}</div>
-        <label class="font-bold self-start" for="note">Note</label>
+        <label class="font-bold self-start" for="note">{{ $t("note") }}</label>
         <textarea
             id="note"
             v-model="transaction.detail"
             class="add-input"
         ></textarea>
-        <label class="font-bold  " for="createdDate">Date</label>
+        <label class="font-bold  " for="createdDate">{{ $t("date") }}</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
       </div>
       <div class="flex w-full items-center justify-center gap-3">
         <input
             class="main-btn p-3 w-2/6"
             type="submit"
-            value="Transfer">
+            :value="$t('transfer')">
         <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
                 type="button"
                 @click="$store.dispatch('modalModule/changeModal')">
-          Cancel
+          {{ $t("cancel") }}
         </button>
       </div>
     </form>

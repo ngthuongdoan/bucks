@@ -13,16 +13,16 @@
       <div class="flex items-center justify-center mt-5 gap-10">
         <custom-select
             :currency="from"
-            label="From"
+            :label="$t('from')"
             @select-handle="selectFrom($event)"/>
         <custom-select
             :currency="to"
-            label="To"
+            :label="$t('to')"
             @select-handle="selectTo($event)"/>
         <!--        -->
 
       </div>
-      <input class="w-full rounded mt-4 p-2 main-btn" type="submit" value="Exchange">
+      <input :value="$t('modal.exchangeModal.exchange')" class="w-full rounded mt-4 p-2 main-btn" type="submit">
     </form>
     <div v-if="isSubmit"
          class="w-full max-w-screen-sm rounded shadow p-5 mt-4 mx-auto bg-white">
@@ -42,15 +42,15 @@
           {{ Object.values(result.rates)[0].currency_name }}
         </h1>
         <div class="col-span-3 justify-center">
-          <span class="font-bold">Rate:</span> {{
+          <span class="font-bold">{{ $t("modal.exchangeModal.rate") }}:</span> {{
             Number.parseInt(Object.values(result.rates)[0].rate) | separateValue
           }}
         </div>
       </div>
       <div class="flex w-full justify-evenly mt-4">
-        <h3 class="text-md"><span class="font-bold">From:</span> {{ Number.parseFloat(result.amount) }}
+        <h3 class="text-md"><span class="font-bold">{{ $t("from") }}:</span> {{ Number.parseFloat(result.amount) }}
           {{ result.base_currency_code.toUpperCase() }}</h3>
-        <h3 class="text-md"><span class="font-bold">To:</span>
+        <h3 class="text-md"><span class="font-bold">{{ $t("to") }}:</span>
           {{ Number.parseInt(Object.values(result.rates)[0].rate_for_amount) | separateValue }}
           {{ Object.keys(result.rates)[0].toUpperCase() }}</h3>
       </div>

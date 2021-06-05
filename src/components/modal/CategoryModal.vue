@@ -9,12 +9,12 @@
             @route="currentCategory = $event"
         ></app-navigation>
         <input v-model="searchCriteria" class="px-5 py-2" placeholder="search..." type="search">
-        <ul class="max-h-96 overflow-y-scroll">
+        <ul class="max-h-96 overflow-y-scroll custom-scrollbar">
           <li v-for="(item, i) in filterCategory" :key="i"
               class="w-full px-5 py-2 rounded-2xl my-2 cursor-pointer flex"
               @click="changeCategory(item)">
             <img :src="item.icon" alt="" class="object-contain max-h-6 h-6 mr-4"/>
-            <h1 class="capitalize">{{ item.name }}</h1>
+            <h1 class="capitalize">{{ item.name[$i18n.locale] }}</h1>
           </li>
         </ul>
       </div>
@@ -56,7 +56,7 @@ export default {
         return this.categories
             .filter(category =>
                 this.currentCategory.includes(category.type)
-                && (this.searchCriteria.toLowerCase().split('').every(v => category.name.toLowerCase().includes(v)))
+                && (this.searchCriteria.toLowerCase().split('').every(v => category.name[this.$i18n.locale].toLowerCase().includes(v)))
             )
             .sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
       }

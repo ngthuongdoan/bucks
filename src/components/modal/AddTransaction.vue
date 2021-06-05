@@ -15,34 +15,35 @@
     <form id="addForm" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="addTransaction">
       <div class="flex flex-col justify-center items-center mb-4 gap-2">
         <label>
-          <input
-              v-model.number="transaction.value"
-              v-unsigned
+          <currency-input
+              v-model="transaction.value"
+              :currency="null"
+              :precision="0"
+              :value-as-integer="true"
               class="add-input text-4xl font-bold text-center m-0"
-              type="text"
           />
         </label>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
-        <label class="font-bold self-start" for="note">Note</label>
+        <label class="font-bold self-start" for="note">{{ $t("note") }}</label>
         <textarea
             id="note"
             v-model="transaction.detail"
             class="add-input"
             rows="5"
         ></textarea>
-        <label class="font-bold mt-2">Wallet</label>
+        <label class="font-bold mt-2">{{ $t("wallet") }}</label>
         <div
             class="add-input " @click="toggleSubModal('transaction-wallet-modal')">
           {{ wallet.name || '' }}
         </div>
-        <label class="font-bold mt-2">Category</label>
+        <label class="font-bold mt-2">{{ $t("category") }}</label>
         <div class="add-input" @click="toggleSubModal('category-modal')">
-          {{ transaction.category.name || '' }}
+          {{ transaction.category.name[$i18n.locale] || '' }}
         </div>
-        <label class="font-bold mt-2" for="createdDate">Date</label>
+        <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
-        <label v-if="isDebtLoan" class="font-bold mt-2">Person</label>
+        <label v-if="isDebtLoan" class="font-bold mt-2">{{ $t("person") }}</label>
         <div v-if="isDebtLoan" class="add-input" @click="toggleSubModal('person-modal')">{{
             transaction.person.name || ''
           }}
@@ -53,12 +54,12 @@
         <input
             class="main-btn p-3 w-2/6"
             type="submit"
-            value="Create">
+            :value="$t('create')">
         <button
             class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
             type="button"
             @click="$store.dispatch('modalModule/changeModal')">
-          Cancel
+          {{ $t("cancel") }}
         </button>
       </div>
     </form>

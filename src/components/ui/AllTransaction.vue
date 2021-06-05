@@ -5,6 +5,7 @@
       <div class="fixed p-3 pb-0 rounded-t-xl bg-white flex">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
+                    :language="languages[$i18n.locale]"
                     format="dd/MM/yyyy"
                     input-class="text-gray-400 font-bold cursor-pointer flex-grow "
                     placeholder="Select Date"
@@ -32,11 +33,14 @@ import {transactionStore} from "@/plugin/db";
 import AppTransaction from "@/components/ui/AppTransaction";
 import Datepicker from "vuejs-datepicker";
 import {mapGetters} from "vuex";
+import {en, vi} from 'vuejs-datepicker/dist/locale'
 
 export default {
   name: "AllTransaction",
   data() {
+    const languages = {en, vi};
     return {
+      languages,
       selectedDate: new Date(),
       transactions: [],
       filterTransactions: [],

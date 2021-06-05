@@ -12,7 +12,7 @@
         </label>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
-        <label class="font-bold self-start" for="note">Note</label>
+        <label class="font-bold self-start" for="note">{{ $t("note") }}</label>
         <textarea
             id="note"
             v-model="transaction.detail"
@@ -20,23 +20,23 @@
             readonly
             rows="5"
         ></textarea>
-        <label class="font-bold mt-2" for="wallet">Wallet</label>
+        <label class="font-bold mt-2" for="wallet">{{ $t("wallet") }}</label>
         <div class="add-input ">
           {{ wallet.name }}
         </div>
-        <label class="font-bold mt-2" for="category">Category</label>
+        <label class="font-bold mt-2" for="category">{{ $t("category") }}</label>
         <div class="add-input">
           {{ transaction.category.name || "" }}
         </div>
-        <label class="font-bold mt-2" for="createdDate">Date</label>
+        <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
         <input id="createdDate" v-model="tempDate" class="add-input" readonly type="date"/>
-        <label v-if="transaction.person" class="font-bold mt-2">Person</label>
+        <label v-if="transaction.person" class="font-bold mt-2">{{ $t("person") }}</label>
         <div v-if="transaction.person" class="add-input">{{
             transaction.person.name || ""
           }}
         </div>
       </div>
-      <button class="main-btn p-3" type="button" @click="deleteTransaction">Delete</button>
+      <button class="main-btn p-3" type="button" @click="deleteTransaction">{{ $t("delete") }}</button>
     </form>
   </div>
 </template>

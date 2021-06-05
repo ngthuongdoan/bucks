@@ -23,24 +23,24 @@
         </label>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
-        <label class="font-bold mt-2">Category</label>
+        <label class="font-bold mt-2">{{ $t("category") }}</label>
         <div class="add-input" @click="toggleSubModal('category-modal')">
-          {{ budget.category.name || "" }}
+          {{ budget.category.name[$i18n.locale] || "" }}
         </div>
-        <label class="font-bold mt-2">Start Date</label>
+        <label class="font-bold mt-2">{{ $t("modal.budgetModal.startDate") }}</label>
         <input v-model="tempStartDate" class="add-input" type="date"/>
-        <label class="font-bold mt-2">Due Date</label>
+        <label class="font-bold mt-2">{{ $t("modal.budgetModal.dueDate") }}</label>
         <input v-model="tempDueDate" class="add-input" type="date"/>
       </div>
       <div class="flex w-full items-center justify-center gap-3">
         <input
             class="main-btn p-3 w-2/6"
             type="submit"
-            value="Create">
+            :value="$t('create')">
         <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
                 type="button"
                 @click="$store.dispatch('modalModule/changeModal')">
-          Cancel
+          {{ $t("cancel") }}
         </button>
       </div>
     </form>

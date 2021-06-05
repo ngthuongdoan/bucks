@@ -34,10 +34,12 @@
     "faq": "FAQ"
   },
   "account": {
-    "hi": "Chào",
-    "name": "Tên"
+    "hi": "Chào"
   },
   "navigation": {
+    "income": "thu",
+    "expense": "chi",
+    "debtloan": "Vay/nợ",
     "debt": "Vay",
     "loan": "Nợ"
   },
@@ -48,8 +50,40 @@
     "deleteWallet": "Xoá ví"
   },
   "modal": {
+    "walletModal": {
+      "currency": "Tiền tệ",
+      "type": "Loại ví",
+      "none": "Không",
+      "color": "Màu ví",
+      "initial": "G.tri ban đầu"
+    },
+    "exchangeModal": {
+      "exchange": "Chuyển đổi",
+      "rate": "Tỉ lệ"
+    },
+    "budgetModal": {
+      "startDate": "Ngày bắt đầu",
+      "dueDate": "Ngày kết thúc"
+    },
     "language": "Ngôn ngữ"
   },
+  "enterValue": "Nhập giá trị",
+  "earn": "Nhận",
+  "pay": "Trả",
+  "name": "Tên",
+  "note": "Ghi chú",
+  "wallet": "Ví",
+  "category": "Danh mục",
+  "date": "Ngày",
+  "person": "Cùng với",
+  "from": "Từ",
+  "to": "Đến",
+  "delete": "Xoá",
+  "transfer": "Chuyển",
+  "change": "Thay đổi",
+  "create": "Tạo",
+  "cancel": "Trở về",
+  "optional": "Tuỳ chọn",
   "noTransaction": "Không có giao dịch",
   "noBudgets": "Không có ngân sách",
   "noDebtLoan": "Không có vay nợ"

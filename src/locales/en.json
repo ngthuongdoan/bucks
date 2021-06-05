@@ -34,10 +34,10 @@
     "faq": "FAQ"
   },
   "account": {
-    "hi": "Hi",
-    "name": "Name"
+    "hi": "Hi"
   },
   "navigation": {
+
     "debt": "Debt",
     "loan": "Loan"
   },
@@ -48,8 +48,39 @@
     "deleteWallet": "Delete Wallet"
   },
   "modal": {
+    "walletModal": {
+      "currency": "Currency",
+      "type": "Type",
+      "none": "None",
+      "color": "Color",
+      "initial": "Initial"
+    },
+    "exchangeModal": {
+      "exchange": "Exchange",
+      "rate": "Rate"
+    },
+    "budgetModal": {
+      "startDate": "Start Date",
+      "dueDate": "Due Date"
+    },
     "language": "Language"
   },
+  "enterValue": "Enter value",
+  "earn": "Earn",
+  "pay": "Pay",
+  "from": "From",
+  "to": "To",
+  "name": "Name",
+  "note": "Note",
+  "wallet": "Wallet",
+  "category": "Category",
+  "date": "Date",
+  "person": "Person",
+  "transfer": "Transfer",
+  "delete": "Delete",
+  "change": "Change",
+  "cancel": "Cancel",
+  "optional": "Optional",
   "noTransaction": "No Transaction",
   "noBudgets": "No Budgets",
   "noDebtLoan": "No Debt/Loan"

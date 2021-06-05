@@ -5,17 +5,17 @@
         @away="isPay = !isPay"
     >
       <form class="flex flex-col w-full px-10 justify-center items-center" @submit.prevent="earn">
-        <label for="">Enter value</label>
+        <label for="">{{ $t("enterValue") }}</label>
         <input v-model="amount" class="input" step="0.1" type="number">
         <div class="flex w-full items-center justify-center gap-3">
           <input
               class="p-3 bg-control hover:bg-control-light font-bold text-md w-2/6 cursor-pointer ease-in-out duration-300 transition-all"
               type="submit"
-              value="EARN">
+              :value="$t('earn')">
           <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
                   type="button"
                   @click="isPay = !isPay">
-            Cancel
+            {{ $t("cancel") }}
           </button>
         </div>
       </form>
@@ -34,8 +34,11 @@
       ></app-transaction>
     </div>
     <div class="w-full flex px-5 gap-5">
-      <button class="w-1/2 bg-gray-50 p-3 rounded-full font-bold" @click="$helpers.back()">BACK</button>
-      <button class="w-1/2 bg-control text-light-grey p-3 rounded-full font-bold" @click="isPay = !isPay">EARN</button>
+      <button class="w-1/2 bg-gray-50 p-3 rounded-full font-bold" @click="$helpers.back()">{{ $t("cancel") }}</button>
+      <button class="w-1/2 bg-control text-light-grey p-3 rounded-full font-bold" @click="isPay = !isPay">{{
+          $t("earn")
+        }}
+      </button>
     </div>
   </div>
 </template>

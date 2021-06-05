@@ -9,7 +9,7 @@
         <p class="italic text-sm text-gray-500">{{ currentUser.data.uid }}</p>
       </div>
       <div class="my-3">
-        <h1 class="font-semibold">{{ $t("account.name") }}</h1>
+        <h1 class="font-semibold">{{ $t("name") }}</h1>
         <p class="italic text-sm text-gray-500">{{ currentUser.data.displayName }}</p>
       </div>
       <div class="my-3">

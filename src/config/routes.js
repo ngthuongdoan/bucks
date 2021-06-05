@@ -21,7 +21,7 @@ export const routes = {
             dictionary: ["expense"]
         },
         {
-            name: "debt",
+            name: "debtloan",
             dictionary: CONSTANTS.DEBT_LOAN_DICT
         }
     ],

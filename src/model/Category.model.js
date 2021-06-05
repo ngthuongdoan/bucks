@@ -10,8 +10,8 @@ class Category {
      * @param {string|undefined} type - includes ["Income, Expense, Debt/Loan"]
      */
     constructor(name = "", icon = "", type = undefined) {
-        this.name = name;
-        this.icon = icon;
+        this.name = {en: "", vi: ""};
+      this.icon = icon;
         this.type = type;
     }
 }

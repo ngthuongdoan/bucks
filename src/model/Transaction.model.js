@@ -14,7 +14,7 @@ class Transaction {
     this.detail = detail;
     this.images = [];
     this.wallet = {};
-    this.category = {};
+    this.category = {name: {en: "", vi: ""}};
     this.person = {}
   }
 }
