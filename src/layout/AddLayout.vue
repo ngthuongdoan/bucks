@@ -6,7 +6,7 @@
       <img
           alt="" class="w-7" src="~@/assets/back.png" @click="to"/>
       <h1 class="text-lg capitalize">{{ title }}</h1>
-      <input class="font-bold text-lg bg-transparent cursor-pointer" form="addForm" type="submit" value="Save"/>
+      <input :value="$t('save')" class="font-bold text-lg bg-transparent cursor-pointer" form="addForm" type="submit"/>
     </div>
     <slot></slot>
   </div>

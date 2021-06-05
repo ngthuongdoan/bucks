@@ -11,7 +11,7 @@
             alt=""
             class="w-5 object-cover mr-2 lg:w-full lg:mb-4"
         />
-        <h1>{{ feat.name }}</h1>
+        <h1>{{ $t(`tool.${feat.name}`) }}</h1>
       </router-link>
     </ul>
   </div>

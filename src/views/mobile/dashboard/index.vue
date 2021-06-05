@@ -13,19 +13,21 @@
       <div class="flex mx-7">
         <datepicker v-model="selectedDate"
                     :highlighted="highlightedFn"
+                    :language="languages[$i18n.locale]"
                     format="dd/MM/yyyy"
                     input-class="text-gray-400 bg-light-grey font-bold cursor-pointer w-fit justify-self-start"
                     placeholder="Select Date"
         ></datepicker>
         <p class="font-bold justify-self-end">
-          Total:
+          {{ $t("dashboard.total") }}:
           <span :class="(total<0)?'text-red-400':'text-green-400'">{{
               total | separateValue
             }}</span>
         </p>
       </div>
       <div class="w-full h-80 overflow-y-scroll">
-        <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">No Transactions</div>
+        <div v-if="filterTransactions.length===0" class="text-center italic text-gray-500">{{ $t("noTransaction") }}
+        </div>
         <app-transaction v-for="trans in filterTransactions" :key="trans.id" :transaction="trans"/>
       </div>
     </div>
@@ -41,10 +43,14 @@ import * as dayjs from "dayjs";
 import Datepicker from "vuejs-datepicker";
 import AppModal from "@/components/modal/AppModal";
 import {mapGetters} from "vuex";
+import {en, vi} from "vuejs-datepicker/dist/locale";
 
 export default {
   data() {
+    const languages = {en, vi};
+
     return {
+      languages,
       transactions: [],
       filterTransactions: [],
       selectedDate: new Date(),

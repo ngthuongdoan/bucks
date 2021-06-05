@@ -14,7 +14,7 @@ class Budget {
     this.beginDate = beginDate;
     this.dueDate = dueDate;
     this.status = "active"
-    this.category = {};
+    this.category = {name: {en: "", vi: ""}};
   }
 }
 

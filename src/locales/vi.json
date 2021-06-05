@@ -37,6 +37,8 @@
     "hi": "Chào"
   },
   "navigation": {
+    "login": "Login",
+    "signup": "Sign Up",
     "income": "thu",
     "expense": "chi",
     "debtloan": "Vay/nợ",
@@ -67,6 +69,12 @@
     },
     "language": "Ngôn ngữ"
   },
+  "save": "Lưu",
+  "or": "hoặc",
+  "crop": "Cắt",
+  "addBudget": "Thêm ngân sách",
+  "addWallet": "Thêm ví",
+  "addTransaction": "Thêm giao dịch",
   "enterValue": "Nhập giá trị",
   "earn": "Nhận",
   "pay": "Trả",

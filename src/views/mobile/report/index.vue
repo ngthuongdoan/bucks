@@ -10,7 +10,7 @@
           @change-range="range=$event"
       ></chart-criteria>
     </div>
-    <div class="font-bold uppercase text-xl text-black">Monthly Income-Expense</div>
+    <div class="font-bold uppercase text-xl text-black">{{ $t("report.overview") }}</div>
     <report-overview
         :active-overview="activeOverview"
         :range="range"
@@ -18,26 +18,25 @@
     ></report-overview>
     <div class="mt-5 flex w-full h-full">
       <div class="w-1/2">
-        <div class="font-bold uppercase text-md text-black">Income Category</div>
+        <div class="font-bold uppercase text-md text-black">{{ $t('report.incomeCategory') }}</div>
         <pie-chart
             :active-overview="activeOverview"
             :range="range"
             :transactions="transactions"
-            title="Income Category"
+            :title="$t('report.incomeCategory')"
             type="income"
         ></pie-chart>
       </div>
       <div class="w-1/2">
-        <div class="font-bold uppercase text-md text-black">Expense Category</div>
+        <div class="font-bold uppercase text-md text-black">{{ $t('report.expenseCategory') }}</div>
         <pie-chart
             :active-overview="activeOverview"
             :range="range"
             :transactions="transactions"
-            title="Expense Category"
+            :title="$t('report.expenseCategory')"
             type="expense"
         ></pie-chart>
       </div>
-
     </div>
   </div>
 </template>

@@ -19,8 +19,6 @@
             :currency="to"
             :label="$t('to')"
             @select-handle="selectTo($event)"/>
-        <!--        -->
-
       </div>
       <input :value="$t('modal.exchangeModal.exchange')" class="w-full rounded mt-4 p-2 main-btn" type="submit">
     </form>

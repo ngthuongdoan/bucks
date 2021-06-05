@@ -5,7 +5,7 @@
         @away="isPay = !isPay"
     >
       <form class="flex flex-col w-full px-10 justify-center items-center" @submit.prevent="repaying">
-        <label for="">{{ $t("enterValue") }}</label>
+        <label>{{ $t("enterValue") }}</label>
         <input v-model="amount" class="input" step="0.1" type="number">
         <div class="flex w-full items-center justify-center gap-3">
           <input
@@ -34,10 +34,11 @@
       ></app-transaction>
     </div>
     <div class="w-full flex px-5 gap-5">
-      <button class="w-1/2 bg-gray-50 p-3 rounded-full font-bold" @click="$helpers.back()">{{ $t("cancel") }}</button>
-      <button class="w-1/2 bg-control text-light-grey p-3 rounded-full font-bold" @click="isPay = !isPay">{{
-          $t("pay")
-        }}
+      <button class="w-1/2 bg-gray-50 p-3 rounded-full font-bold" @click="$helpers.back()">
+        {{ $t("cancel") }}
+      </button>
+      <button class="w-1/2 bg-control text-light-grey p-3 rounded-full font-bold" @click="isPay = !isPay">
+        {{ $t("pay") }}
       </button>
     </div>
   </div>

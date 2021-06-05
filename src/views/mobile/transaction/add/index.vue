@@ -1,5 +1,5 @@
 <template>
-  <add-layout title="Add Transaction">
+  <add-layout :title="$t('addTransaction')">
     <app-modal
         v-if="isOpen"
         :is-category="this.modal==='category-modal'"
@@ -23,7 +23,7 @@
               type="text"
           />
         </label>
-        <p class="text-center w-full mx-0">or</p>
+        <p class="text-center w-full mx-0">{{ $t("or") }}</p>
         <label for="image">
           <img
               alt=""
@@ -46,11 +46,11 @@
             @change="change"
         ></cropper>
         <button v-if="ocr" class="main-btn w-full p-2" type="button" @click="recognize">
-          Crop it
+          {{ $t("") }}
         </button>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
-        <label class="font-bold self-start" for="note">Note</label>
+        <label class="font-bold self-start" for="note">{{ $t("note") }}</label>
         <textarea
             id="note"
             v-model="transaction.detail"
@@ -58,17 +58,17 @@
             rows="5"
             @click="$store.dispatch('modalModule/changeModal',{modal:'blank-modal'})"
         ></textarea>
-        <label class="font-bold mt-2">Wallet</label>
+        <label class="font-bold mt-2">{{ $t("wallet") }}</label>
         <div class="add-input " @click="$store.dispatch('modalModule/changeModal',{modal:'wallet-modal'})">
           {{ wallet.name || '' }}
         </div>
-        <label class="font-bold mt-2">Category</label>
+        <label class="font-bold mt-2">{{ $t("category") }}</label>
         <div class="add-input" @click="$store.dispatch('modalModule/changeModal',{modal:'category-modal'})">
           {{ transaction.category.name || '' }}
         </div>
-        <label class="font-bold mt-2" for="createdDate">Date</label>
+        <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
-        <label v-if="isDebtLoan" class="font-bold mt-2">Person</label>
+        <label v-if="isDebtLoan" class="font-bold mt-2">{{ $t("person") }}</label>
         <div
             v-if="isDebtLoan" class="add-input"
             @click="$store.dispatch('modalModule/changeModal',{modal:'person-modal'})">{{

@@ -37,7 +37,11 @@
     "hi": "Hi"
   },
   "navigation": {
-
+    "login": "Login",
+    "signup": "Sign Up",
+    "income": "income",
+    "expense": "expense",
+    "debtloan": "Debt/Loan",
     "debt": "Debt",
     "loan": "Loan"
   },
@@ -65,6 +69,12 @@
     },
     "language": "Language"
   },
+  "save": "Save",
+  "or": "or",
+  "crop": "Crop",
+  "addBudget": "Add Budget",
+  "addWallet": "Add Wallet",
+  "addTransaction": "Add Transaction",
   "enterValue": "Enter value",
   "earn": "Earn",
   "pay": "Pay",
