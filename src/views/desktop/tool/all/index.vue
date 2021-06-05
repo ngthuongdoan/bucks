@@ -7,7 +7,7 @@
             alt=""
             class=" object-cover m-auto w-10 mb-4"
         />
-        <h1>{{ feat.name }}</h1>
+        <h1>{{ $t(`tool.${feat.name}`) }}</h1>
       </li>
     </ul>
   </div>

@@ -1,26 +1,26 @@
 [
   {
-    "name": "Exchange",
+    "name": "exchange",
     "path": "exchange",
     "icon": "https://img.icons8.com/pastel-glyph/64/000000/exchange-euro.png"
   },
   {
-    "name": "Transfer Money",
+    "name": "transferMoney",
     "path": "transfer-money",
     "icon": "https://img.icons8.com/android/96/000000/money-transfer.png"
   },
   {
-    "name": "Budgets",
+    "name": "budgets",
     "path": "budget",
     "icon": "https://img.icons8.com/ios/50/000000/money-bag-shekel-.png"
   },
   {
-    "name": "FAQ",
+    "name": "faq",
     "path": "faq",
     "icon": "https://img.icons8.com/ios/50/000000/faq.png"
   },
   {
-    "name": "Debt/Loan",
+    "name": "debtloan",
     "path": "debt-loan",
     "icon": "https://img.icons8.com/fluent-systems-filled/96/000000/debt.png"
   }

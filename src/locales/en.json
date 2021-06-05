@@ -26,6 +26,13 @@
     "incomeCategory": "Income Category",
     "expenseCategory": "Expense Category"
   },
+  "tool": {
+    "exchange": "Exchange",
+    "transferMoney": "Transfer Money",
+    "budgets": "Budgets",
+    "debtloan": "Debt/Loan",
+    "faq": "FAQ"
+  },
   "account": {
     "hi": "Hi",
     "name": "Name"

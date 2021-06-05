@@ -26,6 +26,13 @@
     "incomeCategory": "Danh mục thu",
     "expenseCategory": "Danh mục chi"
   },
+  "tool": {
+    "exchange": "Chuyển đổi",
+    "transferMoney": "Chuyển tiền",
+    "budgets": "QLy Ngân sách",
+    "debtloan": "QLy Vay nợ",
+    "faq": "FAQ"
+  },
   "account": {
     "hi": "Chào",
     "name": "Tên"
