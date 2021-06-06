@@ -89,6 +89,7 @@ export default {
     AppHeader,
     Datepicker,
     AppModal,
+    SettingModal: () => import("@/components/modal/SettingModal"),
     AdjustBalanceModal: () => import("@/components/modal/AdjustBalanceModal"),
   },
   firestore() {

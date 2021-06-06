@@ -10,6 +10,7 @@
         alt=""
         class="absolute z-10 top-7 right-5 w-6 cursor-pointer"
         src="https://img.icons8.com/small/16/000000/gear.png"
+        @click="$store.dispatch('modalModule/changeModal',{modal:'setting-modal'})"
     />
     <wallet-card
         v-if="wallet"

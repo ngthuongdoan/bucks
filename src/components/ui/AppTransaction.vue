@@ -6,7 +6,7 @@
     <img :src="transaction.category.icon" alt="" class="object-contain w-1 justify-self-start flex-grow"
          style="max-width: 30px">
     <div class="ml-3 flex-grow">
-      <h1 class="font-bold text-sm m-0">{{ transaction.category.name }}</h1>
+      <h1 class="font-bold text-sm m-0">{{ transaction.category.name[$i18n.locale] }}</h1>
       <span class="text-xs text-gray-500">{{ transaction.detail || refinedDay }}</span>
     </div>
     <span :class="['flex-grow justify-self-end text-right font-bold', isExpense?'text-red-400':'text-green-400']">{{

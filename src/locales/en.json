@@ -69,6 +69,7 @@
     },
     "language": "Language"
   },
+  "adjust": "Adjust",
   "save": "Save",
   "or": "or",
   "crop": "Crop",
@@ -89,6 +90,7 @@
   "transfer": "Transfer",
   "delete": "Delete",
   "change": "Change",
+  "create": "Create",
   "cancel": "Cancel",
   "optional": "Optional",
   "noTransaction": "No Transaction",

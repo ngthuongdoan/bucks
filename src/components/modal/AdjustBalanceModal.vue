@@ -1,16 +1,16 @@
 <template>
   <form class="flex flex-col w-full px-10 justify-center items-center" @submit.prevent="adjustBalance">
-    <label for="">Enter current balance of this wallet</label>
+    <label for="">{{ $t("enterValue") }}</label>
     <input v-model.number="balance" class="input" type="text" @keypress="preventCharacter($event)">
     <div class="flex w-full items-center justify-center gap-3">
       <input
           class="main-btn p-3 w-2/6"
           type="submit"
-          value="Adjust">
+          :value="$t('adjust')">
       <button class="p-3 bg-gray-200 font-bold text-md w-2/6 cursor-pointer ease-in-out duration-100 transition-all"
               type="button"
               @click="$store.dispatch('modalModule/changeModal')">
-        Cancel
+        {{ $t("cancel") }}
       </button>
     </div>
   </form>

@@ -12,7 +12,7 @@
         <currency-select
             :currency="wallet.currency"
             class="col-span-2 currency-select"
-            :label="$t('currency')"
+            :label="$t('modal.walletModal.currency')"
             @select-handle="changeCurrency($event)"
         ></currency-select>
         <label class="text-input" for="wallet-type">{{ $t("modal.walletModal.type") }}</label>

@@ -46,7 +46,7 @@
             @change="change"
         ></cropper>
         <button v-if="ocr" class="main-btn w-full p-2" type="button" @click="recognize">
-          {{ $t("") }}
+          {{ $t("crop") }}
         </button>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
@@ -64,7 +64,7 @@
         </div>
         <label class="font-bold mt-2">{{ $t("category") }}</label>
         <div class="add-input" @click="$store.dispatch('modalModule/changeModal',{modal:'category-modal'})">
-          {{ transaction.category.name || '' }}
+          {{ transaction.category.name[$i18n.locale] || '' }}
         </div>
         <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
         <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
