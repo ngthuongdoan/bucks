@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full h-96 pt-5">
+  <div class="bg-white w-full pt-5 pb-10">
     <v-chart v-if="option" :option="option" class="w-full h-96"></v-chart>
   </div>
 </template>
@@ -49,17 +49,19 @@ export default {
   computed: {
     refinedData() {
       let result = [];
+      const locale = this.$i18n.locale;
       const incomeFilter = this.transactions.filter(trans => trans.category.type === this.type);
-      const categoryList = new Set(incomeFilter.map(trans => trans.category.name));
+      const categoryList = new Set(incomeFilter.map(trans => trans.category.name[locale]));
       categoryList.forEach(category => {
         const sum = this.transactions
-            .filter(trans => trans.category.name === category)
-            .reduce((accumulator, currentValue) => accumulator + currentValue.value, 0);
+            .filter(trans => trans.category.name[locale] === category)
+            .reduce((accumulator, currentValue) => accumulator + Math.abs(currentValue.value), 0);
         result.push({
           name: category,
           value: sum,
         })
       })
+      console.log(JSON.stringify(result))
       return result
     },
     option() {
@@ -75,8 +77,8 @@ export default {
           trigger: 'item'
         },
         legend: {
-          orient: 'vertical',
-          left: 'left',
+          orient: 'horizontal',
+          bottom: "bottom"
         },
         series: [
           {
