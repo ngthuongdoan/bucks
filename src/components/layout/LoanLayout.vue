@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-for="person in persons" :key="person.id" class="shadow-2xl">
+    <div v-if="persons.length===0" class="text-center italic text-gray-500">{{ $t("noDebtLoan") }}</div>
+    <div v-for="person in persons" v-else :key="person.id" class="shadow-2xl">
       <debt-loan-card
           :is-debt="false"
           :person="person"

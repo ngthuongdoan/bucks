@@ -1,7 +1,7 @@
 <template>
   <form id="addForm" ref="form" class="flex flex-col m-auto gap-3 px-7 py-5" @submit.prevent="changeInformation">
     <div class="grid grid-cols-add gap-y-2 justify-center items-center">
-      <label class="text-input" for="name">{{ $t("modal.walletModal.name") }}</label>
+      <label class="text-input" for="name">{{ $t("name") }}</label>
       <input
           id="name"
           v-model.trim="wallet.name"

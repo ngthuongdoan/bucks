@@ -39,6 +39,18 @@ export const BudgetService = {
       }
     })
   },
+  async updateBudget(transaction, state) {
+    const budgetRef = budgetStore
+      .where("uid", "==", transaction.uid)
+      .where("category.id", "==", transaction.category.id)
+
+    const budgetSnapshot = await budgetRef.get();
+    const refinedValue = Math.abs(transaction.value) * (state === "add") ? 1 : -1
+    if (budgetSnapshot.docs.length !== 0) {
+      const currentValue = budgetSnapshot.docs[0].data().currentValue + refinedValue;
+      await budgetStore.doc(budgetSnapshot.docs[0].id).update({currentValue})
+    }
+  },
   async delete(budget) {
     await budgetStore.doc(budget.id).delete();
   }

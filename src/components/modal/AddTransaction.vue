@@ -42,7 +42,7 @@
           {{ transaction.category.name[$i18n.locale] || '' }}
         </div>
         <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
-        <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
+        <input id="createdDate" v-model="tempDate" :max="maxDate" class="add-input" type="date"/>
         <label v-if="isDebtLoan" class="font-bold mt-2">{{ $t("person") }}</label>
         <div v-if="isDebtLoan" class="add-input" @click="toggleSubModal('person-modal')">{{
             transaction.person.name || ''
@@ -77,6 +77,7 @@ import 'vue-advanced-cropper/dist/style.css'
 import {TransactionService} from '@/service/Transaction.service'
 import TransactionWalletModal from '@/components/modal/TransactionWalletModal'
 import {mapGetters} from 'vuex'
+import * as dayjs from "dayjs"
 
 export default {
   data() {
@@ -94,6 +95,9 @@ export default {
     ...mapGetters({
       isOpen: 'modalModule/isOpen',
     }),
+    maxDate() {
+      return dayjs().format('YYYY-MM-DD');
+    }
   },
   watch: {
     'transaction.wallet'(newValue) {

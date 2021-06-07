@@ -3,6 +3,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import {isMobileOnly} from "mobile-device-detect";
 import features from "@/config/features.json"
+import store from "@/store";
 
 Vue.use(VueRouter);
 const getFolder = () => isMobileOnly ? 'mobile' : 'desktop';
@@ -129,12 +130,16 @@ if (process.env.VUE_APP_GUARD === "true") {
       await next();
       return;
     }
-    const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-    if (requiresAuth && !await firebase.getCurrentUser()) {
+    try {
+      const uid = await store.getters["userModule/user"].data?.uid;
+      const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+      if (requiresAuth && !await firebase.getCurrentUser() && !uid) {
+        await next("/login");
+      } else {
+        await next();
+      }
+    } catch (e) {
       await next("/login");
-    } else {
-      await next();
-
     }
   });
 }

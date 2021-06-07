@@ -1,6 +1,7 @@
 <template>
   <div class="w-full p-3 h-72 overflow-auto custom-scrollbar">
-    <app-budget v-for="budget in budgets" :key="budget.id" :budget="budget"></app-budget>
+    <div v-if="budgets.length===0" class="text-center italic text-gray-500">{{ $t("noBudgets") }}</div>
+    <app-budget v-for="budget in budgets" v-else :key="budget.id" :budget="budget"></app-budget>
   </div>
 </template>
 

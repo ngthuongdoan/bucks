@@ -72,7 +72,7 @@ export default {
         this.$helpers.showSuccess()
         await this.$store.dispatch("modalModule/changeModal")
       } catch (e) {
-        this.$helpers.showError()
+        this.$helpers.showError(e)
       }
     }
   },

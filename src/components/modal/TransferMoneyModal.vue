@@ -17,9 +17,9 @@
         </label>
       </div>
       <div class="grid grid-cols-add items-end gap-y-2">
-        <label class="font-bold  mt-2" for="wallet">{{ $t("from") }}</label>
+        <label class="font-bold  mt-2">{{ $t("from") }}</label>
         <div class="add-input " @click="toggleWallet('from')">{{ fromWallet.name || "" }}</div>
-        <label class="font-bold  mt-2" for="wallet">{{ $t("to") }}</label>
+        <label class="font-bold  mt-2">{{ $t("to") }}</label>
         <div class="add-input " @click="toggleWallet('to')">{{ toWallet.name || "" }}</div>
         <label class="font-bold self-start" for="note">{{ $t("note") }}</label>
         <textarea
@@ -108,6 +108,7 @@ export default {
     async addTransaction() {
       this.$helpers.loading();
       try {
+        if (this.fromWallet.id === this.toWallet.id) throw new Error("Cannot transfer with same wallet")
         //Refined Data
         this.transaction.time = Timestamp.fromDate(new Date(Date.parse(this.tempDate)));
         this.transaction.category = await CategoryService.fetchCategory("Adjust Balance");

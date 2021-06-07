@@ -67,7 +67,7 @@
           {{ transaction.category.name[$i18n.locale] || '' }}
         </div>
         <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
-        <input id="createdDate" v-model="tempDate" class="add-input" type="date"/>
+        <input id="createdDate" v-model="tempDate" :max="maxDate" class="add-input" type="date"/>
         <label v-if="isDebtLoan" class="font-bold mt-2">{{ $t("person") }}</label>
         <div
             v-if="isDebtLoan" class="add-input"
@@ -96,6 +96,7 @@ import {mapGetters} from 'vuex'
 import {ImageService} from '@/service/Image.service'
 import {storage} from '@/plugin/storage'
 import BlankModal from "@/components/modal/BlankModal";
+import * as dayjs from "dayjs";
 
 export default {
   data() {
@@ -114,6 +115,9 @@ export default {
       modal: 'modalModule/modal',
       isOpen: 'modalModule/isOpen',
     }),
+    maxDate() {
+      return dayjs().format('YYYY-MM-DD');
+    }
   },
   watch: {
     'transaction.wallet'(newValue) {
