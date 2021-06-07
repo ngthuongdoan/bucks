@@ -52,6 +52,6 @@ export const BudgetService = {
     }
   },
   async delete(budget) {
-    await budgetStore.doc(budget.id).delete();
+    await budgetStore.doc(budget).delete();
   }
 };
