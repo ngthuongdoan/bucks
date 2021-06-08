@@ -139,37 +139,41 @@ export default {
       this.transaction.person = {id: person.id, ...person}
       this.$store.dispatch('modalModule/changeModal')
     },
-    uploadImage() {
+    async uploadImage() {
       this.$helpers.loading();
+      try {
+        const image = await ImageService.compress(this.$refs.fileInput.files[0]);
+        const reader = new FileReader()
+        reader.readAsDataURL(image)
+        reader.onload = (evt) => {
+          this.ocr = evt.target.result
+        }
 
-      const image = this.$refs.fileInput.files[0]
-      const reader = new FileReader()
-      reader.readAsDataURL(image)
-      reader.onload = (evt) => {
-        this.ocr = evt.target.result
-      }
-      const metadata = {
-        contentType: 'image/jpeg',
-      }
+        const metadata = {
+          contentType: 'image/jpeg',
+        }
 
 // Upload file and metadata to the object 'images/mountains.jpg'
-      let uploadTask = storage.ref('transaction/' + image.name).put(image, metadata)
+        let uploadTask = storage.ref('transaction/' + image.name).put(image, metadata)
 
 // Listen for state changes, errors, and completion of the upload.
-      uploadTask.on('state_changed', // or 'state_changed'
-          () => {
-          },
-          (error) => {
-            this.$helpers.showError(error)
-          },
-          () => {
-            // Upload completed successfully, now we can get the download URL
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-              this.transaction.images.push(downloadURL)
-              this.$helpers.close();
-            })
-          },
-      )
+        uploadTask.on('state_changed', // or 'state_changed'
+            () => {
+            },
+            (error) => {
+              this.$helpers.showError(error)
+            },
+            () => {
+              // Upload completed successfully, now we can get the download URL
+              uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                this.transaction.images.push(downloadURL)
+                this.$helpers.close();
+              })
+            },
+        )
+      } catch (e) {
+        this.$helpers.showError(e)
+      }
     },
     change(result) {
       this.cropper = Object.assign({}, result)

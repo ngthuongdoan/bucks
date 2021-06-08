@@ -6,17 +6,19 @@ let blurKernel;
 let blurMult;
 export const ImageService = {
   compress(image) {
-    new Compressor(image, {
-      quality: 0.6,
-      // The compression process is asynchronous,
-      // which means you have to access the `result` in the `success` hook function.
-      success(result) {
-        return result;
-      },
-      error(err) {
-        return err
-      },
-    });
+    return new Promise((resolve, reject) => {
+      new Compressor(image, {
+        quality: 0.6,
+        // The compression process is asynchronous,
+        // which means you have to access the `result` in the `success` hook function.
+        success(result) {
+          resolve(result);
+        },
+        error(err) {
+          reject(err);
+        },
+      });
+    })
   },
   thresholdFilter(pixels, level) {
     if (level === undefined) {
