@@ -29,7 +29,7 @@
       ></a>
       <a
           slot="item_3"
-          @click="handle(`/tool/budget/add`, 'add-budget')"
+          @click="handle(`/budget/add`, 'add-budget')"
       >
         <img class="object-contain w-6 transform translate-x-3 translate-y-2"
              src="https://img.icons8.com/ios/50/000000/money-bag-shekel-.png"/>

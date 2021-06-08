@@ -17,6 +17,7 @@ export const TransactionService = {
       transaction.category.type,
       transaction.wallet
     );
+    console.log("update budget")
     await BudgetService.updateBudget(transaction, "add");
   },
   async delete(transaction) {

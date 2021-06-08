@@ -62,19 +62,21 @@ const routes = [
             path: "loan/:id",
             component: () => import(`../views/${getFolder()}/tool/debt-loan/loan/_id`)
           },
+        ]
+      },
+      {
+        path: "budget",
+        name: "budget",
+        component: () => import(`../views/${getFolder()}/budget/`),
+        children: [
           {
-            path: "budget",
-            component: () => import(`../views/${getFolder()}/tool/budget/all`)
+            path: "",
+            component: () => import(`../views/${getFolder()}/budget/all`)
           },
           {
-            path: "budget/add",
-            component: () => import(`../views/${getFolder()}/tool/budget/add`)
+            path: "add",
+            component: () => import(`../views/${getFolder()}/budget/add`)
           },
-
-          {
-            path: "loan/:id",
-            component: () => import(`../views/${getFolder()}/tool/budget/_id`)
-          }
         ]
       },
       {

@@ -67,7 +67,7 @@ export default {
       try {
         await TransactionService.delete(this.transaction);
         this.$helpers.showSuccess();
-        await this.$store.dispatch("modalModule/changeModal");
+        await this.$router.push("/dashboard");
       } catch (e) {
         this.$helpers.showError(e);
       }
