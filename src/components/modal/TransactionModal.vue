@@ -24,9 +24,9 @@
         <div class="add-input ">
           {{ wallet.name }}
         </div>
-        <label class="font-bold mt-2" for="category">{{ $t("category") }}</label>
+        <label class="font-bold mt-2">{{ $t("category") }}</label>
         <div class="add-input">
-          {{ transaction.category.name || "" }}
+          {{ transaction.category.name[$i18n.locale] || "" }}
         </div>
         <label class="font-bold mt-2" for="createdDate">{{ $t("date") }}</label>
         <input id="createdDate" v-model="tempDate" class="add-input" readonly type="date"/>

@@ -79,8 +79,12 @@ const routes = [
       },
       {
         path: "transaction",
+        name: "transaction",
         component: () => import(`../views/${getFolder()}/transaction`),
         children: [
+          {
+            path: "",
+          },
           {
             path: "add",
             component: () => import(`../views/${getFolder()}/transaction/add`)

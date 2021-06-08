@@ -1,0 +1,32 @@
+[
+  {
+    "question": {
+      "en": "If there is an error during login, what should I do?",
+      "vi": "Nếu có lỗi xảy ra trong quá trình đăng nhập, tôi nên làm thế nào?"
+    },
+    "answer": {
+      "en": "Press F5 key",
+      "vi": "Bấm phím F5."
+    }
+  },
+  {
+    "question": {
+      "en": "What type of invoices can the application scan?",
+      "vi": "Ứng dụng có thể quét kiểu hóa đơn nào?"
+    },
+    "answer": {
+      "en": "Hóa đơn ghi rõ ràng thông tin thanh toán, không bị nhàu và các đơn vị thanh toán không hiển thị theo dạng bảng kê. ",
+      "vi": "The invoice clearly states the payment information, is not creased and the payment units are not displayed in the form of a list."
+    }
+  },
+  {
+    "question": {
+      "en": "If the data like Budget, Wallet, Loan is not displayed correctly, what should I do?",
+      "vi": "Nếu các dữ liệu như Ngân sách, Ví, Vay nợ không hiển thị chính xác thì tôi nên làm gì?"
+    },
+    "answer": {
+      "en": "Press F5 key",
+      "vi": "Bấm phím F5."
+    }
+  }
+]

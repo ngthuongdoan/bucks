@@ -14,6 +14,7 @@
 
 <script>
 import AppFaq from "@/components/ui/AppFaq";
+import faqs from "@/config/faqs.json"
 
 export default {
   data() {
@@ -26,18 +27,7 @@ export default {
    * Lầy FAQ từ trong store
    */
   async created() {
-    this.faqs = [
-      {
-        question: {
-          en: "TestQuestion",
-          vi: "Thử",
-        },
-        answer: {
-          en: "Test Answer",
-          vi: "Trả lời",
-        },
-      }
-    ];
+    this.faqs = faqs;
     this.searchItems = this.faqs;
   },
   watch: {
