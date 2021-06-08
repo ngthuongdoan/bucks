@@ -63,9 +63,14 @@ const routes = [
             component: () => import(`../views/${getFolder()}/tool/debt-loan/loan/_id`)
           },
           {
+            path: "budget",
+            component: () => import(`../views/${getFolder()}/tool/budget/all`)
+          },
+          {
             path: "budget/add",
             component: () => import(`../views/${getFolder()}/tool/budget/add`)
           },
+
           {
             path: "loan/:id",
             component: () => import(`../views/${getFolder()}/tool/budget/_id`)

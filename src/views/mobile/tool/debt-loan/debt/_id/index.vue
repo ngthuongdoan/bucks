@@ -5,7 +5,7 @@
         @away="isPay = !isPay"
     >
       <form class="flex flex-col w-full px-10 justify-center items-center" @submit.prevent="repaying">
-        <label for="">{{ $t("enterValue") }}</label>
+        <label>{{ $t("enterValue") }}</label>
         <input v-model="amount" class="input" step="0.1" type="number">
         <div class="flex w-full items-center justify-center gap-3">
           <input

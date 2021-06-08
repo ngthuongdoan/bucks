@@ -16,29 +16,29 @@
         :range="range"
         :transactions="transactions"
     ></report-overview>
-    <div class="mt-5 flex w-full h-full">
-      <div class="w-1/2">
-        <div class="font-bold uppercase text-md text-black">{{ $t('report.incomeCategory') }}</div>
-        <pie-chart
-            :active-overview="activeOverview"
-            :range="range"
-            :transactions="transactions"
-            :title="$t('report.incomeCategory')"
-            type="income"
-        ></pie-chart>
-      </div>
-      <div class="w-1/2">
-        <div class="font-bold uppercase text-md text-black">{{ $t('report.expenseCategory') }}</div>
-        <pie-chart
-            :active-overview="activeOverview"
-            :range="range"
-            :transactions="transactions"
-            :title="$t('report.expenseCategory')"
-            type="expense"
-        ></pie-chart>
-      </div>
+    <!--    <div class="mt-5 flex w-full h-full">-->
+    <div class="w-96 h-full">
+      <div class="font-bold uppercase text-md text-black">{{ $t('report.incomeCategory') }}</div>
+      <pie-chart
+          :active-overview="activeOverview"
+          :range="range"
+          :transactions="transactions"
+          :title="$t('report.incomeCategory')"
+          type="income"
+      ></pie-chart>
     </div>
-  </div>
+    <div class="w-96 h-full">
+      <div class="font-bold uppercase text-md text-black">{{ $t('report.expenseCategory') }}</div>
+      <pie-chart
+          :active-overview="activeOverview"
+          :range="range"
+          :transactions="transactions"
+          :title="$t('report.expenseCategory')"
+          type="expense"
+      ></pie-chart>
+    </div>
+    </div>
+  <!--  </div>-->
 </template>
 
 <script>
