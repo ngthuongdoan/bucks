@@ -22,7 +22,6 @@ export const postProcessing = (rawInput) => {
     detail += line.text
   })
   const lastLines = rawInput.slice(-1)[0].words.slice(-1)[0];
-  console.log(lastLines)
   value = Number(
     lastLines.text
       .trim()

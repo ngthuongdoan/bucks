@@ -61,7 +61,6 @@ export default {
           value: sum,
         })
       })
-      console.log(JSON.stringify(result))
       return result
     },
     option() {

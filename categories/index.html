@@ -31,7 +31,6 @@
 		const categoryRef = db.collection("categories");
 		categories.forEach(category => {
 			categoryRef.add(category);
-			console.log(category);
 		});
 		console.log("Done");
 	};

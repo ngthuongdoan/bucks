@@ -34,7 +34,7 @@ export default {
         await this.$store.dispatch("userModule/changeSelected", wallet.id);
         await this.$store.dispatch("modalModule/changeModal");
       } catch (e) {
-        console.log(e);
+        this.$helpers.showError(e);
       }
 
     },

@@ -27,7 +27,6 @@ export default {
   },
   firestore() {
     const uid = store.getters["userModule/user"].data.uid;
-    console.log(uid)
     return {
       budgets: budgetStore.where("uid", "==", uid).orderBy("dueDate", "asc")
     }
