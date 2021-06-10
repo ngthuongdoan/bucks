@@ -188,7 +188,7 @@ export default {
       try {
         const result = await worker.recognize(image)
         const lines = result.data.lines
-        const {detail, value} = postProcessing(lines);
+        const {detail, value} = await postProcessing(lines);
         this.transaction.detail = detail;
         this.transaction.value = value;
         await worker.terminate()

@@ -15,21 +15,23 @@ export const load = async () => {
 };
 
 export const postProcessing = (rawInput) => {
-
-  let detail = "";
-  let value = 0;
-  rawInput.forEach((line) => {
-    detail += line.text
+  return new Promise((resolve, reject) => {
+    let detail = "";
+    let value = 0;
+    rawInput.forEach((line) => {
+      detail += line.text
+    })
+    console.log(rawInput.slice(-1)[0].text.replace(/[^\d.-]/g, ""))
+    const lastLines = rawInput.slice(-1)[0].words.slice(-1)[0];
+    value = Number(
+      lastLines.text
+        .trim()
+        .replace(/[^0-9-]+/g, "")
+    )
+    if (isNaN(value)) {
+      reject(new Error('Sorry please input the value manually'));
+    }
+    resolve({detail, value})
   })
-  const lastLines = rawInput.slice(-1)[0].words.slice(-1)[0];
-  value = Number(
-    lastLines.text
-      .trim()
-      .replace(/[^0-9-]+/g, "")
-  )
-  if (isNaN(value)) {
-    return new Error('Sorry please input the value manually')
-  }
-  return {detail, value}
 }
 
